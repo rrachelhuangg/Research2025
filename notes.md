@@ -23,3 +23,8 @@
 
 * extremely helpful youtube lecture series for in general stuff: https://www.youtube.com/watch?v=PAVKuYv1HC8&list=PLXEJgM3ycgQW5ysL69uaEdPoof4it6seB&index=44
 
+* qiskit general instructions page: https://docs.quantum.ibm.com/guides/map-problem-to-circuits
+* circuit library: https://docs.quantum.ibm.com/guides/circuit-library
+* pre-built operators for specific circuits: https://docs.quantum.ibm.com/api/qiskit/circuit_library#particular-quantum-circuits
+* qiskit api home page: https://docs.quantum.ibm.com/api/qiskit
+
