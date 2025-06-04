@@ -1,5 +1,8 @@
 - [x] Get Qiskit set up locally
-- [ ] Implement a base version of Grover's algorithm for testing/understanding it
+- [ ] Implement a base version of Grover's algorithm for testing/understanding it (Qiskit API and gfg implementation)
+  - [ ] Figure out what implementations have in common
+  - [ ] Use official API documentation for Grover's operator and phase oracle to implement the working test from gfg
+
 
 - [ ] Implement Shor's algorithm
 - [ ] Implement Grover's algorithm
