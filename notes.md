@@ -30,3 +30,10 @@
 * kind of related project: https://grishmaprs.medium.com/zx-calculus-qiskit-transpiler-pass-pyzx-and-my-qamp-fall-2022-experience-cf17a6731cda
 * pyZX Python library implements ZX-calculus functionality: https://github.com/zxcalc/pyzx
 
+--------------------------------------------------------------------------------------------------
+* 6/4 Meeting notes:
+  * Work on graphics research project
+  * start with an easier circuit that I know the answer to and implement it with API docs. compare it to a found given implementation to see where the gaps are.
+  * have grover's base done by the very least for next meeting. to show and test. maybe have a couple variations.
+  * maybe reevaluate timeline 
+
