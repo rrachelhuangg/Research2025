@@ -27,4 +27,6 @@
 * circuit library: https://docs.quantum.ibm.com/guides/circuit-library
 * pre-built operators for specific circuits: https://docs.quantum.ibm.com/api/qiskit/circuit_library#particular-quantum-circuits
 * qiskit api home page: https://docs.quantum.ibm.com/api/qiskit
+* kind of related project: https://grishmaprs.medium.com/zx-calculus-qiskit-transpiler-pass-pyzx-and-my-qamp-fall-2022-experience-cf17a6731cda
+* pyZX Python library implements ZX-calculus functionality: https://github.com/zxcalc/pyzx
 
