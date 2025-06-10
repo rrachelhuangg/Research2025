@@ -19,8 +19,6 @@ encoded = feature_map.assign_parameters(features)
 encoded.draw(filename="circuit_drawings/angle_encoding.txt")
 
 ###
-
-
 qc = QuantumCircuit(2)
 qc.cx(0, 1)
 qc.cx(0, 1)

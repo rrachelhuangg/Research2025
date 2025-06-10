@@ -30,6 +30,8 @@
 * kind of related project: https://grishmaprs.medium.com/zx-calculus-qiskit-transpiler-pass-pyzx-and-my-qamp-fall-2022-experience-cf17a6731cda
 * pyZX Python library implements ZX-calculus functionality: https://github.com/zxcalc/pyzx
 
+* really helpful application of qiskit api stuff (this link is specifically for grover's algorithm, but good repo): https://github.com/Qiskit/qiskit-tutorials/blob/master/tutorials/algorithms/06_grover.ipynb
+
 --------------------------------------------------------------------------------------------------
 * 6/4 Meeting notes:
   * Work on graphics research project
