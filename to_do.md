@@ -1,6 +1,7 @@
 - [x] Get Qiskit set up locally
 - [x] Implement a generic version of Grover's algorithm for testing/understanding it
   - [ ] Modify implementation based on specific project specs
+  - [ ] Make it configurable and try different options
 - [ ] Figure out what type of problem to apply these circuits to (just searching for a marked state or something a little more complex)
 
 -----------------------------------------------
