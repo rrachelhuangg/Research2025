@@ -1,7 +1,7 @@
 - [x] Get Qiskit set up locally
-- [ ] Implement a generic version of Grover's algorithm for testing/understanding it (Qiskit API and gfg implementation)
-  - [ ] Use official API docs for Grover's operator and phase oracle to implement the working test from gfg
+- [x] Implement a generic version of Grover's algorithm for testing/understanding it
   - [ ] Modify implementation based on specific project specs
+- [ ] Figure out what type of problem to apply these circuits to (just searching for a marked state or something a little more complex)
 
 -----------------------------------------------
 
