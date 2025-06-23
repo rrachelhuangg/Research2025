@@ -2,12 +2,13 @@
 - [x] Implement a generic version of Grover's algorithm for testing/understanding it
   - [x] Modify implementation based on specific project specs
   - [x] Make it configurable and try different options
-- [ ] Figure out what type of problem to apply these circuits to (just searching for a marked state or something more complex)
+- [x] Figure out what type of problem to apply these circuits to (just searching for a marked state or something more complex)
+- [x] Implement Shor's algorithm
+- [ ] Implement QFT algorithm
+  - [ ] Structure the testing like Grover's
 
 -----------------------------------------------
 
-- [ ] Implement Shor's algorithm
-- [ ] Implement Grover's algorithm
 - [ ] Implement QFT algorithm
 - [ ] Implement selected quantum teleportation algorithm
 - [ ] Implement ZX-optimization for a basic circuit
