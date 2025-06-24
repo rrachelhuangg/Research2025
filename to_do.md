@@ -6,12 +6,12 @@
 - [x] Implement Shor's algorithm
 - [ ] Implement QFT algorithm
   - [ ] Structure the testing like Grover's
+- [x] Implemented one-state quantum teleportation with 3 qubits
+- [x] Applied ZX-calculus to teleportation circuit
 
 -----------------------------------------------
 
 - [ ] Implement QFT algorithm
-- [ ] Implement selected quantum teleportation algorithm
-- [ ] Implement ZX-optimization for a basic circuit
 - [ ] ...
 - [ ] Implement tests for checking if optimized circuits and original circuits still have the same functionality
 

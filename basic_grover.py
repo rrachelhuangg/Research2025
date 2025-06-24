@@ -21,6 +21,8 @@ to see its component gates.
  - input state (qubit preparation)
  - can explicitly specify each part of the Grover operator
  - number of iterations (of applying the Grover operator)
+ - the marked state
+ - optimization and where to make it more complex/simple
 """
 
 marked_state = ['11']
