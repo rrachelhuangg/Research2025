@@ -15,6 +15,7 @@
 - [ ] Buff up all four circuits for ZX-calculus testing (the different test groups for each circuit and a control)
 - [ ] Apply ZX-calculus to all circuits
 - [ ] Try out different ZX-calculus optimization techniques
+- [ ] Calculate difference in gates before and after ZX-calculus optimization
 - [ ] Try running smallest working circuit on IBM hardware
 - [ ] ...
 - [ ] Implement tests for checking if optimized circuits and original circuits still have the same functionality
