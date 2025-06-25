@@ -40,7 +40,7 @@ fig.savefig('teleportation/pre_opt_circuit_results.png')
 zx_qasm_circuit = zx.Circuit.load("teleportation/qasm_init.qasm")
 graph = zx_qasm_circuit.to_graph(compress_rows=True) #init_zx_graph
 #optimization operation with zx calculus
-zx.full_reduce(graph, quiet=False)
+zx.full_reduce(graph, quiet=False) #prints out the zx calc simplification steps full_reduce applied
 graph.normalize() #zx_full_reduce_init
 optimized_circuit = zx.extract_circuit(graph.copy()) #zx_full_reduce_init_extracted_circuit
 #for post optimization validation

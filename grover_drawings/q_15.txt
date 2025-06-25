@@ -1,4 +1,4 @@
-Total elapsed time: 2.231
+Total elapsed time: 4.675
 
 Top measurement:111111111111111
 

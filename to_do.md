@@ -4,14 +4,18 @@
   - [x] Make it configurable and try different options
 - [x] Figure out what type of problem to apply these circuits to (just searching for a marked state or something more complex)
 - [x] Implement Shor's algorithm
-- [ ] Implement QFT algorithm
-  - [ ] Structure the testing like Grover's
+
 - [x] Implemented one-state quantum teleportation with 3 qubits
 - [x] Applied ZX-calculus to teleportation circuit
+- [x] Verified that teleportation circuit functionality was the same before and after applying zx-calculus
 
 -----------------------------------------------
 
 - [ ] Implement QFT algorithm
+- [ ] Buff up all four circuits for ZX-calculus testing (the different test groups for each circuit and a control)
+- [ ] Apply ZX-calculus to all circuits
+- [ ] Try out different ZX-calculus optimization techniques
+- [ ] Try running smallest working circuit on IBM hardware
 - [ ] ...
 - [ ] Implement tests for checking if optimized circuits and original circuits still have the same functionality
 

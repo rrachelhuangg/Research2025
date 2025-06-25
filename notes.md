@@ -47,6 +47,10 @@
 * qiskit teleportation docs: https://learning.quantum.ibm.com/course/utility-scale-quantum-computing/lesson-03-teleportation
 * geeks for geeks quantum teleportation basic step-by-step implementation: https://www.geeksforgeeks.org/python/quantum-teleportation-in-python/
 
+* qiskit qft docs: https://docs.quantum.ibm.com/api/qiskit/qiskit.circuit.library.QFT
+* a github page about qft implementation: https://github.com/qiskit-community/qiskit-community-tutorials/blob/master/terra/qis_adv/fourier_transform.ipynb
+* openqasm docs: https://github.com/openqasm/openqasm
+* another qiskit qft implementation webpage: https://quantumcomputinguk.org/tutorials/quantum-fourier-transform-in-qiskit
 
 --------------------------------------------------------------------------------------------------
 * 6/4 Meeting notes:
