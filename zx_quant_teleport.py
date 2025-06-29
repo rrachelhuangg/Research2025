@@ -35,13 +35,16 @@ fig.savefig('teleportation/pre_opt_circuit_results.png')
 # with open("teleportation/qasm_init.qasm", "w") as f:
 #     qasm_circuit = dumps(circuit)
 #     f.write(qasm_circuit)
-# have to go through and remove non-unitary qasm ops like creg, measure, and barrier from file first
+# have to go through and remove non-unitary qasm ops like creg, measure, and barrier from file first - automate this
 #loading qasm circuit and converting to pyzx zx-calc graph form
 zx_qasm_circuit = zx.Circuit.load("teleportation/qasm_init.qasm")
 graph = zx_qasm_circuit.to_graph(compress_rows=True) #init_zx_graph
+print("INITIAL GRAPH STATS: ", graph.stats())
+print("INITIAL STATS 2: ", zx_qasm_circuit.to_basic_gates().stats())
 #optimization operation with zx calculus
 zx.full_reduce(graph, quiet=False) #prints out the zx calc simplification steps full_reduce applied
 graph.normalize() #zx_full_reduce_init
+print("POST GRAPH STATS: ", graph.stats())
 optimized_circuit = zx.extract_circuit(graph.copy()) #zx_full_reduce_init_extracted_circuit
 #for post optimization validation
 g = zx_qasm_circuit
@@ -49,6 +52,7 @@ p = optimized_circuit
 #converting back to qiskit circuit for testing and drawing
 opt_qasm = optimized_circuit.to_qasm()
 opt_circuit = QuantumCircuit.from_qasm_str(opt_qasm)
+print("POST OPTIMIZATION STATS: ", p.to_basic_gates().stats())
 opt_circuit_viz = opt_circuit.draw(output='text') #use pyzx validation too HERE
 with open(f"teleportation/post_zx_qiskit_circuit.txt", "w") as file:
     file.write(str(opt_circuit_viz))

@@ -1,0 +1,15 @@
+spider_simp: 351. 282. 206. 79. 56. 47. 32. 22. 18. 10. 7. 6. 4. 3. 2. 2. 1.  17 iterations
+id_simp: 199.  1 iterations
+spider_simp: 59. 2. 1.  3 iterations
+pivot_simp: 121. 14.  2 iterations
+id_simp: 6.  1 iterations
+spider_simp: 6.  1 iterations
+pivot_simp: 6.  1 iterations
+pivot_gadget_simp: 326. 142. 60. 9.  4 iterations
+id_simp: 16.  1 iterations
+spider_simp: 14. 1.  2 iterations
+pivot_simp: 4.  1 iterations
+lcomp_simp: 8. 8.  2 iterations
+gadget_simp: 18.  1 iterations
+pivot_simp: 1.  1 iterations
+lcomp_simp: 17. 17.  2 iterations
