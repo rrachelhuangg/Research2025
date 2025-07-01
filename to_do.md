@@ -10,12 +10,15 @@
 - [x] Verified that teleportation circuit functionality was the same before and after applying zx-calculus
 
 - [x] Build out data collection spreadsheet for experiments (running locally section)
-- [ ] Automate creg/measure/barrier removal from qasm circuits and then insertion back conversion process during application of zx
-- [ ] Setup and run experiments for the smallest of each circuit's experimental/control group circuit
+- [ ] Implement QFT algorithm circuit 
+- [ ] Implement pyzx full_reduce optimization for QFT circuit
+- [ ] Collect data from QFT experiments
+- [x] Setup and run experiments for the smallest of each circuit's experimental/control group circuit
 
 -----------------------------------------------
 
 - [ ] Automate experiment running in a sort of Dockerized pipeline CLI
+- [ ] Automate creg/measure/barrier removal from qasm circuits (and/or circuit decomposition/transpilation) and then insertion back conversion process during application of zx
 - [ ] QR code videos
 - [ ] Record a demo video of running pipeline on a couple examples
 - [ ] Implement QFT algorithm
