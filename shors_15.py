@@ -11,6 +11,7 @@ from qiskit import qasm2
 import pyzx as zx
 from qiskit.qasm2 import dumps
 from qiskit import ClassicalRegister
+import time
 
 def initialize_qubits(circuit, n, m):
     #superposition with Hadamard gates => 2^n computational states
@@ -75,8 +76,11 @@ if __name__ == '__main__':
     final_circuit = shors_alg(n, m, a)
     #pre optimization simulation
     simulator = AerSimulator()
+    pre_start_time = time.time()
     compiled_circuit = transpile(final_circuit, simulator)
     counts = simulator.run(compiled_circuit).result().get_counts(final_circuit)
+    pre_end_time = time.time()
+    print("PRE OPT RUN TIME: ", round(pre_end_time-pre_start_time, 6))
     plot_histogram(counts, filename='shors_15/pre_opt_histogram.png')
     for i in counts:
         measured_value = int(i[::-1], 2)
@@ -113,8 +117,11 @@ if __name__ == '__main__':
     opt_circuit.add_register(ClassicalRegister(n))
     opt_circuit.measure(range(n), range(n))
     simulator = AerSimulator()
+    post_start_time = time.time()
     compiled_circuit = transpile(opt_circuit, simulator)
     counts = simulator.run(compiled_circuit).result().get_counts(opt_circuit)
+    post_end_time = time.time()
+    print("POST OPT RUN TIME: ", round(post_end_time-post_start_time, 6))
     plot_histogram(counts, filename='shors_15/post_opt_histogram.png')
     for i in counts:
         measured_value = int(i[::-1], 2)

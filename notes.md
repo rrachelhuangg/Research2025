@@ -51,6 +51,11 @@
 * a github page about qft implementation: https://github.com/qiskit-community/qiskit-community-tutorials/blob/master/terra/qis_adv/fourier_transform.ipynb
 * openqasm docs: https://github.com/openqasm/openqasm
 * another qiskit qft implementation webpage: https://quantumcomputinguk.org/tutorials/quantum-fourier-transform-in-qiskit
+* gate-level optimization (non zx, though): https://pyzx.readthedocs.io/en/latest/simplify.html
+* polynomial circuits paper: https://arxiv.org/abs/1303.2042
+* pyzx implementation paper: https://arxiv.org/pdf/1903.10477
+* pyzx verify_equality and compare_tensors: https://pyzx.readthedocs.io/en/latest/api.html
+* can decompose a qiskit circuit into fundamental gates using qiskit transpile and decompose
 
 --------------------------------------------------------------------------------------------------
 * 6/4 Meeting notes:

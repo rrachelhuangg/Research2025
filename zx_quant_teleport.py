@@ -3,6 +3,12 @@ from qiskit_aer import AerSimulator
 from qiskit.visualization import plot_histogram
 import pyzx as zx
 from qiskit.qasm2 import dumps
+import time, sys
+
+global opt_method
+
+if __name__ == '__main__':
+    opt_method = sys.argv[1]
 
 #3 qubit teleportation circuit
 circuit = QuantumCircuit(3,3)
@@ -27,8 +33,11 @@ circuit.cx(1,2)
 circuit.cz(0,2)
 simulator = AerSimulator(method="matrix_product_state")
 circuit.measure(2,2)
+pre_start_time = time.time()
 result = simulator.run(circuit, shots=1000).result()
 counts = result.get_counts()
+pre_end_time = time.time()
+print("PRE OPT RUN TIME: ", round(pre_end_time-pre_start_time, 6))
 fig = plot_histogram(counts)
 fig.savefig('teleportation/pre_opt_circuit_results.png')
 # intermediate step to convert qiskit circuit to pyzx graph (convert to qasm format)
@@ -42,7 +51,10 @@ graph = zx_qasm_circuit.to_graph(compress_rows=True) #init_zx_graph
 print("INITIAL GRAPH STATS: ", graph.stats())
 print("INITIAL STATS 2: ", zx_qasm_circuit.to_basic_gates().stats())
 #optimization operation with zx calculus
-zx.full_reduce(graph, quiet=False) #prints out the zx calc simplification steps full_reduce applied
+
+if opt_method == 'full_reduce': #have a number switch box with cli for options
+    zx.full_reduce(graph, quiet=False) #prints out the zx calc simplification steps full_reduce applied
+
 graph.normalize() #zx_full_reduce_init
 print("POST GRAPH STATS: ", graph.stats())
 optimized_circuit = zx.extract_circuit(graph.copy()) #zx_full_reduce_init_extracted_circuit
@@ -63,8 +75,11 @@ opt_circuit.cx(1,2)
 opt_circuit.cz(0,2)
 simulator = AerSimulator(method="matrix_product_state")
 opt_circuit.measure(2,2)
+post_start_time = time.time()
 result = simulator.run(opt_circuit, shots=1000).result()
 counts = result.get_counts()
+post_end_time = time.time()
+print("POST OPT RUN TIME: ", round(post_end_time-post_start_time, 6))
 fig = plot_histogram(counts)
 fig.savefig('teleportation/opt_circuit_results.png')
 #validating with pyzx's <10 qubit direct linear map comparison
