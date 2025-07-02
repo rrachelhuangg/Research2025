@@ -10,9 +10,9 @@
 - [x] Verified that teleportation circuit functionality was the same before and after applying zx-calculus
 
 - [x] Build out data collection spreadsheet for experiments (running locally section)
-- [ ] Implement QFT algorithm circuit 
-- [ ] Implement pyzx full_reduce optimization for QFT circuit
-- [ ] Collect data from QFT experiments
+- [x] Implement QFT algorithm circuit 
+- [x] Implement pyzx full_reduce optimization for QFT circuit
+- [x] Collect data from QFT experiments
 - [x] Setup and run experiments for the smallest of each circuit's experimental/control group circuit
 
 -----------------------------------------------

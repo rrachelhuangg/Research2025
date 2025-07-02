@@ -1,0 +1,201 @@
+Type of Circuit,Number of Qubits,ZX Status (pre/post opt. and operations applied),Qiskit Circuit format,Number of T(single)-qubits,Number of Cliffords (next 2 are subsets of this)**,Number of 2-qubit gates*,Number of CNOT gates (subset of 2-qubits),Number of Hadamard gates*,Run time (s),ZX Graph Format,Number of vertices,Number of edges,Degree of Distribution Value 1,Degree of Distribution Value 2,Degree of Distribution Value 3,Details on ZX simplification operations applied,Notes,Reduction in T-gates (%),Reduction in run time (%),Reduction in Hadamard gates (%),Change in 2-qubit gates (%),Reduction in number of graph vertices (%),Reduction in number of graph edges (%),Averages
+Quantum Teleportation,3,Pre full_reduce,,0,9,6,4,2,0.008769,,21,24,6,3,12,"spider_simp: 3. 2.  2 iterations
+pivot_simp: 2.  1 iterations
+id_simp: 3.  1 iterations",,0,-41.077,200,-16.667,-42.857,-54.167,Reduction in run time
+Quantum Teleportation,3,Post full_reduce,,0,12,5,3,6,0.005167,,12,11,6,3,2,,Degree of Distribution Value 4: 1,,,,,,,-37.6542
+Quantum Teleportation,3,Pre full_reduce,,0,9,6,4,2,0.008808,,21,24,6,3,12,"spider_simp: 3. 2.  2 iterations
+pivot_simp: 2.  1 iterations
+id_simp: 3.  1 iterations",,0,-41.247,200,-16.667,-42.857,-54.167,
+Quantum Teleportation,3,Post full_reduce,,0,12,5,3,6,0.005175,,12,11,6,3,2,,Degree of Distribution Value 4: 1,,,,,,,
+Quantum Teleportation,3,Pre full_reduce,,0,9,6,4,2,0.010905,,21,24,6,3,12,"spider_simp: 3. 2.  2 iterations
+pivot_simp: 2.  1 iterations
+id_simp: 3.  1 iterations",Running for 5 runs for each experiment actually - can't tell if results are clear enough,0,-50.151,200,-16.667,-42.857,-54.167,
+Quantum Teleportation,3,Post full_reduce,,0,12,5,3,6,0.005436,,12,11,6,3,2,,Degree of Distribution Value 4: 1,,,,,,,
+Quantum Teleportation,3,Pre full_reduce,,0,9,6,4,2,0.009279,,21,24,6,3,12,"spider_simp: 3. 2.  2 iterations
+pivot_simp: 2.  1 iterations
+id_simp: 3.  1 iterations",,0,-34.433,200,-16.667,-42.857,-54.167,
+Quantum Teleportation,3,Post full_reduce,,0,12,5,3,6,0.006084,,12,11,6,3,2,,Degree of Distribution Value 4: 1,,,,,,,
+Quantum Teleportation,3,Pre full_reduce,,0,9,6,4,2,0.007265,,21,24,6,3,12,"spider_simp: 3. 2.  2 iterations
+pivot_simp: 2.  1 iterations
+id_simp: 3.  1 iterations",,0,-21.363,200,-16.667,-42.857,-54.167,
+Quantum Teleportation,3,Post full_reduce,,0,12,5,3,6,0.005713,,12,11,6,3,2,,Degree of Distribution Value 4: 1,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+Shors (factor 15),8,Pre full_reduce,,963,1161,882,882,278,0.369522,,3022,3896,16,1242,1764,"spider_simp: 351. 282. 206. 79. 56. 47. 32. 22. 18. 10. 7. 6. 4. 3. 2. 2. 1.  17 iterations
+id_simp: 199.  1 iterations
+spider_simp: 59. 2. 1.  3 iterations
+pivot_simp: 121. 14.  2 iterations
+id_simp: 6.  1 iterations
+spider_simp: 6.  1 iterations
+pivot_simp: 6.  1 iterations
+pivot_gadget_simp: 326. 142. 60. 9.  4 iterations
+id_simp: 16.  1 iterations
+spider_simp: 14. 1.  2 iterations
+pivot_simp: 4.  1 iterations
+lcomp_simp: 8. 8.  2 iterations
+gadget_simp: 18.  1 iterations
+pivot_simp: 1.  1 iterations
+lcomp_simp: 17. 17.  2 iterations",Should add a column for measuring time for each pre and post simulation. Should also add a couple columns for calculating the percentage in gate reductions. Number of gates actually seems to have gone down pretty significantly for this experiment. Should also run multiple times for each experiment/control group. At least 3 times. Organize experiments in sequential rows so easier to run analysis later.,-24.922,-80.348,334.532,6.916,-59.828,-45.252,Reduction in run time
+Shors (factor 15),8,Post full_reduce,,723,2151,943,606,1208,0.072617,,1214,2133,490,1,329,,"This experiment's times include circuit compile time. Rest of the degree of distribution values: 4: 117
+5: 72
+6: 72
+7: 60
+8: 49
+9: 10
+10: 7
+11: 2
+12: 1
+37: 1
+77: 1
+137: 1
+270: 1",,,,,,,-79.076
+Shors (factor 15),8,Pre full_reduce,,963,1161,882,882,278,0.393533,,3022,3896,16,1242,1764,"spider_simp: 351. 282. 206. 79. 56. 47. 32. 22. 18. 10. 7. 6. 4. 3. 2. 2. 1.  17 iterations
+id_simp: 199.  1 iterations
+spider_simp: 59. 2. 1.  3 iterations
+pivot_simp: 121. 14.  2 iterations
+id_simp: 6.  1 iterations
+spider_simp: 6.  1 iterations
+pivot_simp: 6.  1 iterations
+pivot_gadget_simp: 326. 142. 60. 9.  4 iterations
+id_simp: 16.  1 iterations
+spider_simp: 14. 1.  2 iterations
+pivot_simp: 4.  1 iterations
+lcomp_simp: 8. 8.  2 iterations
+gadget_simp: 18.  1 iterations
+pivot_simp: 1.  1 iterations
+lcomp_simp: 17. 17.  2 iterations",,-24.922,-83.432,334.532,6.916,-59.828,-45.252,
+Shors (factor 15),8,Post full_reduce,,723,2151,943,606,1208,0.065201,,1214,2133,490,1,329,,"Rest of the degree of distribution values: 4: 117
+5: 72
+6: 72
+7: 60
+8: 49
+9: 10
+10: 7
+11: 2
+12: 1
+37: 1
+77: 1
+137: 1
+270: 1",,,,,,,
+Shors (factor 15),8,Pre full_reduce,,963,1161,882,882,278,0.382386,,3022,3896,16,1242,1764,,,-24.922,-79.607,334.532,6.916,-59.828,-45.252,
+Shors (factor 15),8,Post full_reduce,,723,2151,943,606,1208,0.077979,,1214,2133,490,1,329,,,,,,,,,
+Shors (factor 15),8,Pre full_reduce,,963,1161,882,882,278,0.29561,,3022,3896,16,1242,1764,,,-24.922,-75.167,334.532,6.916,-59.828,-45.252,
+Shors (factor 15),8,Post full_reduce,,723,2151,943,606,1208,0.07341,,1214,2133,490,1,329,,,,,,,,,
+Shors (factor 15),8,Pre full_reduce,,963,1161,882,882,278,0.3118,,3022,3896,16,1242,1764,,,-24.922,-76.826,334.532,6.916,-59.828,-45.252,
+Shors (factor 15),8,Post full_reduce,,723,2151,943,606,1208,0.072258,,1214,2133,490,1,329,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+Grover's (search for 11111),5,Pre full_reduce,,43,50,36,36,0,0.254349,,139,170,10,57,72,"spider_simp: 14. 12. 7. 2. 1. 1.  6 iterations
+pivot_simp: 2.  1 iterations
+lcomp_simp: 8. 1. 1.  3 iterations
+id_simp: 2.  1 iterations
+spider_simp: 1.  1 iterations
+pivot_gadget_simp: 15. 8. 4. 2. 1. 1.  6 iterations
+id_simp: 11.  1 iterations
+spider_simp: 1. 1. 1. 1. 1. 1. 1. 1.  8 iterations",,-18.605,-89.231,div 0,77.778,-48.201,-39.412,Reduction in run time
+Grover's (search for 11111),5,Post full_reduce,,35,136,64,19,72,0.027391,,72,103,33,4,19,,"other degree distribution values: 4: 9
+5: 2
+6: 1
+13: 2
+14: 1
+16: 1",,,,,,,-89.1724
+Grover's (search for 11111),5,Pre full_reduce,,43,50,36,36,0,0.285567,,139,170,10,57,72,"spider_simp: 14. 12. 7. 2. 1. 1.  6 iterations
+pivot_simp: 2.  1 iterations
+lcomp_simp: 8. 1. 1.  3 iterations
+id_simp: 2.  1 iterations
+spider_simp: 1.  1 iterations
+pivot_gadget_simp: 15. 8. 4. 2. 1. 1.  6 iterations
+id_simp: 11.  1 iterations
+spider_simp: 1. 1. 1. 1. 1. 1. 1. 1.  8 iterations",,-18.605,-90.163,div 0,77.778,-48.201,-39.412,
+Grover's (search for 11111),5,Post full_reduce,,35,136,64,19,72,0.028092,,72,103,33,4,19,,"""other degree distribution values: 4: 9
+5: 2
+6: 1
+13: 2
+14: 1
+16: 1""",,,,,,,
+Grover's (search for 11111),5,Pre full_reduce,,43,50,36,36,0,0.258995,,139,170,10,57,72,"""spider_simp: 14. 12. 7. 2. 1. 1.  6 iterations
+pivot_simp: 2.  1 iterations
+lcomp_simp: 8. 1. 1.  3 iterations
+id_simp: 2.  1 iterations
+spider_simp: 1.  1 iterations
+pivot_gadget_simp: 15. 8. 4. 2. 1. 1.  6 iterations
+id_simp: 11.  1 iterations
+spider_simp: 1. 1. 1. 1. 1. 1. 1. 1.  8 iterations""",,-18.605,-88.039,div 0,77.778,-48.201,-39.412,
+Grover's (search for 11111),5,Post full_reduce,,35,136,64,19,72,0.030979,,72,103,33,4,19,,"""""""other degree distribution values: 4: 9
+5: 2
+6: 1
+13: 2
+14: 1
+16: 1""""""",,,,,,,
+Grover's (search for 11111),5,Pre full_reduce,,43,50,36,36,0,0.272558,,139,170,10,57,72,"""spider_simp: 14. 12. 7. 2. 1. 1.  6 iterations
+pivot_simp: 2.  1 iterations
+lcomp_simp: 8. 1. 1.  3 iterations
+id_simp: 2.  1 iterations
+spider_simp: 1.  1 iterations
+pivot_gadget_simp: 15. 8. 4. 2. 1. 1.  6 iterations
+id_simp: 11.  1 iterations
+spider_simp: 1. 1. 1. 1. 1. 1. 1. 1.  8 iterations""",,-18.605,-89.808,div 0,77.778,-48.201,-39.412,
+Grover's (search for 11111),5,Post full_reduce,,35,136,64,19,72,0.027778,,72,103,33,4,19,,"""""""other degree distribution values: 4: 9
+5: 2
+6: 1
+13: 2
+14: 1
+16: 1""""""",,,,,,,
+Grover's (search for 11111),5,Pre full_reduce,,43,50,36,36,0,0.239216,,139,170,10,57,72,"""spider_simp: 14. 12. 7. 2. 1. 1.  6 iterations
+pivot_simp: 2.  1 iterations
+lcomp_simp: 8. 1. 1.  3 iterations
+id_simp: 2.  1 iterations
+spider_simp: 1.  1 iterations
+pivot_gadget_simp: 15. 8. 4. 2. 1. 1.  6 iterations
+id_simp: 11.  1 iterations
+spider_simp: 1. 1. 1. 1. 1. 1. 1. 1.  8 iterations""",,-18.605,-88.621,div 0,77.778,-48.201,-39.412,
+Grover's (search for 11111),5,Post full_reduce,,35,136,64,19,72,0.027221,,72,103,33,4,19,,"""""""other degree distribution values: 4: 9
+5: 2
+6: 1
+13: 2
+14: 1
+16: 1""""""",,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,
+QFT (frequency 00001),5,Pre full_reduce,,33,32,20,20,10,0.002145,,95,110,10,45,40,"spider_simp: 11. 8. 6. 4. 3. 2. 1.  7 iterations
+id_simp: 5.  1 iterations
+spider_simp: 2. 2.  2 iterations
+pivot_gadget_simp: 10. 3. 2. 1.  4 iterations
+id_simp: 6.  1 iterations
+spider_simp: 3. 2. 1.  3 iterations",,-45.455,-32.308,240,85,-57.895,-59.091,Reduction in run time
+QFT (frequency 00001),5,Post full_reduce,,18,72,37,9,34,0.001452,,40,45,20,2,12,,"other degree distribution values: 4: 2
+5: 2
+6: 2",,,,,,,-39.0742
+QFT (frequency 00001),5,Pre full_reduce,,33,32,20,20,10,0.004028,,95,110,10,45,40,"spider_simp: 11. 8. 6. 4. 3. 2. 1.  7 iterations
+id_simp: 5.  1 iterations
+spider_simp: 2. 2.  2 iterations
+pivot_gadget_simp: 10. 3. 2. 1.  4 iterations
+id_simp: 6.  1 iterations
+spider_simp: 3. 2. 1.  3 iterations",,-45.455,-56.132,240,85,-57.895,-59.091,
+QFT (frequency 00001),5,Post full_reduce,,18,72,37,9,34,0.001767,,40,45,20,2,12,,"other degree distribution values: 4: 2
+5: 2
+6: 2",,,,,,,
+QFT (frequency 00001),5,Pre full_reduce,,33,32,20,20,10,0.002296,,95,110,10,45,40,"spider_simp: 11. 8. 6. 4. 3. 2. 1.  7 iterations
+id_simp: 5.  1 iterations
+spider_simp: 2. 2.  2 iterations
+pivot_gadget_simp: 10. 3. 2. 1.  4 iterations
+id_simp: 6.  1 iterations
+spider_simp: 3. 2. 1.  3 iterations",,-45.455,-35.497,240,85,-57.895,-59.091,
+QFT (frequency 00001),5,Post full_reduce,,18,72,37,9,34,0.001481,,40,45,20,2,12,,"other degree distribution values: 4: 2
+5: 2
+6: 2",,,,,,,
+QFT (frequency 00001),5,Pre full_reduce,,33,32,20,20,10,0.002352,,95,110,10,45,40,"spider_simp: 11. 8. 6. 4. 3. 2. 1.  7 iterations
+id_simp: 5.  1 iterations
+spider_simp: 2. 2.  2 iterations
+pivot_gadget_simp: 10. 3. 2. 1.  4 iterations
+id_simp: 6.  1 iterations
+spider_simp: 3. 2. 1.  3 iterations",,-45.455,-38.818,240,85,-57.895,-59.091,
+QFT (frequency 00001),5,Post full_reduce,,18,72,37,9,34,0.001439,,40,45,20,2,12,,"other degree distribution values: 4: 2
+5: 2
+6: 2",,,,,,,
+QFT (frequency 00001),5,Pre full_reduce,,33,32,20,20,10,0.002137,,95,110,10,45,40,"spider_simp: 11. 8. 6. 4. 3. 2. 1.  7 iterations
+id_simp: 5.  1 iterations
+spider_simp: 2. 2.  2 iterations
+pivot_gadget_simp: 10. 3. 2. 1.  4 iterations
+id_simp: 6.  1 iterations
+spider_simp: 3. 2. 1.  3 iterations",,-45.455,-32.616,240,85,-57.895,-59.091,
+QFT (frequency 00001),5,Post full_reduce,,18,72,37,9,34,0.00144,,40,45,20,2,12,,"other degree distribution values: 4: 2
+5: 2
+6: 2",,,,,,,

@@ -57,6 +57,13 @@
 * pyzx verify_equality and compare_tensors: https://pyzx.readthedocs.io/en/latest/api.html
 * can decompose a qiskit circuit into fundamental gates using qiskit transpile and decompose
 
+* ibm qiskit docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit/0.24/qiskit.circuit.library.QFT
+* super helpful qft github with instructions for running on actual hardware too!!! https://github.com/qiskit-community/qiskit-community-tutorials/blob/master/terra/qis_adv/fourier_transform.ipynb
+* ^ above used c1 and u1 links were deprecated though - had to be replaced
+* qiskit also has documentation for specific gates: https://quantum.cloud.ibm.com/docs/en/api/qiskit/qiskit.circuit.library.CU1Gate
+* what the qiskit qft circuit returns: https://www.google.com/search?q=what+does+the+qiskit+qft+circuit+return&oq=what+does+the+qiskit+qft+circuit+return&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORigATIHCAEQIRiPAjIHCAIQIRiPAtIBCDUyMDJqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8
+* super helpful github for studying for the qiskit certificate: https://github.com/pratjz/IBM-Qiskit-Certification-Exam-Prep
+
 --------------------------------------------------------------------------------------------------
 * 6/4 Meeting notes:
   * Work on graphics research project
