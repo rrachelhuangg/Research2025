@@ -1,79 +1,120 @@
-from qiskit import QuantumCircuit, transpile, QuantumRegister, ClassicalRegister
-from qiskit_algorithms import AmplificationProblem, Grover
-from qiskit.primitives import Sampler
-from qiskit.quantum_info import Statevector
-from qiskit.circuit.library import ZGate
-from qiskit_aer import AerSimulator
-from qiskit.primitives import BackendSampler
-import time, sys, math
-from qiskit.qasm2 import dumps
 import pyzx as zx
+import sys
+import time
+from qiskit import QuantumCircuit, transpile, ClassicalRegister
+from qiskit_aer import Aer
 from qiskit.circuit.library import QFT
+from qiskit_ibm_runtime import QiskitRuntimeService
+from qiskit.transpiler import generate_preset_pass_manager
+from qiskit_ibm_runtime import SamplerV2 as Sampler
+from qiskit.qasm2 import dumps
+from datetime import datetime
 
-def input_state(circuit, q, n): #q = QuantumRegister(n), c = ClassicalRegister(3)
-    """n-qubit state for QFT that produces output 1"""
-    for j in range(n):
-        circuit.h(q[j])
-        circuit.p(-math.pi/float(2**(j)), q[j])
 
-def qft(circuit, q, n):
-    """n-qubit QFT on q in circuit"""
-    for j in range(n):
-        for k in range(j):
-            circuit.cp(math.pi/float(2**(j-k)), q[j], q[k])
-        circuit.h(q[j])
-
-def controller(n: int=3):
-    quantum_bits = QuantumRegister(n)
-    classical_bits = ClassicalRegister(n)
-    qft_circuit = QuantumCircuit(quantum_bits, classical_bits)
-    input_state(qft_circuit, quantum_bits, n)
-    qft(qft_circuit, quantum_bits, n)
-    for i in range(n):
-        qft_circuit.measure(quantum_bits[i], classical_bits[i])
-    # with open(f"qft/qft_circuit_{n}.qasm", "w") as f:
-    #     qasm_circuit = dumps(qft_circuit)
-    #     f.write(qasm_circuit)
-    with open(f"qft/pre_zx_{n}_circuit.txt", "w") as file:
-        file.write(str(qft_circuit))
-    simulator = AerSimulator(method="matrix_product_state")
-    pre_start_time = time.time()
-    result = simulator.run(qft_circuit, shots=1000).result()
-    counts = result.get_counts()
-    pre_end_time = time.time()
-    print("PRE OPT RUN TIME: ", round(pre_end_time-pre_start_time, 6))
-    print("RESULT: ", counts)
-    zx_qasm_circuit = zx.Circuit.load(f"qft/qft_circuit_{n}.qasm")
+def apply_zx_calc(circuit, n: int=3):
+    #convert to qasm intermediary format
+    with open(f"hardware_qft/qft_{n}.txt", "w") as f:
+        qasm_circuit = str(dumps(circuit))
+        f.write(qasm_circuit)
+    with open(f"hardware_qft/qft_{n}.txt", "r") as f:
+        lines = f.read().split('\n')
+        format_lines = ""
+        for l in lines:
+            if 'creg' not in l and 'measure' not in l and 'barrier' not in l:
+                format_lines += (l+'\n')
+    qasm_file_name = f"hardware_qft/qft_{n}.qasm"
+    with open(qasm_file_name, "w") as f:
+        qasm_circuit = QuantumCircuit.from_qasm_str(format_lines)
+        formatted = dumps(qasm_circuit)
+        f.write(formatted)
+    #apply zx calculus
+    zx_qasm_circuit = zx.Circuit.load(qasm_file_name)
     graph = zx_qasm_circuit.to_graph(compress_rows=True)
-    print("INITIAL GRAPH STATS: ", graph.stats())
-    print("INITIAL STATS 2: ", zx_qasm_circuit.to_basic_gates().stats())
+    print("ZX-Calculus Reduction Steps:")
+    print("----------------------------")
     zx.full_reduce(graph, quiet=False)
-    graph.normalize() #zx_full_reduce_init
-    print("POST GRAPH STATS: ", graph.stats())
-    optimized_circuit = zx.extract_circuit(graph.copy()) #zx_full_reduce_init_extracted_circuit
-    #for post optimization validation
+    print("\n")
+    graph.normalize()
+    optimized_circuit = zx.extract_circuit(graph.copy())
     g = zx_qasm_circuit
     p = optimized_circuit
-    #converting back to qiskit circuit for testing and drawing
     opt_qasm = optimized_circuit.to_qasm()
     opt_circuit = QuantumCircuit.from_qasm_str(opt_qasm)
-    print("POST OPTIMIZATION STATS: ", p.to_basic_gates().stats())
-    opt_circuit_viz = opt_circuit.draw(output='text') #use pyzx validation too HERE
-    with open(f"qft/post_zx_{n}circuit.txt", "w") as file:
-        file.write(str(opt_circuit_viz))
-    opt_circuit.add_register(ClassicalRegister(n))
-    opt_circuit.measure(range(n), range(n))
-    simulator = AerSimulator()
-    post_start_time = time.time()
-    counts = simulator.run(opt_circuit, shots=1000).result().get_counts()
-    print("COUNTS: ", counts)
-    post_end_time = time.time()
-    print("POST OPT RUN TIME: ", round(post_end_time-post_start_time, 6))
-    print("optimization validation check: ", zx.compare_tensors(g, p))
-    print("optimization validation check: ", zx_qasm_circuit.verify_equality(optimized_circuit, up_to_swaps=False, up_to_global_phase=True))
+    stats_circuit('Pre ZX-calculus optimized stats: ', g)
+    stats_circuit('Post ZX-calculus optimized stats: ', p)
+    # print("optimization validation check: ", zx.compare_tensors(g, p))
+    # print("optimization validation check: ", zx_qasm_circuit.verify_equality(optimized_circuit, up_to_swaps=False, up_to_global_phase=True))
+    return opt_circuit
 
-if __name__ == '__main__':
+
+def output_circuit(message, circuit):
+    print(message)
+    print(circuit.draw(output='text'))
+    print('\n')
+
+
+def stats_circuit(message, circuit):
+    print(message)
+    print(circuit.to_basic_gates().stats())
+    print('\n')
+
+
+def controller(n_qubits:int=3, hardware: str='s', zx_opt:str='False'):
+    circuit = QuantumCircuit(n_qubits, n_qubits)
+    circuit.x(n_qubits-1) #n qubit state where the n-1th qubit is a 1
+    qft_gate = QFT(num_qubits=n_qubits, inverse=False)
+    circuit.append(qft_gate, range(n_qubits))
+    inverse_qft_gate = QFT(num_qubits=n_qubits, inverse=True)
+    circuit.append(inverse_qft_gate, range(n_qubits))
+    circuit.measure(range(n_qubits), range(n_qubits))
+
+    result, start_time, end_time=None, None, None
+    if hardware=='r':
+        message='Pre ZX-calculus optimized circuit: '
+        if zx_opt=='True':
+            circuit = apply_zx_calc(circuit, n_qubits)
+            circuit.add_register(ClassicalRegister(n))
+            circuit.measure(range(n), range(n))
+            message='Post ZX-calculus optimized circuit: '
+        print('Circuit stats: ', circuit.count_ops())
+        output_circuit(message, circuit)
+        service = QiskitRuntimeService()
+        backend = service.backend("ibm_brisbane")
+        sampler = Sampler(mode=backend)
+        pass_manager = generate_preset_pass_manager(
+            optimization_level=1, backend=backend
+        )
+        transpiled = pass_manager.run(circuit)
+        print('Transpiled circuit stats: ', transpiled.count_ops())
+        job = sampler.run([(transpiled,)])
+        result = job.result()[0].join_data().get_counts()
+        start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].start), '%Y-%m-%d %H:%M:%S.%f')
+        end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].stop), '%Y-%m-%d %H:%M:%S.%f')
+    elif hardware=='s':
+        message='Pre ZX-calculus optimized circuit: '
+        if zx_opt=='True':
+            circuit = apply_zx_calc(circuit, n_qubits)
+            circuit.add_register(ClassicalRegister(n))
+            circuit.measure(range(n), range(n))
+            message='Post ZX-calculus optimized circuit: '
+        print("Circuit stats: ", circuit.count_ops())
+        output_circuit(message, circuit)
+        backend = Aer.get_backend('qasm_simulator')
+        prepped = transpile(circuit, backend)
+        print("Tranpiled circuit stats: ", prepped.count_ops())
+        start_time = time.time()
+        job = backend.run(prepped)
+        end_time = time.time()
+        result = dict(job.result().get_counts())
+    print(f"Measurement Result: {max(result, key=result.get)}\n")
+    print(f"Time taken: {end_time-start_time}\n")
+
+
+if __name__=='__main__':
     n = int(sys.argv[1])
-    controller(n)
-
-
+    hardware = sys.argv[2]
+    zx_opt = sys.argv[3]
+    if zx_opt == 'True':
+        controller(n, hardware, 'True')
+    else:
+        controller(n, hardware, 'False')

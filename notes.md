@@ -64,6 +64,15 @@
 * what the qiskit qft circuit returns: https://www.google.com/search?q=what+does+the+qiskit+qft+circuit+return&oq=what+does+the+qiskit+qft+circuit+return&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORigATIHCAEQIRiPAjIHCAIQIRiPAtIBCDUyMDJqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8
 * super helpful github for studying for the qiskit certificate: https://github.com/pratjz/IBM-Qiskit-Certification-Exam-Prep
 
+* qiskit runtime api docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime
+* stack overflow about checking the fidelity value of quantum states: https://quantumcomputing.stackexchange.com/questions/41169/studying-qft-circuit-noise-in-qiskit-comparing-statevectors-with-state-fidelity
+* ibm quantum cloud hardware service updates link: https://quantum.cloud.ibm.com/announcements/en/service-alerts
+* QFT circuits compilation paper: https://arxiv.org/html/2312.16114v1
+* application of qft circuit: https://www.google.com/search?q=application+of+qft+circuit&oq=application+of+qft+circuit&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigAdIBCDQ2MDBqMGo5qAIAsAIB&sourceid=chrome&ie=UTF-8
+* IBM quantum cloud hardware link: https://quantum.cloud.ibm.com/
+* tranpiler that has to be used when running on IBM hardware: https://quantum.cloud.ibm.com/docs/en/guides/transpile-with-pass-managers
+* setting up ibm quantum cloud account: https://quantum.cloud.ibm.com/docs/en/guides/cloud-setup#cloud-save
+
 --------------------------------------------------------------------------------------------------
 * 6/4 Meeting notes:
   * Work on graphics research project

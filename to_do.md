@@ -15,6 +15,13 @@
 - [x] Collect data from QFT experiments
 - [x] Setup and run experiments for the smallest of each circuit's experimental/control group circuit
 
+- [x] Run a circuit on IBM quantum hardware!
+- [x] Realized that original QFT implementation was kinda scuffed and only work on local simulators w/o noise. Scrapped and completely rewrote for hardware. 
+- [x] Figure out direction of project moving forward/where to focus on (compare ZX-calculus with other optimization methods)
+- [x] Buff up code for QFT to be more modular as a model for the other circuits
+- [x] Start collecting data for QFT n circuit using just ZX-calculus for pre/post comparison
+- [ ] Resesarch other optimization methods to implement and compare against for next week
+
 -----------------------------------------------
 
 - [ ] Automate experiment running in a sort of Dockerized pipeline CLI
