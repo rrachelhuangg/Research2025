@@ -20,7 +20,12 @@
 - [x] Figure out direction of project moving forward/where to focus on (compare ZX-calculus with other optimization methods)
 - [x] Buff up code for QFT to be more modular as a model for the other circuits
 - [x] Start collecting data for QFT n circuit using just ZX-calculus for pre/post comparison
-- [ ] Resesarch other optimization methods to implement and compare against for next week
+
+- [x] Pick 2 other optimization methods to implement
+- [ ] Collect data for QFT 100 circuit (ZX-calculus)
+- [ ] Implement the 2 optimization methods for QFT
+- [ ] Collect data for 3 QFT circuits (using the other 2 optimization methods)
+- [ ] Record at least 3 trials for each experiment
 
 -----------------------------------------------
 

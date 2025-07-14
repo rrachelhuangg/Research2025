@@ -73,6 +73,16 @@
 * tranpiler that has to be used when running on IBM hardware: https://quantum.cloud.ibm.com/docs/en/guides/transpile-with-pass-managers
 * setting up ibm quantum cloud account: https://quantum.cloud.ibm.com/docs/en/guides/cloud-setup#cloud-save
 
+* writing plugins: https://quantum.cloud.ibm.com/docs/en/api/qiskit/transpiler_plugins#module-qiskit.transpiler.preset_passmanagers.plugin
+* super helpful qiskit pass manager/transpiler docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit/transpiler
+* qiskit visualization docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit/visualization
+* qiskit compiler docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit/compiler
+* installing plugins: https://quantum.cloud.ibm.com/docs/en/guides/transpiler-plugins
+* reasons for circuit optimization and key optimization metrics: https://www.google.com/search?q=optimizing+qiskit+circuit+techniques&oq=optimizing+qiskit+circuit+techniques&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORigATIHCAEQIRigATIHCAIQIRigAdIBCTEwOTY5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
+  * reduces required resources
+  * increases accuracy
+* 
+
 --------------------------------------------------------------------------------------------------
 * 6/4 Meeting notes:
   * Work on graphics research project
