@@ -81,12 +81,5 @@
 * reasons for circuit optimization and key optimization metrics: https://www.google.com/search?q=optimizing+qiskit+circuit+techniques&oq=optimizing+qiskit+circuit+techniques&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORigATIHCAEQIRigATIHCAIQIRigAdIBCTEwOTY5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
   * reduces required resources
   * increases accuracy
-* 
-
---------------------------------------------------------------------------------------------------
-* 6/4 Meeting notes:
-  * Work on graphics research project
-  * start with an easier circuit that I know the answer to and implement it with API docs. compare it to a found given implementation to see where the gaps are.
-  * have grover's base done by the very least for next meeting. to show and test. maybe have a couple variations.
-  * maybe reevaluate timeline 
+* qiskit pass manager class api docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit/0.38/qiskit.transpiler.preset_passmanagers.generate_preset_pass_manager
 

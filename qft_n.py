@@ -59,7 +59,7 @@ def stats_circuit(message, circuit):
     print('\n')
 
 
-def controller(n_qubits:int=3, hardware: str='s', zx_opt:str='False'):
+def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
     circuit = QuantumCircuit(n_qubits, n_qubits)
     circuit.x(n_qubits-1) #n qubit state where the n-1th qubit is a 1
     qft_gate = QFT(num_qubits=n_qubits, inverse=False)
@@ -70,29 +70,40 @@ def controller(n_qubits:int=3, hardware: str='s', zx_opt:str='False'):
 
     result, start_time, end_time=None, None, None
     if hardware=='r':
-        message='Pre ZX-calculus optimized circuit: '
-        if zx_opt=='True':
+        message=f'Pre {opt_method} optimized circuit: '
+        opt_level = 0
+        layout_method = ''
+        routing_method = ''
+        translation_method = ''
+        if opt_method=='ZX':
             circuit = apply_zx_calc(circuit, n_qubits)
             circuit.add_register(ClassicalRegister(n))
             circuit.measure(range(n), range(n))
             message='Post ZX-calculus optimized circuit: '
+        if opt_method=='plugin-combo':
+            message = f'Post {opt_method} optimized circuit: '
+            opt_level=3
+            layout_method='sabre'
+            routing_method='stochastic'
+            translation_method='synthesis'
         print('Circuit stats: ', circuit.count_ops())
         output_circuit(message, circuit)
         service = QiskitRuntimeService()
         backend = service.backend("ibm_brisbane")
         sampler = Sampler(mode=backend)
         pass_manager = generate_preset_pass_manager(
-            optimization_level=1, backend=backend
+            optimization_level=opt_level, backend=backend, layout_method=layout_method, routing_method=routing_method, translation_method=translation_method
         )
         transpiled = pass_manager.run(circuit)
         print('Transpiled circuit stats: ', transpiled.count_ops())
+        # output_circuit(f'Transpiled {message}', transpiled)
         job = sampler.run([(transpiled,)])
         result = job.result()[0].join_data().get_counts()
         start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].start), '%Y-%m-%d %H:%M:%S.%f')
         end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].stop), '%Y-%m-%d %H:%M:%S.%f')
     elif hardware=='s':
         message='Pre ZX-calculus optimized circuit: '
-        if zx_opt=='True':
+        if opt_method=='ZX':
             circuit = apply_zx_calc(circuit, n_qubits)
             circuit.add_register(ClassicalRegister(n))
             circuit.measure(range(n), range(n))
@@ -113,8 +124,11 @@ def controller(n_qubits:int=3, hardware: str='s', zx_opt:str='False'):
 if __name__=='__main__':
     n = int(sys.argv[1])
     hardware = sys.argv[2]
-    zx_opt = sys.argv[3]
-    if zx_opt == 'True':
-        controller(n, hardware, 'True')
+    if len(sys.argv)>3:
+        opt_method = sys.argv[3]
+        if opt_method == 'ZX':
+            controller(n, hardware, 'ZX')
+        elif opt_method == 'plugin-combo':
+            controller(n, hardware, 'plugin-combo')
     else:
-        controller(n, hardware, 'False')
+        controller(n, hardware, '')
