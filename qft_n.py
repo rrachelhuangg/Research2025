@@ -117,7 +117,7 @@ def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
         backend = service.backend("ibm_brisbane")
         sampler = Sampler(mode=backend)
         pass_manager = generate_preset_pass_manager(
-            optimization_level=opt_level, backend=backend, layout_method=layout_method, routing_method=routing_method, translation_method=translation_method, seed_transpiler=10
+            optimization_level=opt_level, backend=backend, layout_method=layout_method, routing_method=routing_method, translation_method=translation_method
         )
         if opt_method=='custom-pass':
             custom_stage_1, custom_stage_2 = custom_pass_stages(backend, 1)

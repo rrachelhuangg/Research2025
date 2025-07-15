@@ -82,4 +82,9 @@
   * reduces required resources
   * increases accuracy
 * qiskit pass manager class api docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit/0.38/qiskit.transpiler.preset_passmanagers.generate_preset_pass_manager
+* lower-level tranpiler passes: https://quantum.cloud.ibm.com/docs/en/api/qiskit/transpiler_passes
+* updated qiskit package transpilation docs: https://quantum.cloud.ibm.com/docs/en/guides/transpile
+* dynamic decoupling: https://www.google.com/search?q=what+are+dynamic+decoupling+sequences+in+qiskit+transpiler&oq=what+are+dynamic+decoupling+sequences+in+qiskit+transpiler&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRigATIHCAUQIRigATIHCAYQIRiPAtIBCTE1OTgyajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
+* other commonly used parameters for transpilation: https://quantum.cloud.ibm.com/docs/en/guides/common-parameters
+* 
 
