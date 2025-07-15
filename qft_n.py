@@ -1,14 +1,21 @@
 import pyzx as zx
+import numpy as np
 import sys
 import time
+from datetime import datetime
 from qiskit import QuantumCircuit, transpile, ClassicalRegister
 from qiskit_aer import Aer
 from qiskit.circuit.library import QFT
 from qiskit_ibm_runtime import QiskitRuntimeService
-from qiskit.transpiler import generate_preset_pass_manager
+from qiskit.transpiler import generate_preset_pass_manager, PassManager
 from qiskit_ibm_runtime import SamplerV2 as Sampler
 from qiskit.qasm2 import dumps
-from datetime import datetime
+from qiskit.circuit import library as lib
+from qiskit.transpiler.passes import (
+    ALAPScheduleAnalysis,
+    InverseCancellation,
+    PadDynamicalDecoupling,
+)
 
 
 def apply_zx_calc(circuit, n: int=3):
@@ -58,6 +65,24 @@ def stats_circuit(message, circuit):
     print(circuit.to_basic_gates().stats())
     print('\n')
 
+def custom_pass_stages(backend, opt:int=1):
+    if opt==1:
+        dd_sequence = [lib.XGate(), lib.XGate()]
+        scheduling_pm = PassManager(
+            [
+                ALAPScheduleAnalysis(target=backend.target),
+                PadDynamicalDecoupling(target=backend.target, dd_sequence=dd_sequence),
+            ]
+        )
+        inverse_gate_list = [
+            lib.CXGate(),
+            lib.HGate(),
+            (lib.RXGate(np.pi / 4), lib.RXGate(-np.pi / 4)),
+            (lib.PhaseGate(np.pi / 4), lib.PhaseGate(-np.pi / 4)),
+            (lib.TGate(), lib.TdgGate()),
+        ]
+        logical_opt = PassManager([InverseCancellation(inverse_gate_list)])
+        return logical_opt, scheduling_pm
 
 def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
     circuit = QuantumCircuit(n_qubits, n_qubits)
@@ -80,7 +105,7 @@ def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
             circuit.add_register(ClassicalRegister(n))
             circuit.measure(range(n), range(n))
             message='Post ZX-calculus optimized circuit: '
-        if opt_method=='plugin-combo':
+        elif opt_method=='plugin-combo':
             message = f'Post {opt_method} optimized circuit: '
             opt_level=3
             layout_method='sabre'
@@ -92,8 +117,12 @@ def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
         backend = service.backend("ibm_brisbane")
         sampler = Sampler(mode=backend)
         pass_manager = generate_preset_pass_manager(
-            optimization_level=opt_level, backend=backend, layout_method=layout_method, routing_method=routing_method, translation_method=translation_method
+            optimization_level=opt_level, backend=backend, layout_method=layout_method, routing_method=routing_method, translation_method=translation_method, seed_transpiler=10
         )
+        if opt_method=='custom-pass':
+            custom_stage_1, custom_stage_2 = custom_pass_stages(backend, 1)
+            pass_manager.pre_layout = custom_stage_1
+            pass_manager.scheduling = custom_stage_2
         transpiled = pass_manager.run(circuit)
         print('Transpiled circuit stats: ', transpiled.count_ops())
         # output_circuit(f'Transpiled {message}', transpiled)
@@ -126,9 +155,6 @@ if __name__=='__main__':
     hardware = sys.argv[2]
     if len(sys.argv)>3:
         opt_method = sys.argv[3]
-        if opt_method == 'ZX':
-            controller(n, hardware, 'ZX')
-        elif opt_method == 'plugin-combo':
-            controller(n, hardware, 'plugin-combo')
+        controller(n, hardware, opt_method)
     else:
         controller(n, hardware, '')
