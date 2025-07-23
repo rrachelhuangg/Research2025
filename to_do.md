@@ -22,10 +22,13 @@
 - [x] Start collecting data for QFT n circuit using just ZX-calculus for pre/post comparison
 
 - [x] Pick 2 other optimization methods to implement
-- [ ] Collect data for QFT 100 circuit (ZX-calculus)
-- [ ] Implement the 2 optimization methods for QFT
-- [ ] Collect data for 3 QFT circuits (using the other 2 optimization methods)
-- [ ] Record at least 3 trials for each experiment
+- [x] Collect data for QFT 100 circuit (ZX-calculus)
+- [x] Implement the 2 optimization methods for QFT
+- [x] Collect data for 3 QFT circuits (using the other 2 optimization methods)
+- [x] Record at least 3 trials for each experiment
+
+- [x] Debugged original QFT Grover implementation
+- [x] Refactor Grover circuit(s) to be modular with both circuit size and optimization method like revamped QFT circuit setup
 
 -----------------------------------------------
 
