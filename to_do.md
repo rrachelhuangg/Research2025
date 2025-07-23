@@ -34,17 +34,13 @@
 
 - [ ] Automate experiment running in a sort of Dockerized pipeline CLI
 - [ ] Automate creg/measure/barrier removal from qasm circuits (and/or circuit decomposition/transpilation) and then insertion back conversion process during application of zx
-- [ ] QR code videos
+- [ ] QR code videos!
 - [ ] Record a demo video of running pipeline on a couple examples
-- [ ] Implement QFT algorithm
 - [ ] Buff up all four circuits for ZX-calculus testing (the different test groups for each circuit and a control)
 - [ ] Apply ZX-calculus to all circuits
-- [ ] Try out different ZX-calculus optimization techniques
-- [ ] Calculate difference in gates before and after ZX-calculus optimization
-- [ ] Try running smallest working circuit on IBM hardware
 - [ ] ...
 - [ ] Implement tests for checking if optimized circuits and original circuits still have the same functionality
 
 - [ ] Pass the test for this certificate [IBM Qiskit Certificate](https://www.ibm.com/training/certification/ibm-certified-associate-developer-quantum-computation-using-qiskit-v02x-C0010300) probably around when this project
-is close to being completed
+is close to being completed (August)
 
