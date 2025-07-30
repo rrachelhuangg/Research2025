@@ -38,7 +38,7 @@ def modular_exponentiation(a, x):
             for q in range(4):
                 U.x(q)
     U_viz = U.decompose().draw(output='text')
-    with open(f"shors_15/modular_function.txt", "w") as file:
+    with open(f"shors/modular_function.txt", "w") as file:
         file.write(str(U_viz))
     U = U.to_gate()
     c_U = U.control()
@@ -65,7 +65,7 @@ def shors_alg(n, m, a):
     inverse_qft(qc, range(n))
     qc.measure(range(n), range(n))
     qc_viz = qc.decompose().draw(output='text')
-    with open(f"shors_15/algorithm.txt", "w") as file:
+    with open(f"shors/algorithm.txt", "w") as file:
         file.write(str(qc_viz))
     return qc
 
@@ -81,7 +81,7 @@ if __name__ == '__main__':
     counts = simulator.run(compiled_circuit).result().get_counts(final_circuit)
     pre_end_time = time.time()
     print("PRE OPT RUN TIME: ", round(pre_end_time-pre_start_time, 6))
-    plot_histogram(counts, filename='shors_15/pre_opt_histogram.png')
+    plot_histogram(counts, filename='shors/pre_opt_histogram.png')
     for i in counts:
         measured_value = int(i[::-1], 2)
         if measured_value % 2 != 0:
@@ -92,10 +92,10 @@ if __name__ == '__main__':
         factors = gcd(x+1, 15), gcd(x-1, 15)
         print("FACTORS: ", factors)
     #zx
-    # with open("shors_15/shors_15.qasm", "w") as f:
+    # with open("shors/shors_15.qasm", "w") as f:
     #     qasm_circuit = dumps(final_circuit)
     #     f.write(qasm_circuit)
-    zx_qasm_circuit = zx.Circuit.load("shors_15/shors_15.qasm")
+    zx_qasm_circuit = zx.Circuit.load("shors/shors_15.qasm")
     graph = zx_qasm_circuit.to_graph(compress_rows=True) #init_zx_graph
     print("INITIAL GRAPH STATS: ", graph.stats())
     print("INITIAL STATS 2: ", zx_qasm_circuit.to_basic_gates().stats())
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     print("POST OPTIMIZATION STATS: ", p.to_basic_gates().stats())
     print("PYZX VERIFICATION: ", zx.compare_tensors(g, p))
     opt_circuit_viz = opt_circuit.draw(output='text')
-    with open(f"shors_15/post_zx_qiskit_circuit.txt", "w") as file:
+    with open(f"shors/post_zx_qiskit_circuit.txt", "w") as file:
         file.write(str(opt_circuit_viz))
     #post optimization simulation for verification against pre optimization simulation
     #adding back the classical bits for measuring onto after removing them during qasm conversion process
@@ -122,7 +122,7 @@ if __name__ == '__main__':
     counts = simulator.run(compiled_circuit).result().get_counts(opt_circuit)
     post_end_time = time.time()
     print("POST OPT RUN TIME: ", round(post_end_time-post_start_time, 6))
-    plot_histogram(counts, filename='shors_15/post_opt_histogram.png')
+    plot_histogram(counts, filename='shors/post_opt_histogram.png')
     for i in counts:
         measured_value = int(i[::-1], 2)
         if measured_value % 2 != 0:

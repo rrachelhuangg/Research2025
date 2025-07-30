@@ -20,16 +20,16 @@ from qiskit.transpiler.passes import (
 
 def apply_zx_calc(circuit, n: int=3):
     #convert to qasm intermediary format
-    with open(f"hardware_qft/qft_{n}.txt", "w") as f:
+    with open(f"qft/{n}.txt", "w") as f:
         qasm_circuit = str(dumps(circuit))
         f.write(qasm_circuit)
-    with open(f"hardware_qft/qft_{n}.txt", "r") as f:
+    with open(f"qft/{n}.txt", "r") as f:
         lines = f.read().split('\n')
         format_lines = ""
         for l in lines:
             if 'creg' not in l and 'measure' not in l and 'barrier' not in l:
                 format_lines += (l+'\n')
-    qasm_file_name = f"hardware_qft/qft_{n}.qasm"
+    qasm_file_name = f"qft/{n}.qasm"
     with open(qasm_file_name, "w") as f:
         qasm_circuit = QuantumCircuit.from_qasm_str(format_lines)
         formatted = dumps(qasm_circuit)

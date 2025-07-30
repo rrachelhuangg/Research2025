@@ -24,11 +24,11 @@ from qiskit.transpiler.passes import (
 )
 
 def apply_zx_calc(oracle, n: int=3,):
-    with open(f"grover_drawings/{n}.qasm", "w") as f:
+    with open(f"grover/{n}.qasm", "w") as f:
         basis_circuit = transpile(oracle)
         qasm_circuit = dumps(basis_circuit)
         f.write(qasm_circuit)
-    zx_qasm_circuit = zx.Circuit.load(f"grover_drawings/{n}.qasm")
+    zx_qasm_circuit = zx.Circuit.load(f"grover/{n}.qasm")
     graph = zx_qasm_circuit.to_graph(compress_rows=True)
     print("ZX-Calculus Reduction Steps:")
     print("----------------------------")
