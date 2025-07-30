@@ -30,6 +30,9 @@
 - [x] Debugged original QFT Grover implementation
 - [x] Refactor Grover circuit(s) to be modular with both circuit size and optimization method like revamped QFT circuit setup
 
+- [x] Refactor quantum teleportation circuit to be modular with both circuit size and optimization method
+- [ ] Refactor to pull out common methods between circuits to a separate methods file
+
 -----------------------------------------------
 
 - [ ] Automate experiment running in a sort of Dockerized pipeline CLI

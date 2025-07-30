@@ -1,2 +1,0 @@
-spider_simp: 2. 1.  2 iterations
-pivot_simp: 1.  1 iterations

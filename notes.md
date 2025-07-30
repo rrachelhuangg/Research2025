@@ -86,5 +86,7 @@
 * updated qiskit package transpilation docs: https://quantum.cloud.ibm.com/docs/en/guides/transpile
 * dynamic decoupling: https://www.google.com/search?q=what+are+dynamic+decoupling+sequences+in+qiskit+transpiler&oq=what+are+dynamic+decoupling+sequences+in+qiskit+transpiler&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRigATIHCAIQIRigATIHCAMQIRigATIHCAQQIRigATIHCAUQIRigATIHCAYQIRiPAtIBCTE1OTgyajBqN6gCALACAA&sourceid=chrome&ie=UTF-8
 * other commonly used parameters for transpilation: https://quantum.cloud.ibm.com/docs/en/guides/common-parameters
-* 
+
+* ibm teleportation docs: https://quantum.cloud.ibm.com/learning/en/courses/utility-scale-quantum-computing/teleportation
+* ibm bloch sphere docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit/qiskit.visualization.plot_bloch_multivector
 
