@@ -33,6 +33,11 @@
 - [x] Refactor quantum teleportation circuit to be modular with both circuit size and optimization method
 - [ ] Refactor to pull out common methods between circuits to a separate methods file
 
+- [x] Write up project title and abstract for review/submission
+- [ ] Refactor Shor's algorithm circuit to be modular with both circuit size and optimization method
+- [x] Opted to switch out Shor's circuit for QAOA because Shor's is now deprecated/harder to generalize
+- [x] Work on local implementation of QAOA algorithm
+
 -----------------------------------------------
 
 - [ ] Automate experiment running in a sort of Dockerized pipeline CLI

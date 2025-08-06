@@ -90,3 +90,10 @@
 * ibm teleportation docs: https://quantum.cloud.ibm.com/learning/en/courses/utility-scale-quantum-computing/teleportation
 * ibm bloch sphere docs: https://quantum.cloud.ibm.com/docs/en/api/qiskit/qiskit.visualization.plot_bloch_multivector
 
+* ibm qaoa docs: https://quantum.cloud.ibm.com/docs/en/tutorials/quantum-approximate-optimization-algorithm 
+  * mapping classical inputs to a quantum problem
+  * hamiltonian contains the quantum definition of the problem
+  * quantum annealing: finds the lowest energy state of a system, which corresponds to the solution of the optimization problem
+  * for the minimization of the hamiltonian, can use estimator runtime instead of sampler since the measurement of the cost function
+  is just the expectation value
+
