@@ -96,4 +96,6 @@
   * quantum annealing: finds the lowest energy state of a system, which corresponds to the solution of the optimization problem
   * for the minimization of the hamiltonian, can use estimator runtime instead of sampler since the measurement of the cost function
   is just the expectation value
+* ibm qiskit QAOA class: https://qiskit-community.github.io/qiskit-algorithms/stubs/qiskit_algorithms.QAOA.html#qiskit_algorithms.QAOA
+* qiskit circuit library class: https://quantum.cloud.ibm.com/docs/en/api/qiskit/circuit_library
 

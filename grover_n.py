@@ -103,7 +103,7 @@ def controller(n: int=15, hardware: str='s', opt_method:str=''):
         oracle_viz = problem.grover_operator.oracle.decompose().draw(output='text')
         output_circuit(message, oracle_viz)
         service = QiskitRuntimeService()
-        backend = service.backend("ibm_brisbane")
+        backend = service.backend("ibm_torino")
         sampler = Sampler(mode=backend)
         grover = Grover(sampler=sampler, iterations=1)
         circuit = grover.construct_circuit(problem)
@@ -121,8 +121,17 @@ def controller(n: int=15, hardware: str='s', opt_method:str=''):
         # output_circuit(f'Transpiled {message}', transpiled)
         job = sampler.run([(transpiled,)])
         result = job.result()[0].join_data().get_counts()
-        start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].start), '%Y-%m-%d %H:%M:%S.%f')
-        end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].stop), '%Y-%m-%d %H:%M:%S.%f')
+        correct = "1"*n
+        total = 0
+        accuracy = 0
+        for key in result:
+            total += result[key]
+            if key == correct:
+                accuracy = result[key]
+        # start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].start), '%Y-%m-%d %H:%M:%S.%f')
+        # end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].stop), '%Y-%m-%d %H:%M:%S.%f')
+        start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans']['__value__']['spans'][0].start), '%Y-%m-%d %H:%M:%S.%f')
+        end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans']['__value__']['spans'][0].stop), '%Y-%m-%d %H:%M:%S.%f')
     if hardware=='s':
         message='Pre ZX-calculus optimized circuit: '
         if opt_method == 'ZX':
@@ -137,7 +146,8 @@ def controller(n: int=15, hardware: str='s', opt_method:str=''):
         result = grover.amplify(problem).top_measurement
         end_time = time.time()
         output_circuit(message, oracle_viz)
-    print(f"Measurement result: {result}")
+    # print(f"Measurement result: {result}")
+    print(f"Accuracy: {accuracy/total}")
     print(f"Time taken: {end_time-start_time}\n")
 
 if __name__ == '__main__':

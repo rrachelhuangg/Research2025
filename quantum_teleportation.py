@@ -141,8 +141,12 @@ def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
         job = sampler.run([(transpiled,)])
         result = job.result()[0].join_data().get_counts()
         counts = result
-        start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].start), '%Y-%m-%d %H:%M:%S.%f')
-        end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].stop), '%Y-%m-%d %H:%M:%S.%f')
+        # start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].start), '%Y-%m-%d %H:%M:%S.%f')
+        # end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans'].stop), '%Y-%m-%d %H:%M:%S.%f')
+        #for qpu torino instead of brisbane
+        # print(job.result().metadata['execution']['execution_spans']['__value__']['spans'][0].start)
+        start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans']['__value__']['spans'][0].start), '%Y-%m-%d %H:%M:%S.%f')
+        end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans']['__value__']['spans'][0].stop), '%Y-%m-%d %H:%M:%S.%f')
     elif hardware=='s':
         message='Pre ZX-calculus optimized circuit: '
         if opt_method=='ZX':
