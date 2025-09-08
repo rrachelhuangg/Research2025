@@ -10,6 +10,6 @@ Abstract: Measurement-based quantum computing (MBQC) is considered to be a promi
 
 Fall 2025:
 
-Goal: To build a collection of random circuits to which genetic programming in regards to ZX-calculus can be applied. Emphasis is placed on compiling data for which ZX-calculus methods resulted in the greatest circuit reduction for circuits of all sizes and gates. 
+Goal: To build a collection of random circuits to which genetic programming in regards to ZX-calculus can be applied. Emphasis is placed on compiling data for which ZX-calculus methods resulted in the greatest circuit reduction for circuits of all sizes and gates within defined constraints.
 
 [Circuit Generation Rules](https://github.com/rrachelhuangg/Research2025/blob/main/generating_valid_random_circuits_rules.pdf)
