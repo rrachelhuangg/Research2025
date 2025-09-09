@@ -73,6 +73,7 @@ def generate_random(n_qubits):
     i = 0
     while i < n_qubits:
         random_op_idx = random.randint(1, 4)
+        print("I: ", i, "N_QUBITS: ", n_qubits, "RAND: ", random_op_idx)
         if random_op_idx == 1:
             random_idx = random.randint(0,18)
             selected_op = one_qubit_ops[random_idx]
@@ -213,8 +214,6 @@ def generate_random(n_qubits):
             elif selected_op == "RCCCXGATE":
                 circuit.rcccx(i, i+1, i+2, i+3)
                 i += 4
-        else:
-            break
     print(circuit)
     return circuit
 
