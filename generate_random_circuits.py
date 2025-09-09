@@ -12,7 +12,7 @@ from qiskit.transpiler import generate_preset_pass_manager, PassManager
 from qiskit_ibm_runtime import SamplerV2 as Sampler
 from qiskit.qasm2 import dumps
 from qiskit.circuit import library as lib
-from qiskit.circuit.library import XXMinusYYGate, XXPlusYYGate
+from qiskit.circuit.library import XXMinusYYGate, XXPlusYYGate, C3XGate, C4XGate, CCXGate, CCZGate, CSwapGate
 import random
 
 def apply_zx_calc(circuit, n: int=3):
@@ -61,114 +61,165 @@ def stats_circuit(message, circuit):
     print(circuit.to_basic_gates().stats())
     print('\n')
 
-one_qubit_ops = ["HGATE", "IGATE", "PHASEGATE", "RGATE", "RXGATE", "RYGATE", "RZGATE", "SGATE", "SDGGATE", "SXGATE", "SXDGGATE", "TGATE", "TDGGATE", "UGATE", "U1GATE", "U2GATE", "XGATE", "YGATE", "ZGATE", "NOGATE"]
-two_qubit_ops = ["CHGATE", "CPHASEGATE", "CRXGATE", "CRYGATE", "CRZGATE", "CSGATE", "CSDGGATE", "CSXGATE", "CUGATE", "CXGATE", "CYGATE", "CZGATE", "DCXGATE", "ISWAPGATE", "RXXGATE", "RYYGATE", "RZZGATE", "SWAPGATE"]
+one_qubit_ops = ["HGATE", "IGATE", "PHASEGATE", "RGATE", "RXGATE", "RYGATE", "RZGATE", "SGATE", "SDGGATE", "SXGATE", "SXDGGATE", "TGATE", "TDGGATE", "UGATE", "U1GATE", "U2GATE", "XGATE", "YGATE", "ZGATE"]
+two_qubit_ops = ["CHGATE", "CPHASEGATE", "CRXGATE", "CRYGATE", "CRZGATE", "CSGATE", "CSDGGATE", "CSXGATE", "CUGATE", "CXGATE", "CYGATE", "CZGATE", "DCXGATE", "ISWAPGATE", "RXXGATE", "RZZGATE", "SWAPGATE"]
+three_qubit_ops = ["CCXGATE", "CCZGATE", "CSWAPGATE"]
+four_qubit_ops = ["C3XGATE", "RCCCXGATE"]
 def generate_random(n_qubits):
     circuit = QuantumCircuit(n_qubits, n_qubits)
     #use a seed for replication?
     #probably randomly generate phi, theta, etc. angle values that are fixed per circuit
+    #want to make sure each qubit is used!
     i = 0
     while i < n_qubits:
-        random_op_idx = random.randint(1, 2)
+        random_op_idx = random.randint(1, 4)
         if random_op_idx == 1:
-            random_idx = random.randint(0,19)
+            random_idx = random.randint(0,18)
             selected_op = one_qubit_ops[random_idx]
             if selected_op == "HGATE":
                 circuit.h(i)
+                i += 1
             elif selected_op == "IGATE":
                 circuit.id(i)
+                i += 1
             elif selected_op == "PHASEGATE":
                 circuit.p(1.5, i)
+                i += 1
             elif selected_op == "RXGATE":
                 circuit.rx(1.5, i)
+                i += 1
             elif selected_op == "RYGATE":
                 circuit.ry(1.5, i)
+                i += 1
             elif selected_op == "RZGATE":
                 circuit.rz(1.5, i)
+                i += 1
             elif selected_op == "SGATE":
                 circuit.s(i)
+                i += 1
             elif selected_op == "SDGGATE":
                 circuit.sdg(i)
+                i += 1
             elif selected_op == "SXGATE":
                 circuit.sx(i)
+                i += 1
             elif selected_op == "SXDGGATE":
                 circuit.sxdg(i)
+                i += 1
             elif selected_op == "TGATE":
                 circuit.t(i)
+                i += 1
             elif selected_op == "TDGGATE":
                 circuit.tdg(i)
+                i += 1
             elif selected_op == "UGATE":
                 circuit.u(1.5, 2.5, 3.5, i)
+                i += 1
             elif selected_op == "U1GATE":
                 circuit.u(0, 0, 1.5, i)
+                i += 1
             elif selected_op == "U2GATE":
                 circuit.u(np.pi/2, 1.5, 1.5, i)
+                i += 1
             elif selected_op == "XGATE":
                 circuit.x(i)
+                i += 1
             elif selected_op == "YGATE":
                 circuit.y(i)
+                i += 1
             elif selected_op == "ZGATE":
                 circuit.z(i)
-            i += 1
+                i += 1
         elif random_op_idx == 2 and n_qubits-i>1:
-            random_idx = random.randint(0,17)
+            random_idx = random.randint(0,16)
             selected_op = two_qubit_ops[random_idx]
             if selected_op == "CHGATE":
                 circuit.ch(i, i+1)
+                i += 2
             elif selected_op == "CPHASEGATE":
                 circuit.cp(1.5, i, i+1)
+                i += 2
             elif selected_op == "CRXGATE":
                 circuit.crx(1.5, i, i+1)
+                i += 2
             elif selected_op == "CRYGATE":
                 circuit.cry(1.5, i, i+1)
+                i += 2
             elif selected_op == "CRZGATE":
                 circuit.crz(1.5, i, i+1)
+                i += 2
             elif selected_op == "CSGATE":
                 circuit.cs(i, i+1)
+                i += 2
             elif selected_op == "CSDGGATE":
                 circuit.csdg(i, i+1)
+                i += 2
             elif selected_op == "CSXGATE":
                 circuit.csx(i, i+1)
+                i += 2
             elif selected_op == "CUGATE":
                 circuit.cu(1.5, 1.5, 1.5, 1.5, i, i+1)
+                i += 2
             elif selected_op == "CXGATE":
                 circuit.cx(i, i+1)
+                i += 2
             elif selected_op == "CYGATE":
                 circuit.cy(i, i+1)
+                i += 2
             elif selected_op == "CZGATE":
                 circuit.cz(i, i+1)
+                i += 2
             elif selected_op == "DCXGATE":
                 circuit.dcx(i, i+1)
+                i += 2
             elif selected_op == "ISWAPGATE":
                 circuit.iswap(i, i+1)
+                i += 2
             elif selected_op == "RXXGATE":
                 circuit.rxx(1.5, i, i+1)
-            elif selected_op == "RYYGATE":
-                circuit.ryy(1.5, i, i+1)
-            elif selected_op == "RZXGATE":
-                circuit.rzx(1.5, i, i+1)
+                i += 2
             elif selected_op == "RZZGATE":
                 circuit.rzz(1.5, i, i+1)
+                i += 2
             elif selected_op == "SWAPGATE":
                 circuit.swap(i, i+1)
+                i += 2
             elif selected_op == "XXMINUSYYGATE":
                 xx = XXMinusYYGate(1.5, 1.5)
                 circuit.append(xx, [i, i+1])
+                i += 2
             elif selected_op == "XXPLUSYYGATE":
                 yy = XXPlusYYGate(1.5, 1.5)
                 circuit.append(yy, [i, i+1])
-            i += 2
+                i += 2
+        elif random_op_idx == 3 and n_qubits-i>2:
+            random_idx = random.randint(0,2)
+            selected_op = three_qubit_ops[random_idx]
+            if selected_op == "CCXGATE":
+                circuit.append(CCXGate(), [i, i+1, i+2])
+                i += 3
+            elif selected_op == "CCZGATE":
+                circuit.append(CCZGate(), [i, i+1, i+2])
+                i += 3
+            elif selected_op == "CSWAPGATE":
+                circuit.append(CSwapGate(), [i, i+1, i+2])
+                i += 3
+        elif random_op_idx == 4 and n_qubits-i>3:
+            random_idx = random.randint(0,1)
+            selected_op = four_qubit_ops[random_idx]
+            if selected_op == "C3XGATE":
+                circuit.append(C3XGate(), [i, i+1, i+2, i+3])
+                i += 4
+            elif selected_op == "RCCCXGATE":
+                circuit.rcccx(i, i+1, i+2, i+3)
+                i += 4
         else:
             break
     print(circuit)
     return circuit
 
 def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
-    # circuit = QuantumCircuit(n_qubits,n_qubits)
     circuit = generate_random(n_qubits)
-    #insert random gates here/use randomly generated circuit
-    #measure qubits 0 and 1 into classical bits 0 and 1
-    # circuit.measure([0,1],[0,1])
 
     result, start_time, end_time, correct, total=None, None, None, 0, 0
     if hardware=='r':
@@ -177,6 +228,7 @@ def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
         layout_method = ''
         routing_method = ''
         translation_method = ''
+        temp_circuit = circuit
         if opt_method=='ZX':
             circuit = apply_zx_calc(circuit, n_qubits)
             circuit.add_register(ClassicalRegister(n))
@@ -190,8 +242,12 @@ def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
         pass_manager = generate_preset_pass_manager(
             optimization_level=opt_level, backend=backend, layout_method=layout_method, routing_method=routing_method, translation_method=translation_method
         )
+        pre_opt_transpiled = pass_manager.run(temp_circuit)
+        print("PRE OPT TRANSPILED: ", pre_opt_transpiled.count_ops())
         transpiled = pass_manager.run(circuit)
+        # print("TRANSPILED: ", transpiled) #need to compare stats of pre ZX calculus transpilation (make a copy) and post ZX calculus transpilation
         print('Transpiled circuit stats: ', transpiled.count_ops())
+        # print("POST OPT TRANSPILED: ", transpiled)
         # output_circuit(f'Transpiled {message}', transpiled)
         job = sampler.run([(transpiled,)])
         result = job.result()[0].join_data().get_counts()
