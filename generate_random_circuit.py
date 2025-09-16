@@ -73,7 +73,6 @@ def generate_random(n_qubits):
     i = 0
     while i < n_qubits:
         random_op_idx = random.randint(1, 4)
-        print("I: ", i, "N_QUBITS: ", n_qubits, "RAND: ", random_op_idx)
         if random_op_idx == 1:
             random_idx = random.randint(0,18)
             selected_op = one_qubit_ops[random_idx]
@@ -214,12 +213,11 @@ def generate_random(n_qubits):
             elif selected_op == "RCCCXGATE":
                 circuit.rcccx(i, i+1, i+2, i+3)
                 i += 4
-    print(circuit)
+    # print("GENERATED CIRCUIT: \n", circuit)
     return circuit
 
 def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
     circuit = generate_random(n_qubits)
-
     result, start_time, end_time, correct, total=None, None, None, 0, 0
     if hardware=='r':
         message=f'Pre {opt_method} optimized circuit: '
@@ -230,8 +228,6 @@ def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
         temp_circuit = circuit
         if opt_method=='ZX':
             circuit = apply_zx_calc(circuit, n_qubits)
-            circuit.add_register(ClassicalRegister(n))
-            circuit.measure(range(n), range(n))
             message='Post ZX-calculus optimized circuit: '
         print('Circuit stats: ', circuit.count_ops())
         output_circuit(message, circuit)
@@ -244,14 +240,12 @@ def controller(n_qubits:int=3, hardware: str='s', opt_method:str=''):
         pre_opt_transpiled = pass_manager.run(temp_circuit)
         print("PRE OPT TRANSPILED: ", pre_opt_transpiled.count_ops())
         transpiled = pass_manager.run(circuit)
-        # print("TRANSPILED: ", transpiled) #need to compare stats of pre ZX calculus transpilation (make a copy) and post ZX calculus transpilation
+        with open("pre_opt_transpiled.txt", "w") as f:
+            f.write(str(pre_opt_transpiled))
+        with open("post_opt_transpiled.txt", "w") as f:
+            f.write(str(transpiled))
         print('Transpiled circuit stats: ', transpiled.count_ops())
-        # print("POST OPT TRANSPILED: ", transpiled)
-        # output_circuit(f'Transpiled {message}', transpiled)
         job = sampler.run([(transpiled,)])
-        result = job.result()[0].join_data().get_counts()
-        start_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans']['__value__']['spans'][0].start), '%Y-%m-%d %H:%M:%S.%f')
-        end_time = datetime.strptime(str(job.result().metadata['execution']['execution_spans']['__value__']['spans'][0].stop), '%Y-%m-%d %H:%M:%S.%f')
     elif hardware=='s':
         message='Pre ZX-calculus optimized circuit: '
         if opt_method=='ZX':
