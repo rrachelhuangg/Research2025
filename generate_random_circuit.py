@@ -70,7 +70,7 @@ def generate_random(n_qubits):
     #use a seed for replication?
     #probably randomly generate phi, theta, etc. angle values that are fixed per circuit
     i = 0
-    width = 5
+    width = 3
     j = 0
     while j < width:
         i = 0
