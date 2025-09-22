@@ -11,6 +11,7 @@ four_qubit_ops = ["C3XGATE", "RCCCXGATE"]
 
 def mutate_circuit(circuit):
     print("PRE MUTATION CIRCUIT: ", circuit)
+    print("\n")
     n_idx = 1
     n_to_mutate = random.randint(1, int(len(circuit.data)/4))+1
     mutate_idxs = []
@@ -115,19 +116,15 @@ def mutate_circuit(circuit):
                 n_idx += 4
         else:
             break
-    print("POST MUTATION CIRCUIT: ", circuit)
+    print("POST MUTATION CIRCUIT:", circuit)
+    print("\n")
     return circuit
 
-for filename in os.listdir('circuit_population/'):
-    if "qpy" in filename:
-        name = f"circuit_population/{filename}"
-        print("NAME: ", name)
-        with open(name, "rb") as file:
-            circuit = qpy.load(file)[0]
-            mutate_circuit(circuit)
-
-
-# with open("circuit_population/1.qpy", "rb") as file:
-#     circuit = qpy.load(file)[0]
-
-# mutate_circuit(circuit)
+if __name__=='__main__':
+    for filename in os.listdir('circuit_population/'):
+        if "qpy" in filename:
+            name = f"circuit_population/{filename}"
+            print("NAME: ", name)
+            with open(name, "rb") as file:
+                circuit = qpy.load(file)[0]
+                mutate_circuit(circuit)
