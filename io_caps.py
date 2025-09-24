@@ -24,13 +24,15 @@ def io_caps_teleport():
 
         #local simulator
         untranspiled_circuit = circuit.copy()
-        circuit = transpile(circuit, simulator)
+        # circuit = transpile(circuit, simulator)
         #hardware
         # circuit = apply_zx_calc(circuit, 3)
         # circuit.measure_all()
         
         #local
-        result = simulator.run(circuit, shots=1000).result().get_counts()
+        # result = simulator.run(circuit, shots=1000).result().get_counts()
+        untranspiled_circuit_transpiled = transpile(circuit, simulator)
+        result = simulator.run(untranspiled_circuit_transpiled, shots=1000).result().get_counts()
         correct, total = 0, 0
 
         #hardware
@@ -67,6 +69,53 @@ def io_caps_teleport():
                 print("RANDOM CIRCUIT: ", untranspiled_circuit)
                 print(f"Measurement Results: {result}\n")
                 print(f"Accuracy: {correct/total}\n")
+            #for testing/specific circuit preservation on hardware
+            #zx-calculus doesn't seem to help? (went from a potential 5 correct states to 4 correct states)
+            # with open(f"qasm_accurate.txt", "w") as f:
+            #     qasm_circuit = str(dumps(circuit))
+            #     f.write(qasm_circuit)
+            # with open(f"qasm_accurate.txt", "r") as f:
+            #     lines = f.read().split('\n')
+            #     format_lines = ""
+            #     for l in lines:
+            #         if 'creg' not in l and 'measure' not in l and 'barrier' not in l:
+            #             format_lines += (l+'\n')
+            # qasm_file_name = f"qasm_accurate.qasm"
+            # with open(qasm_file_name, "w") as f:
+            #     qasm_circuit = QuantumCircuit.from_qasm_str(format_lines)
+            #     formatted = dumps(qasm_circuit)
+            #     f.write(formatted)
+            # loaded_circuit = zx.Circuit.load(qasm_file_name)
+
+            # graph = loaded_circuit.to_graph(compress_rows=True)
+            # print("ZX-Calculus Reduction Steps:")
+            # print("----------------------------")
+            # zx.full_reduce(graph, quiet=False)
+            # print("\n")
+            # graph.normalize()
+            # optimized_circuit = zx.extract_circuit(graph.copy())
+            # opt_qasm = optimized_circuit.to_qasm()
+            # circuit = QuantumCircuit.from_qasm_str(opt_qasm)
+            # circuit.add_register(ClassicalRegister(3))
+            # circuit.measure(range(3), range(3))
+
+            opt_level = 0
+            layout_method = ''
+            routing_method = ''
+            translation_method = ''
+            print('Circuit stats: ', circuit.count_ops())
+            service = QiskitRuntimeService()
+            backend = service.backend("ibm_brisbane")
+            sampler = Sampler(mode=backend)
+            pass_manager = generate_preset_pass_manager(
+                optimization_level=opt_level, backend=backend, layout_method=layout_method, routing_method=routing_method, translation_method=translation_method
+            )
+            transpiled = pass_manager.run(circuit)
+            job = sampler.run([(transpiled,)])
+            result = job.result()[0].join_data().get_counts()
+            print("RESULT: ", result)
+            print("CIRCUIT: ", circuit)
+            break
 
         i += 1
 
