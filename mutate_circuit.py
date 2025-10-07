@@ -10,8 +10,9 @@ three_qubit_ops = ["CCXGATE", "CCZGATE", "CSWAPGATE"]
 four_qubit_ops = ["C3XGATE", "RCCCXGATE"]
 
 def mutate_circuit(circuit):
-    print("PRE MUTATION CIRCUIT: ", circuit)
-    print("\n")
+    print("MUTATING!")
+    # print("PRE MUTATION CIRCUIT: ", circuit)
+    # print("\n")
     n_idx = 1
     n_to_mutate = random.randint(1, int(len(circuit.data)/4))+1
     mutate_idxs = []
@@ -116,8 +117,8 @@ def mutate_circuit(circuit):
                 n_idx += 4
         else:
             break
-    print("POST MUTATION CIRCUIT:", circuit)
-    print("\n")
+    # print("POST MUTATION CIRCUIT:", circuit)
+    # print("\n")
     return circuit
 
 if __name__=='__main__':
