@@ -9,11 +9,12 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit_aer import AerSimulator
 from qiskit.quantum_info import Statevector
 import numpy as np
+from collections import Counter
 
 #gene = [q_ti, G_i, q_ci, theta]
 gene_gates = ["R_X", "R_Y", "R_Z", "CNOT"]
 #temp testing value
-init_pop_size = 100
+init_pop_size = 10000
 #n determines the W-state (target) and size of individuals
 n = 6 
 
@@ -93,7 +94,7 @@ def create_circuits(population):
                     individual.cx(j, j+1)
                     j += 2
         circuit_representations += [individual]
-    return circuit_representations
+    return circuit_representations, population
 
 
 def get_circuit_state(circuit):
@@ -190,11 +191,50 @@ def mutate_population(population):
             mutated_population += [population[i]]
     return mutated_population
 
+def assign_fitness_weights(population, curr_genes):
+    fitness_weights = []
+    selected_genes = []
+    average_fitness = 0
+    for individual, fitness in population:
+        average_fitness += fitness
+    average_fitness = average_fitness/len(population)
+    if average_fitness == 0:
+        average_fitness = 1
+    i = 0
+    for individual, fitness in population:
+        if fitness >= 0 and fitness < 0.25*average_fitness:
+            fitness_weights += [[individual, 1]]
+            selected_genes += [curr_genes[i]]
+        elif fitness >= 0.25*average_fitness and fitness < 0.5*average_fitness:
+            fitness_weights += [[individual, 2]]
+            selected_genes += [curr_genes[i]]
+        elif fitness >= 0.5*average_fitness and fitness < 0.75*average_fitness:
+            fitness_weights += [[individual, 3]]
+            selected_genes += [curr_genes[i]]
+        else:
+            fitness_weights += [[individual, 4]]
+            selected_genes += [curr_genes[i]]
+        i += 1
+    return fitness_weights, selected_genes
+
+def roulette_wheel_selection(fitness_weights, genes):
+    population = [x[0] for x in fitness_weights]
+    fitnesses = [x[1] for x in fitness_weights]
+    indexes = random.choices(range(len(population)), weights=fitnesses, k=int(0.9*len(fitness_weights)))
+    selected_individuals = [population[i] for i in indexes]
+    selected_genes = [genes[i] for i in indexes]
+    return selected_individuals, selected_genes
 
 if __name__=='__main__':
     W_state = get_circuit_state(create_W_state(n))
     init_population, init_pop_genes = generate_init_pop()
-    bred = breed_population(init_pop_genes)
-    mutated = mutate_population(bred)
-    mutated_population = create_circuits(mutated)
-    print("FIRST GENERATION: ", run_generation(W_state, mutated_population), ": ", len(mutated_population))
+    for i in range(10):
+        bred = breed_population(init_pop_genes)
+        mutated = mutate_population(bred)
+        mutated_population, curr_genes = create_circuits(mutated)
+        first_gen = run_generation(W_state, mutated_population)
+        fitness_weights, selected_genes = assign_fitness_weights(first_gen, curr_genes)
+        selected_individuals, init_pop_genes = roulette_wheel_selection(fitness_weights, selected_genes)
+    second_entries = [sublist[1] for sublist in fitness_weights]
+    counts = Counter(second_entries)
+    print("COUNTS: ", counts)
