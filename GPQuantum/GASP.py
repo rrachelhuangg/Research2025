@@ -10,11 +10,12 @@ from qiskit_aer import AerSimulator
 from qiskit.quantum_info import Statevector
 import numpy as np
 from collections import Counter
+from helper import visualize
 
 #gene = [q_ti, G_i, q_ci, theta]
 gene_gates = ["R_X", "R_Y", "R_Z", "CNOT"]
 #temp testing value
-init_pop_size = 10000
+init_pop_size = 100000
 #n determines the W-state (target) and size of individuals
 n = 6 
 
@@ -78,21 +79,36 @@ def create_circuits(population):
     for circuit in population:
         individual = QuantumCircuit(n, n)
         for j in range(len(circuit)):
-            if circuit[j] == "R_X":
-                individual.rx(1.5, j)
-                j += 1
-            elif circuit[j] == "R_Y":
-                individual.ry(1.5, j)
-                j += 1
-            elif circuit[j] == "R_Z":
-                individual.rz(1.5, j)
-                j += 1
-            elif circuit[j] == "CNOT":
-                if j+1 == n:
-                    continue
-                else:
-                    individual.cx(j, j+1)
-                    j += 2
+            if isinstance(circuit[j], list):
+                for gate in circuit[j]:
+                    if gate == "R_X":
+                        individual.rx(1.5, j)
+                    elif gate == "R_Y":
+                        individual.ry(1.5, j)
+                    elif gate == "R_Z":
+                        individual.rz(1.5, j)
+                    elif gate == "CNOT":
+                        if j + 1 == n:
+                            continue
+                        else:
+                            individual.cx(j, j+1)
+            else:
+                if circuit[j] == "R_X":
+                    individual.rx(1.5, j)
+                    j += 1
+                elif circuit[j] == "R_Y":
+                    individual.ry(1.5, j)
+                    j += 1
+                elif circuit[j] == "R_Z":
+                    individual.rz(1.5, j)
+                    j += 1
+                elif circuit[j] == "CNOT":
+                    if j+1 == n:
+                        continue
+                    else:
+                        individual.cx(j, j+1)
+                        j += 2
+                        # j += 1
         circuit_representations += [individual]
     return circuit_representations, population
 
@@ -157,9 +173,39 @@ def breed_population(population):
         new_generation += [child]
     return new_generation
 
+def additive_mutate(individual):
+    """
+    Mutates an individual by adding a gene randomly to it.
+    """
+    idx_to_mutate = random.randint(0, len(individual)-1)
+    if idx_to_mutate != len(individual)-1:
+        addition = gene_gates[random.randint(0, len(gene_gates)-1)]
+    else:
+        addition = gene_gates[random.randint(0, len(gene_gates)-2)]
+    if isinstance(individual[idx_to_mutate], list):
+        individual[idx_to_mutate].append(addition)
+    else:
+        individual[idx_to_mutate] = [individual[idx_to_mutate], addition]
+    return individual
+
+def removal_mutate(individual):
+    """
+    Mutates an individual by removing a gene randomly from it.
+    """
+    idx_to_mutate = random.randint(0, len(individual)-1)
+    if isinstance(individual[idx_to_mutate], list):
+        if len(individual[idx_to_mutate]) == 1:
+            individual[idx_to_mutate]= []
+        elif len(individual[idx_to_mutate]) > 1:
+            individual[idx_to_mutate] = individual[idx_to_mutate][1:]
+    else:
+        individual[idx_to_mutate] = ""
+    return individual
+
 def mutate_individual(individual):
     """
     Mutates a random gene in the individual. Should probably make the number of mutated genes also variable.
+    Currently replaces gates (may reduce number of gates when replacing a CNOT).
     """
     idx_to_mutate = random.randint(0, len(individual)-1)
     gate = individual[idx_to_mutate]
@@ -178,6 +224,7 @@ def mutate_population(population):
     n_mutate = int(len(population)*mutation_rate)
     idxs_mutate = []
     i = 0
+    idx = 0
     while i < n_mutate:
         idx = random.randint(0, len(population)-1)
         if idx not in idxs_mutate:
@@ -185,19 +232,31 @@ def mutate_population(population):
             i += 1
     for i in range(len(population)):
         if idx in idxs_mutate:
-            mutated_individual = mutate_individual(population[i])
+            mutation_type = random.randint(0, 2)
+            if mutation_type == 0:
+                mutated_individual = mutate_individual(population[i])
+            elif mutation_type == 1:
+                mutated_individual = additive_mutate(population[i])
+            elif mutation_type == 2:
+                mutated_individual = removal_mutate(population[i])
             mutated_population += [mutated_individual]
         else:
             mutated_population += [population[i]]
     return mutated_population
 
 def assign_fitness_weights(population, curr_genes):
+    """
+    Assigns a weight to each individual based on their fitness.
+    """
     fitness_weights = []
     selected_genes = []
     average_fitness = 0
     for individual, fitness in population:
         average_fitness += fitness
-    average_fitness = average_fitness/len(population)
+    if len(population) == 0:
+        return None, None, True
+    else:
+        average_fitness = average_fitness/len(population)
     if average_fitness == 0:
         average_fitness = 1
     i = 0
@@ -215,12 +274,15 @@ def assign_fitness_weights(population, curr_genes):
             fitness_weights += [[individual, 4]]
             selected_genes += [curr_genes[i]]
         i += 1
-    return fitness_weights, selected_genes
+    return fitness_weights, selected_genes, False
 
 def roulette_wheel_selection(fitness_weights, genes):
+    """
+    Randomly selects individuals to exterminate based on their assigned fitness weight.
+    """
     population = [x[0] for x in fitness_weights]
     fitnesses = [x[1] for x in fitness_weights]
-    indexes = random.choices(range(len(population)), weights=fitnesses, k=int(0.9*len(fitness_weights)))
+    indexes = random.choices(range(len(population)), weights=fitnesses, k=int(0.75*len(fitness_weights)))
     selected_individuals = [population[i] for i in indexes]
     selected_genes = [genes[i] for i in indexes]
     return selected_individuals, selected_genes
@@ -228,13 +290,20 @@ def roulette_wheel_selection(fitness_weights, genes):
 if __name__=='__main__':
     W_state = get_circuit_state(create_W_state(n))
     init_population, init_pop_genes = generate_init_pop()
-    for i in range(10):
+    for i in range(50):
+        print(f"GENERATION {i}")
         bred = breed_population(init_pop_genes)
         mutated = mutate_population(bred)
         mutated_population, curr_genes = create_circuits(mutated)
         first_gen = run_generation(W_state, mutated_population)
-        fitness_weights, selected_genes = assign_fitness_weights(first_gen, curr_genes)
+        fitness_weights, selected_genes, halt = assign_fitness_weights(first_gen, curr_genes)
+        if halt == True: #prob need to make this handling more robust
+            break
         selected_individuals, init_pop_genes = roulette_wheel_selection(fitness_weights, selected_genes)
     second_entries = [sublist[1] for sublist in fitness_weights]
-    counts = Counter(second_entries)
+    counts = dict(Counter(second_entries))
+    if 4 in counts:
+        for ind in fitness_weights:
+            if ind[1] == 4:
+                visualize(ind[0])
     print("COUNTS: ", counts)
