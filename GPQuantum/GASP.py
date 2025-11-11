@@ -10,12 +10,12 @@ from qiskit_aer import AerSimulator
 from qiskit.quantum_info import Statevector
 import numpy as np
 from collections import Counter
-from helper import visualize
+from helper import visualize, apply_zx_calc
 
 #gene = [q_ti, G_i, q_ci, theta]
 gene_gates = ["R_X", "R_Y", "R_Z", "CNOT"]
 #temp testing value
-init_pop_size = 100000
+init_pop_size = 10000
 #n determines the W-state (target) and size of individuals
 n = 6 
 
@@ -267,7 +267,7 @@ def assign_fitness_weights(population, curr_genes):
         elif fitness >= 0.25*average_fitness and fitness < 0.5*average_fitness:
             fitness_weights += [[individual, 2]]
             selected_genes += [curr_genes[i]]
-        elif fitness >= 0.5*average_fitness and fitness < 0.75*average_fitness:
+        elif fitness >= 0.5*average_fitness and fitness < 0.9*average_fitness:
             fitness_weights += [[individual, 3]]
             selected_genes += [curr_genes[i]]
         else:
@@ -290,7 +290,7 @@ def roulette_wheel_selection(fitness_weights, genes):
 if __name__=='__main__':
     W_state = get_circuit_state(create_W_state(n))
     init_population, init_pop_genes = generate_init_pop()
-    for i in range(50):
+    for i in range(20):
         print(f"GENERATION {i}")
         bred = breed_population(init_pop_genes)
         mutated = mutate_population(bred)
@@ -305,5 +305,5 @@ if __name__=='__main__':
     if 4 in counts:
         for ind in fitness_weights:
             if ind[1] == 4:
-                visualize(ind[0])
+                apply_zx_calc(ind[0], 6)
     print("COUNTS: ", counts)
