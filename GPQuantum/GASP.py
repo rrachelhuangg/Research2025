@@ -124,7 +124,7 @@ def get_circuit_state(circuit):
     return result
 
 
-def calculate_fitness(W_state, individual_state):
+def calculate_fitness(W_state, individual_state, individual):
     """
     Calculating the fitness of an individual:
     1) Calculate the inner product of the W_state and the individual's state vector
@@ -133,7 +133,12 @@ def calculate_fitness(W_state, individual_state):
     state_a = Statevector.from_label(W_state)
     state_b = Statevector.from_label(individual_state)
     inner_product = state_a.inner(state_b)
-    return abs(inner_product)**2
+    fitness = abs(inner_product)**2
+    if fitness > 0.8 and len(individual) < 15:
+        fitness *= 1.5
+    elif fitness > 0.8 and len(individual) > 15:
+        fitness *= 0.5
+    return fitness
 
 
 def run_generation(W_state, generation):
@@ -145,7 +150,7 @@ def run_generation(W_state, generation):
     for individual in generation:
         individual_state = get_circuit_state(individual)
         bitstring_a = next(iter(individual_state.keys())).replace(" ", "")
-        evaluations += [[individual, calculate_fitness(bitstring_a, bitstring_b).item()]]
+        evaluations += [[individual, calculate_fitness(bitstring_a, bitstring_b, individual).item()]]
     return evaluations
 
 def one_point_crossover(parent_1, parent_2):
