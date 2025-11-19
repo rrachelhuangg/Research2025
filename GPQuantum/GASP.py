@@ -3,6 +3,7 @@ In-progress implementation of the GASP experiment/algorithm from:
 https://www.nature.com/articles/s41598-023-37767-w.
 """
 
+import os
 import copy
 import random
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
@@ -11,11 +12,13 @@ from qiskit.quantum_info import Statevector
 import numpy as np
 from collections import Counter
 from helper import visualize, apply_zx_calc
+from pathlib import Path
+from qiskit.qasm2 import dumps
 
 #gene = [q_ti, G_i, q_ci, theta]
 gene_gates = ["R_X", "R_Y", "R_Z", "CNOT"]
 #temp testing value
-init_pop_size = 10000
+init_pop_size = 1000
 #n determines the W-state (target) and size of individuals
 n = 6 
 
@@ -134,10 +137,13 @@ def calculate_fitness(W_state, individual_state, individual):
     state_b = Statevector.from_label(individual_state)
     inner_product = state_a.inner(state_b)
     fitness = abs(inner_product)**2
-    if fitness > 0.8 and len(individual) < 15:
-        fitness *= 1.5
-    elif fitness > 0.8 and len(individual) > 15:
-        fitness *= 0.5
+    if len(individual)>0:
+        fitness += (1/len(individual))
+    #add a gamma 10^-6 error --> average fitness over population, as more gens happen, put a lower weight on
+    #length. use accuracy fitness as an indicator for how much to weigh the length penalty. 
+    #only focus on accuracy on the beginning, and only take length into account eventually. 
+    #length only plays a role when you're already in a very high fitness category. could increase n to have 
+    #more initial diversity anyways. 
     return fitness
 
 
@@ -224,7 +230,7 @@ def mutate_population(population):
     """
     The entire input population is mutated with probability mutation_rate.
     """
-    mutation_rate = 0.05
+    mutation_rate = 0.10
     mutated_population = []
     n_mutate = int(len(population)*mutation_rate)
     idxs_mutate = []
@@ -265,6 +271,7 @@ def assign_fitness_weights(population, curr_genes):
     if average_fitness == 0:
         average_fitness = 1
     i = 0
+    print("AVERAGE FITNESS: ", average_fitness)
     for individual, fitness in population:
         if fitness >= 0 and fitness < 0.25*average_fitness:
             fitness_weights += [[individual, 1]]
@@ -285,9 +292,13 @@ def roulette_wheel_selection(fitness_weights, genes):
     """
     Randomly selects individuals to exterminate based on their assigned fitness weight.
     """
+    #only try keeping 10%...(less diversity...mutations will be main factor for diversity)
+    #keeping more, main factor for diversity is recombination
+    #hyperparameter search: write a script to evaluate metrics (diversity, accuracy). mass run stuff
+    #come up with a thesis, try to support/disprove it in feedback loops
     population = [x[0] for x in fitness_weights]
     fitnesses = [x[1] for x in fitness_weights]
-    indexes = random.choices(range(len(population)), weights=fitnesses, k=int(0.75*len(fitness_weights)))
+    indexes = random.choices(range(len(population)), weights=fitnesses, k=int(0.50*len(fitness_weights)))
     selected_individuals = [population[i] for i in indexes]
     selected_genes = [genes[i] for i in indexes]
     return selected_individuals, selected_genes
@@ -295,7 +306,7 @@ def roulette_wheel_selection(fitness_weights, genes):
 if __name__=='__main__':
     W_state = get_circuit_state(create_W_state(n))
     init_population, init_pop_genes = generate_init_pop()
-    for i in range(20):
+    for i in range(10):
         print(f"GENERATION {i}")
         bred = breed_population(init_pop_genes)
         mutated = mutate_population(bred)
@@ -307,8 +318,19 @@ if __name__=='__main__':
         selected_individuals, init_pop_genes = roulette_wheel_selection(fitness_weights, selected_genes)
     second_entries = [sublist[1] for sublist in fitness_weights]
     counts = dict(Counter(second_entries))
+    base_dir = Path('target_W_6/')
+    experiment_n = sum(1 for _ in base_dir.rglob('*') if _.is_dir())
+    new_dir = f'{base_dir}/experiment{experiment_n+1}'
+    os.mkdir(new_dir)
+    circuit_count = 1
     if 4 in counts:
         for ind in fitness_weights:
             if ind[1] == 4:
+                file_path = f'{new_dir}/circuit_{circuit_count}.qasm'
+                qasm_circuit = str(dumps(ind[0]))
+                with open(file_path, "w") as f:
+                    f.write(qasm_circuit)
+                print("MEASURED CIRCUIT: ", get_circuit_state(ind[0]), "=> TARGET STATE:", W_state, ind[1])
                 apply_zx_calc(ind[0], 6)
+                circuit_count += 1
     print("COUNTS: ", counts)
