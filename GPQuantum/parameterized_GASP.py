@@ -33,8 +33,7 @@ def create_W_state(n):
     Equal superposition of all states with one qubit in |1> and the rest in |0>.
     """
     q_reg = QuantumRegister(n, 'q')
-    c_reg = ClassicalRegister(n, 'c')
-    circuit = QuantumCircuit(q_reg, c_reg)
+    circuit = QuantumCircuit(q_reg)
     circuit.x(q_reg[0])
     for i in range(n-1):
         theta = 2*np.arccos(np.sqrt((n-i-1)/(n-i)))
@@ -51,7 +50,7 @@ def generate_init_pop():
     init_pop_circuits = []
     init_pop_genes = []
     for i in range(init_pop_size):
-        individual = QuantumCircuit(n, n)
+        individual = QuantumCircuit(n)
         individual_genes = []
         j = 0
         while j < n:
@@ -85,7 +84,7 @@ def create_circuits(population):
     """
     circuit_representations = []
     for circuit in population:
-        individual = QuantumCircuit(n, n)
+        individual = QuantumCircuit(n)
         for j in range(len(circuit)):
             if isinstance(circuit[j], list):
                 for gate in circuit[j]:
@@ -125,22 +124,24 @@ def get_circuit_state(circuit):
     """
     Measure the circuit with 1 shot to get a single measurement for its state.
     """
-    simulator = AerSimulator()
-    circuit_copy = copy.deepcopy(circuit)
-    circuit_copy.measure_all()
-    result = simulator.run(circuit_copy, shots=1).result().get_counts()
-    return result
+    # simulator = AerSimulator()
+    # circuit_copy = copy.deepcopy(circuit)
+    # circuit_copy.measure_all()
+    # result = simulator.run(circuit_copy, shots=1).result().get_counts()
+    # return result
+    return Statevector.from_instruction(circuit)
 
-def calculate_fitness(W_state, individual_state, individual):
+def calculate_fitness(W_state, individual):
     """
     Calculating the fitness of an individual:
     1) Calculate the inner product of the W_state and the individual's state vector
     2) Square the magnitude of this inner product
     """
-    state_a = Statevector.from_label(W_state)
-    state_b = Statevector.from_label(individual_state)
-    inner_product = state_a.inner(state_b)
-    fitness = abs(inner_product)**2
+    # state_a = Statevector.from_label(W_state)
+    # state_b = Statevector.from_label(individual_state)
+    # inner_product = state_a.inner(state_b)
+    # fitness = abs(inner_product)**2
+
     # if len(individual)>0:
     #     fitness += (1/len(individual))
     #add a gamma 10^-6 error --> average fitness over population, as more gens happen, put a lower weight on
@@ -148,7 +149,13 @@ def calculate_fitness(W_state, individual_state, individual):
     #only focus on accuracy on the beginning, and only take length into account eventually. 
     #length only plays a role when you're already in a very high fitness category. could increase n to have 
     #more initial diversity anyways. 
-    return fitness
+    statevec_target, statevec_candidate = W_state, individual
+    if not isinstance(W_state, Statevector):
+        statevec_target = Statevector(W_state)
+    if not isinstance(individual, Statevector):
+        statevec_candidate = Statevector(individual)
+    fitness = statevec_target.inner(statevec_candidate)
+    return float(abs(fitness)**2)
 
 
 def run_generation(W_state, generation):
@@ -156,11 +163,22 @@ def run_generation(W_state, generation):
     Calculate the fitness for each individual in a generation.
     """
     evaluations = []
-    bitstring_b = next(iter(W_state.keys())).replace(" ", "")
+    # bitstring_b = next(iter(W_state.keys())).replace(" ", "")
+    # for individual in generation:
+    #     individual_state = get_circuit_state(individual)
+    #     bitstring_a = next(iter(individual_state.keys())).replace(" ", "")
+    #     evaluations += [[individual, calculate_fitness(bitstring_a, bitstring_b, individual).item()]]
+    if isinstance(W_state, QuantumCircuit):
+        W_sv = Statevector.from_instruction(W_state)
+    elif isinstance(W_state, Statevector):
+        W_sv = W_state
+    else:
+        W_sv = Statevector(W_state)
+
     for individual in generation:
-        individual_state = get_circuit_state(individual)
-        bitstring_a = next(iter(individual_state.keys())).replace(" ", "")
-        evaluations += [[individual, calculate_fitness(bitstring_a, bitstring_b, individual).item()]]
+        indiv_sv = Statevector.from_instruction(individual)
+        fitness = calculate_fitness(W_sv, indiv_sv)
+        evaluations.append([individual, fitness])
     return evaluations
 
 def one_point_crossover(parent_1, parent_2):
