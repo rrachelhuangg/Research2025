@@ -18,7 +18,7 @@ HYPERPARAMETER_GRID = {
     'init_pop_size': [1000, 5000, 10000],
     'n': [5, 6, 7],
     'mutation_rate': [0.05, 0.10, 0.15],
-    'survival_rate': [0.05, 0.10, 0.20],
+    'survival_rate': [0.20, 0.30, 0.50],
     'num_generations': [20, 30, 40]
 }
 
@@ -48,15 +48,32 @@ def run_gasp_experiment(params, experiment_id, results_dir):
     ]
 
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        process = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            bufsize=1
+        )
+
+        stdout_lines = []
+        stderr_lines = []
+
+        for line in process.stdout:
+            stdout_lines.append(line)
+
+        process.wait(timeout=120)
+        stderr_output = process.stderr.read()
+
+        stdout_output = ''.join(stdout_lines)
 
         with open(exp_dir / "stdout.txt", 'w') as f:
-            f.write(result.stdout)
+            f.write(stdout_output)
         with open(exp_dir / "stderr.txt", 'w') as f:
-            f.write(result.stderr)
+            f.write(stderr_output)
 
-        metrics = parse_metrics(result.stdout, exp_dir)
-        metrics['success'] = result.returncode == 0
+        metrics = parse_metrics(stdout_output, exp_dir)
+        metrics['success'] = process.returncode == 0
 
     except subprocess.TimeoutExpired:
         print(f"Experiment {experiment_id} timed out!")
@@ -125,6 +142,7 @@ def parse_metrics(stdout, exp_dir):
     if metrics['average_fitness']:
         metrics['final_fitness'] = metrics['average_fitness'][-1]
         metrics['best_fitness'] = max(metrics['average_fitness'])
+        print("AVERAGE FITNESS: ", np.mean(metrics['average_fitness']))
 
         if len(metrics['average_fitness']) > 1:
             metrics['improvement_rate'] = (
@@ -209,7 +227,6 @@ def save_summary(results, results_dir):
     max_fitness = 0
     best_exp = None
     for exp in results:
-        # Only consider experiments with valid metrics
         best_fitness = exp["metrics"].get("best_fitness", 0)
         if best_fitness > max_fitness:
             max_fitness = best_fitness
