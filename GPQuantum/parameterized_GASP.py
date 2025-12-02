@@ -186,13 +186,16 @@ def one_point_crossover(parent_1, parent_2):
     child = parent_1[:half_1_idx] + parent_2[half_2_idx:]
     return child
 
-def breed_population(population):
+def breed_population(population, target_size=None):
     """
-    Apply the chosen crossover method to the entire population. Result population is the same size
-    as the input population.
+    Apply the chosen crossover method to the entire population.
+    If target_size is specified, breed to that size, otherwise match input population size.
     """
+    if target_size is None:
+        target_size = len(population)
+
     new_generation = []
-    while len(new_generation) < len(population):
+    while len(new_generation) < target_size:
         parent_1_idx = random.randint(0, len(population)-1)
         if parent_1_idx + 1 < len(population):
             parent_2_idx = parent_1_idx+1
@@ -331,7 +334,7 @@ def roulette_wheel_selection(fitness_weights, genes, survival_rate_param, elitis
 
     return selected_individuals, selected_genes
 
-def run_experiment(init_pop_size_param, n_param, mutation_rate_param, survival_rate_param, num_generations_param, output_dir_param=None):
+def run_experiment(init_pop_size_param, n_param, mutation_rate_param, survival_rate_param, num_generations_param, output_dir_param=None, min_population_size=100):
     """
     Run a GASP experiment with the specified parameters.
     """
@@ -373,6 +376,11 @@ def run_experiment(init_pop_size_param, n_param, mutation_rate_param, survival_r
             break
         prev_fitness_weights = fitness_weights
         selected_individuals, init_pop_genes = roulette_wheel_selection(fitness_weights, selected_genes, survival_rate)
+
+        # Enforce minimum population size
+        if len(init_pop_genes) < min_population_size:
+            print(f"Population below minimum ({len(init_pop_genes)} < {min_population_size}), breeding to minimum...")
+            init_pop_genes = breed_population(init_pop_genes, target_size=min_population_size)
 
     if fitness_weights is None or len(fitness_weights) == 0:
         counts = {}
@@ -416,6 +424,7 @@ if __name__=='__main__':
     parser.add_argument('--survival_rate', type=float, default=0.50, help='Survival rate (0.0 to 1.0)')
     parser.add_argument('--num_generations', type=int, default=10, help='Number of generations')
     parser.add_argument('--output_dir', type=str, default=None, help='Output directory for results')
+    parser.add_argument('--min_population_size', type=int, default=100, help='Minimum population size to maintain')
 
     args = parser.parse_args()
 
@@ -425,5 +434,6 @@ if __name__=='__main__':
         args.mutation_rate,
         args.survival_rate,
         args.num_generations,
-        args.output_dir
+        args.output_dir,
+        args.min_population_size
     )
