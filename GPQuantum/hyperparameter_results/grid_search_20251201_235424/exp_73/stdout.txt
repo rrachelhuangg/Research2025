@@ -1,0 +1,126 @@
+Starting GASP experiment with parameters:
+  Population size: 1000
+  n (qubits): 7
+  Mutation rate: 0.15
+  Survival rate: 0.05
+  Generations: 20
+
+GENERATION 0
+AVERAGE FITNESS:  0.17805476190476055
+GENERATION 1
+AVERAGE FITNESS:  0.17809523809523814
+GENERATION 2
+AVERAGE FITNESS:  0.2
+GENERATION 3
+Halting at generation 3 - saving data from previous generation
+MEASURED CIRCUIT:  {'0010101 0000000': 1} => TARGET STATE: {'1100111 0000000': 1} 4
+PRE OPT:
+
+     ┌─────────┐
+q_0: ┤ Ry(1.5) ├
+     ├─────────┤
+q_1: ┤ Rz(1.5) ├
+     ├─────────┤
+q_2: ┤ Rx(1.5) ├
+     ├─────────┤
+q_3: ┤ Rx(1.5) ├
+     ├─────────┤
+q_4: ┤ Ry(1.5) ├
+     └─────────┘
+q_5: ───────────
+                
+q_6: ───────────
+                
+c: 7/═══════════
+                
+
+
+POST OPT: 
+
+     ┌─────────┐   ┌───┐   ┌────────────┐┌───┐┌──────────┐
+q_0: ┤ Rz(π/2) ├───┤ H ├───┤ Rz(4.7832) ├┤ H ├┤ Rz(3π/2) ├
+     ├─────────┤   ├───┤   └───┬───┬────┘└───┘└──────────┘
+q_1: ┤ Rz(1.5) ├───┤ H ├───────┤ H ├──────────────────────
+     └──┬───┬──┘┌──┴───┴──┐    ├───┤                      
+q_2: ───┤ H ├───┤ Rz(1.5) ├────┤ H ├──────────────────────
+        ├───┤   ├─────────┤    ├───┤                      
+q_3: ───┤ H ├───┤ Rz(1.5) ├────┤ H ├──────────────────────
+     ┌──┴───┴──┐└──┬───┬──┘┌───┴───┴────┐┌───┐┌──────────┐
+q_4: ┤ Rz(π/2) ├───┤ H ├───┤ Rz(4.7832) ├┤ H ├┤ Rz(3π/2) ├
+     └──┬───┬──┘   ├───┤   └────────────┘└───┘└──────────┘
+q_5: ───┤ H ├──────┤ H ├──────────────────────────────────
+        ├───┤      ├───┤                                  
+q_6: ───┤ H ├──────┤ H ├──────────────────────────────────
+        └───┘      └───┘                                  
+Pre ZX-calculus optimized stats: 
+Circuit 7.qasm on 7 qubits with 9 gates.
+        5 is the T-count
+        4 Cliffords among which
+        0 2-qubit gates (0 CNOT, 0 other) and
+        0 Hadamard gates.
+
+
+Post ZX-calculus optimized stats: 
+Circuit  on 7 qubits with 23 gates.
+        5 is the T-count
+        18 Cliffords among which
+        0 2-qubit gates (0 CNOT, 0 other) and
+        14 Hadamard gates.
+
+
+MEASURED CIRCUIT:  {'0001000 0000000': 1} => TARGET STATE: {'1100111 0000000': 1} 4
+PRE OPT:
+
+     ┌─────────┐
+q_0: ┤ Ry(1.5) ├
+     ├─────────┤
+q_1: ┤ Rz(1.5) ├
+     ├─────────┤
+q_2: ┤ Rx(1.5) ├
+     ├─────────┤
+q_3: ┤ Rx(1.5) ├
+     ├─────────┤
+q_4: ┤ Ry(1.5) ├
+     └─────────┘
+q_5: ───────────
+                
+q_6: ───────────
+                
+c: 7/═══════════
+                
+
+
+POST OPT: 
+
+     ┌─────────┐   ┌───┐   ┌────────────┐┌───┐┌──────────┐
+q_0: ┤ Rz(π/2) ├───┤ H ├───┤ Rz(4.7832) ├┤ H ├┤ Rz(3π/2) ├
+     ├─────────┤   ├───┤   └───┬───┬────┘└───┘└──────────┘
+q_1: ┤ Rz(1.5) ├───┤ H ├───────┤ H ├──────────────────────
+     └──┬───┬──┘┌──┴───┴──┐    ├───┤                      
+q_2: ───┤ H ├───┤ Rz(1.5) ├────┤ H ├──────────────────────
+        ├───┤   ├─────────┤    ├───┤                      
+q_3: ───┤ H ├───┤ Rz(1.5) ├────┤ H ├──────────────────────
+     ┌──┴───┴──┐└──┬───┬──┘┌───┴───┴────┐┌───┐┌──────────┐
+q_4: ┤ Rz(π/2) ├───┤ H ├───┤ Rz(4.7832) ├┤ H ├┤ Rz(3π/2) ├
+     └──┬───┬──┘   ├───┤   └────────────┘└───┘└──────────┘
+q_5: ───┤ H ├──────┤ H ├──────────────────────────────────
+        ├───┤      ├───┤                                  
+q_6: ───┤ H ├──────┤ H ├──────────────────────────────────
+        └───┘      └───┘                                  
+Pre ZX-calculus optimized stats: 
+Circuit 7.qasm on 7 qubits with 9 gates.
+        5 is the T-count
+        4 Cliffords among which
+        0 2-qubit gates (0 CNOT, 0 other) and
+        0 Hadamard gates.
+
+
+Post ZX-calculus optimized stats: 
+Circuit  on 7 qubits with 23 gates.
+        5 is the T-count
+        18 Cliffords among which
+        0 2-qubit gates (0 CNOT, 0 other) and
+        14 Hadamard gates.
+
+
+COUNTS:  {4: 2}

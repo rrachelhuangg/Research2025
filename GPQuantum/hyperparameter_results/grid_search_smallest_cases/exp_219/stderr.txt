@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/rachelhuang/Desktop/Research2025/GPQuantum/parameterized_GASP.py", line 394, in <module>
+    run_experiment(
+  File "/Users/rachelhuang/Desktop/Research2025/GPQuantum/parameterized_GASP.py", line 339, in run_experiment
+    mutated = mutate_population(bred, mutation_rate)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rachelhuang/Desktop/Research2025/GPQuantum/parameterized_GASP.py", line 258, in mutate_population
+    mutated_population += [mutated_individual]
+                           ^^^^^^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'mutated_individual' where it is not associated with a value

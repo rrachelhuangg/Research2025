@@ -1,0 +1,22 @@
+{
+  "experiment_id": 224,
+  "params": {
+    "init_pop_size": 10000,
+    "n": 7,
+    "mutation_rate": 0.05,
+    "survival_rate": 0.5,
+    "num_generations": 15
+  },
+  "metrics": {
+    "average_fitness": [
+      0.17746404761906764
+    ],
+    "final_fitness": 0.17746404761906764,
+    "best_fitness": 0.17746404761906764,
+    "num_high_accuracy": 0,
+    "final_counts": {},
+    "improvement_rate": 0,
+    "success": false
+  },
+  "timestamp": "2025-12-01T23:29:19.036984"
+}

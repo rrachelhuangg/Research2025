@@ -1,0 +1,3245 @@
+[
+  {
+    "experiment_id": 1,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:23.117404"
+  },
+  {
+    "experiment_id": 2,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:23.456044"
+  },
+  {
+    "experiment_id": 3,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:23.817464"
+  },
+  {
+    "experiment_id": 4,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:24.161697"
+  },
+  {
+    "experiment_id": 5,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:24.506208"
+  },
+  {
+    "experiment_id": 6,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:24.851281"
+  },
+  {
+    "experiment_id": 7,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:25.199296"
+  },
+  {
+    "experiment_id": 8,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:25.543347"
+  },
+  {
+    "experiment_id": 9,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:25.892887"
+  },
+  {
+    "experiment_id": 10,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.24519999999999725
+      ],
+      "final_fitness": 0.24519999999999725,
+      "best_fitness": 0.24519999999999725,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:26.694904"
+  },
+  {
+    "experiment_id": 11,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:27.041385"
+  },
+  {
+    "experiment_id": 12,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:27.389718"
+  },
+  {
+    "experiment_id": 13,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:27.737803"
+  },
+  {
+    "experiment_id": 14,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:28.084723"
+  },
+  {
+    "experiment_id": 15,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:28.461298"
+  },
+  {
+    "experiment_id": 16,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:28.818501"
+  },
+  {
+    "experiment_id": 17,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.24683333333333035
+      ],
+      "final_fitness": 0.24683333333333035,
+      "best_fitness": 0.24683333333333035,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:29.620388"
+  },
+  {
+    "experiment_id": 18,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:29.970021"
+  },
+  {
+    "experiment_id": 19,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:30.320193"
+  },
+  {
+    "experiment_id": 20,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:30.670610"
+  },
+  {
+    "experiment_id": 21,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.24594999999999706,
+        0.2534166666666669
+      ],
+      "final_fitness": 0.2534166666666669,
+      "best_fitness": 0.2534166666666669,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.0037333333333349206,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:31.515521"
+  },
+  {
+    "experiment_id": 22,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:31.864484"
+  },
+  {
+    "experiment_id": 23,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.3326750000000013
+      ],
+      "final_fitness": 0.3326750000000013,
+      "best_fitness": 0.3326750000000013,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:32.669033"
+  },
+  {
+    "experiment_id": 24,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:33.019837"
+  },
+  {
+    "experiment_id": 25,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2552666666666637
+      ],
+      "final_fitness": 0.2552666666666637,
+      "best_fitness": 0.2552666666666637,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:33.822630"
+  },
+  {
+    "experiment_id": 26,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.25782499999999736,
+        0.2615333333333336
+      ],
+      "final_fitness": 0.2615333333333336,
+      "best_fitness": 0.2615333333333336,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.0018541666666681278,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:34.732757"
+  },
+  {
+    "experiment_id": 27,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:35.082628"
+  },
+  {
+    "experiment_id": 28,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:35.436865"
+  },
+  {
+    "experiment_id": 29,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:35.791114"
+  },
+  {
+    "experiment_id": 30,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:36.145089"
+  },
+  {
+    "experiment_id": 31,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:36.498160"
+  },
+  {
+    "experiment_id": 32,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2054249999999964
+      ],
+      "final_fitness": 0.2054249999999964,
+      "best_fitness": 0.2054249999999964,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:37.333829"
+  },
+  {
+    "experiment_id": 33,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.23144166666666277
+      ],
+      "final_fitness": 0.23144166666666277,
+      "best_fitness": 0.23144166666666277,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:38.169173"
+  },
+  {
+    "experiment_id": 34,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:38.523168"
+  },
+  {
+    "experiment_id": 35,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:38.878246"
+  },
+  {
+    "experiment_id": 36,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:39.233200"
+  },
+  {
+    "experiment_id": 37,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:39.587222"
+  },
+  {
+    "experiment_id": 38,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:39.941312"
+  },
+  {
+    "experiment_id": 39,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:40.296439"
+  },
+  {
+    "experiment_id": 40,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:40.651455"
+  },
+  {
+    "experiment_id": 41,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20839166666666284
+      ],
+      "final_fitness": 0.20839166666666284,
+      "best_fitness": 0.20839166666666284,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:41.489267"
+  },
+  {
+    "experiment_id": 42,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:41.843946"
+  },
+  {
+    "experiment_id": 43,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20670833333332977
+      ],
+      "final_fitness": 0.20670833333332977,
+      "best_fitness": 0.20670833333332977,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:42.680370"
+  },
+  {
+    "experiment_id": 44,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20947499999999647
+      ],
+      "final_fitness": 0.20947499999999647,
+      "best_fitness": 0.20947499999999647,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:43.515842"
+  },
+  {
+    "experiment_id": 45,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:43.870118"
+  },
+  {
+    "experiment_id": 46,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20751666666666302,
+        0.21225000000000022,
+        0.21166666666666667,
+        0.2
+      ],
+      "final_fitness": 0.2,
+      "best_fitness": 0.21225000000000022,
+      "num_high_accuracy": 2,
+      "final_counts": {
+        "4": 2
+      },
+      "improvement_rate": -0.001879166666665752,
+      "success": true
+    },
+    "timestamp": "2025-12-01T23:38:44.772251"
+  },
+  {
+    "experiment_id": 47,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:45.126107"
+  },
+  {
+    "experiment_id": 48,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2045333333333297
+      ],
+      "final_fitness": 0.2045333333333297,
+      "best_fitness": 0.2045333333333297,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:45.962539"
+  },
+  {
+    "experiment_id": 49,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:46.316541"
+  },
+  {
+    "experiment_id": 50,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:46.670770"
+  },
+  {
+    "experiment_id": 51,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:47.024377"
+  },
+  {
+    "experiment_id": 52,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:47.377862"
+  },
+  {
+    "experiment_id": 53,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:47.733134"
+  },
+  {
+    "experiment_id": 54,
+    "params": {
+      "init_pop_size": 2000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:48.087873"
+  },
+  {
+    "experiment_id": 55,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2539033333333305,
+        0.25749999999999945
+      ],
+      "final_fitness": 0.25749999999999945,
+      "best_fitness": 0.25749999999999945,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.0017983333333344842,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:51.156463"
+  },
+  {
+    "experiment_id": 56,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:51.662714"
+  },
+  {
+    "experiment_id": 57,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:52.236461"
+  },
+  {
+    "experiment_id": 58,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:52.781204"
+  },
+  {
+    "experiment_id": 59,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:53.308002"
+  },
+  {
+    "experiment_id": 60,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:53.836460"
+  },
+  {
+    "experiment_id": 61,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:54.355538"
+  },
+  {
+    "experiment_id": 62,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:54.871547"
+  },
+  {
+    "experiment_id": 63,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:55.383472"
+  },
+  {
+    "experiment_id": 64,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:55.899836"
+  },
+  {
+    "experiment_id": 65,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:56.408829"
+  },
+  {
+    "experiment_id": 66,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:38:56.920121"
+  },
+  {
+    "experiment_id": 67,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2659733333333295,
+        0.267066666666665
+      ],
+      "final_fitness": 0.267066666666665,
+      "best_fitness": 0.267066666666665,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.00054666666666775,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:00.292272"
+  },
+  {
+    "experiment_id": 68,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:00.810546"
+  },
+  {
+    "experiment_id": 69,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.24858499999999925
+      ],
+      "final_fitness": 0.24858499999999925,
+      "best_fitness": 0.24858499999999925,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:03.678035"
+  },
+  {
+    "experiment_id": 70,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:04.184803"
+  },
+  {
+    "experiment_id": 71,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:04.716695"
+  },
+  {
+    "experiment_id": 72,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2542499999999982
+      ],
+      "final_fitness": 0.2542499999999982,
+      "best_fitness": 0.2542499999999982,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:07.600306"
+  },
+  {
+    "experiment_id": 73,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:08.108466"
+  },
+  {
+    "experiment_id": 74,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.255399999999998,
+        0.256783333333333,
+        0.2744999999999999
+      ],
+      "final_fitness": 0.2744999999999999,
+      "best_fitness": 0.2744999999999999,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.006366666666667298,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:11.257483"
+  },
+  {
+    "experiment_id": 75,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:11.764409"
+  },
+  {
+    "experiment_id": 76,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:12.270038"
+  },
+  {
+    "experiment_id": 77,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:12.776877"
+  },
+  {
+    "experiment_id": 78,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:13.283507"
+  },
+  {
+    "experiment_id": 79,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:13.790969"
+  },
+  {
+    "experiment_id": 80,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:14.302478"
+  },
+  {
+    "experiment_id": 81,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:14.807131"
+  },
+  {
+    "experiment_id": 82,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:15.330947"
+  },
+  {
+    "experiment_id": 83,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2255200000000102,
+        0.2280666666666638,
+        0.27516666666666634,
+        0.225,
+        0.25
+      ],
+      "final_fitness": 0.25,
+      "best_fitness": 0.27516666666666634,
+      "num_high_accuracy": 1,
+      "final_counts": {
+        "4": 1
+      },
+      "improvement_rate": 0.0048959999999979575,
+      "success": true
+    },
+    "timestamp": "2025-12-01T23:39:18.589362"
+  },
+  {
+    "experiment_id": 84,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:19.111099"
+  },
+  {
+    "experiment_id": 85,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2278666666666748
+      ],
+      "final_fitness": 0.2278666666666748,
+      "best_fitness": 0.2278666666666748,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:22.093160"
+  },
+  {
+    "experiment_id": 86,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:22.616079"
+  },
+  {
+    "experiment_id": 87,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:23.138007"
+  },
+  {
+    "experiment_id": 88,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:23.663064"
+  },
+  {
+    "experiment_id": 89,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:24.190751"
+  },
+  {
+    "experiment_id": 90,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:24.713421"
+  },
+  {
+    "experiment_id": 91,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:25.239428"
+  },
+  {
+    "experiment_id": 92,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20595166666669065
+      ],
+      "final_fitness": 0.20595166666669065,
+      "best_fitness": 0.20595166666669065,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:28.245640"
+  },
+  {
+    "experiment_id": 93,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:28.776073"
+  },
+  {
+    "experiment_id": 94,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.23206166666667247
+      ],
+      "final_fitness": 0.23206166666667247,
+      "best_fitness": 0.23206166666667247,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:31.793050"
+  },
+  {
+    "experiment_id": 95,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:32.320403"
+  },
+  {
+    "experiment_id": 96,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:32.845359"
+  },
+  {
+    "experiment_id": 97,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:33.371619"
+  },
+  {
+    "experiment_id": 98,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:33.895456"
+  },
+  {
+    "experiment_id": 99,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:34.417809"
+  },
+  {
+    "experiment_id": 100,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.22729000000000937,
+        0.2312833333333307,
+        0.2349999999999997,
+        0.215,
+        0.2
+      ],
+      "final_fitness": 0.2,
+      "best_fitness": 0.2349999999999997,
+      "num_high_accuracy": 1,
+      "final_counts": {
+        "4": 1
+      },
+      "improvement_rate": -0.005458000000001873,
+      "success": true
+    },
+    "timestamp": "2025-12-01T23:39:37.694483"
+  },
+  {
+    "experiment_id": 101,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:38.219697"
+  },
+  {
+    "experiment_id": 102,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:38.746989"
+  },
+  {
+    "experiment_id": 103,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:39.275974"
+  },
+  {
+    "experiment_id": 104,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:39.801369"
+  },
+  {
+    "experiment_id": 105,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20555666666669112,
+        0.2064999999999956,
+        0.2083333333333344
+      ],
+      "final_fitness": 0.2083333333333344,
+      "best_fitness": 0.2083333333333344,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.0009255555555477598,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:43.422510"
+  },
+  {
+    "experiment_id": 106,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20644333333335685
+      ],
+      "final_fitness": 0.20644333333335685,
+      "best_fitness": 0.20644333333335685,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:46.451863"
+  },
+  {
+    "experiment_id": 107,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:46.978019"
+  },
+  {
+    "experiment_id": 108,
+    "params": {
+      "init_pop_size": 10000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:39:47.502807"
+  },
+  {
+    "experiment_id": 109,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.24805983333342527
+      ],
+      "final_fitness": 0.24805983333342527,
+      "best_fitness": 0.24805983333342527,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:40:15.305945"
+  },
+  {
+    "experiment_id": 110,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:40:18.108493"
+  },
+  {
+    "experiment_id": 111,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:40:20.782794"
+  },
+  {
+    "experiment_id": 112,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:40:23.455839"
+  },
+  {
+    "experiment_id": 113,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:40:26.114972"
+  },
+  {
+    "experiment_id": 114,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:40:28.801034"
+  },
+  {
+    "experiment_id": 115,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:40:31.500594"
+  },
+  {
+    "experiment_id": 116,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2541563333334271,
+        0.25653599999997173,
+        0.2614560000000022
+      ],
+      "final_fitness": 0.2614560000000022,
+      "best_fitness": 0.2614560000000022,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.0024332222221917035,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:41:06.702444"
+  },
+  {
+    "experiment_id": 117,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:41:09.539997"
+  },
+  {
+    "experiment_id": 118,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2490441666667574
+      ],
+      "final_fitness": 0.2490441666667574,
+      "best_fitness": 0.2490441666667574,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:41:38.901614"
+  },
+  {
+    "experiment_id": 119,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:41:41.548144"
+  },
+  {
+    "experiment_id": 120,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.24898116666676068
+      ],
+      "final_fitness": 0.24898116666676068,
+      "best_fitness": 0.24898116666676068,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:42:11.285955"
+  },
+  {
+    "experiment_id": 121,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:42:14.216180"
+  },
+  {
+    "experiment_id": 122,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.3375401666667377
+      ],
+      "final_fitness": 0.3375401666667377,
+      "best_fitness": 0.3375401666667377,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:42:43.736055"
+  },
+  {
+    "experiment_id": 123,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2670033333334259
+      ],
+      "final_fitness": 0.2670033333334259,
+      "best_fitness": 0.2670033333334259,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:43:13.362262"
+  },
+  {
+    "experiment_id": 124,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:43:16.199166"
+  },
+  {
+    "experiment_id": 125,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:43:18.859074"
+  },
+  {
+    "experiment_id": 126,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:43:21.537294"
+  },
+  {
+    "experiment_id": 127,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.25550483333342405
+      ],
+      "final_fitness": 0.25550483333342405,
+      "best_fitness": 0.25550483333342405,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:43:52.867831"
+  },
+  {
+    "experiment_id": 128,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:43:55.703341"
+  },
+  {
+    "experiment_id": 129,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:43:58.396236"
+  },
+  {
+    "experiment_id": 130,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.25434383333342336
+      ],
+      "final_fitness": 0.25434383333342336,
+      "best_fitness": 0.25434383333342336,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:44:29.599861"
+  },
+  {
+    "experiment_id": 131,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.254002000000091
+      ],
+      "final_fitness": 0.254002000000091,
+      "best_fitness": 0.254002000000091,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:45:00.971868"
+  },
+  {
+    "experiment_id": 132,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.24594500000009376
+      ],
+      "final_fitness": 0.24594500000009376,
+      "best_fitness": 0.24594500000009376,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:45:32.666151"
+  },
+  {
+    "experiment_id": 133,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:45:35.552606"
+  },
+  {
+    "experiment_id": 134,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.24594933333342484,
+        0.24782399999997237,
+        0.2510800000000028
+      ],
+      "final_fitness": 0.2510800000000028,
+      "best_fitness": 0.2510800000000028,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.001710222222192655,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:46:14.248543"
+  },
+  {
+    "experiment_id": 135,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 5,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:46:17.064997"
+  },
+  {
+    "experiment_id": 136,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:46:19.951925"
+  },
+  {
+    "experiment_id": 137,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20785983333358998
+      ],
+      "final_fitness": 0.20785983333358998,
+      "best_fitness": 0.20785983333358998,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:46:49.343615"
+  },
+  {
+    "experiment_id": 138,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:46:52.215510"
+  },
+  {
+    "experiment_id": 139,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2063841666669204
+      ],
+      "final_fitness": 0.2063841666669204,
+      "best_fitness": 0.2063841666669204,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:47:21.543589"
+  },
+  {
+    "experiment_id": 140,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:47:24.371505"
+  },
+  {
+    "experiment_id": 141,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20804400000025802,
+        0.2092449999999398
+      ],
+      "final_fitness": 0.2092449999999398,
+      "best_fitness": 0.2092449999999398,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0.000600499999840895,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:47:58.543787"
+  },
+  {
+    "experiment_id": 142,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:48:01.625652"
+  },
+  {
+    "experiment_id": 143,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:48:04.488513"
+  },
+  {
+    "experiment_id": 144,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.05,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:48:07.630623"
+  },
+  {
+    "experiment_id": 145,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20549050000025285
+      ],
+      "final_fitness": 0.20549050000025285,
+      "best_fitness": 0.20549050000025285,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:48:38.588019"
+  },
+  {
+    "experiment_id": 146,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:48:41.566873"
+  },
+  {
+    "experiment_id": 147,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:48:44.384548"
+  },
+  {
+    "experiment_id": 148,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:48:47.206631"
+  },
+  {
+    "experiment_id": 149,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.2058106666669195
+      ],
+      "final_fitness": 0.2058106666669195,
+      "best_fitness": 0.2058106666669195,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:49:18.260534"
+  },
+  {
+    "experiment_id": 150,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:49:21.236601"
+  },
+  {
+    "experiment_id": 151,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20591733333358442
+      ],
+      "final_fitness": 0.20591733333358442,
+      "best_fitness": 0.20591733333358442,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:49:52.336452"
+  },
+  {
+    "experiment_id": 152,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20586900000025413
+      ],
+      "final_fitness": 0.20586900000025413,
+      "best_fitness": 0.20586900000025413,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:50:23.583926"
+  },
+  {
+    "experiment_id": 153,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.1,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:50:26.613402"
+  },
+  {
+    "experiment_id": 154,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:50:29.491681"
+  },
+  {
+    "experiment_id": 155,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:50:32.333315"
+  },
+  {
+    "experiment_id": 156,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.1,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:50:35.164496"
+  },
+  {
+    "experiment_id": 157,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:50:37.992787"
+  },
+  {
+    "experiment_id": 158,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:50:40.821369"
+  },
+  {
+    "experiment_id": 159,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.2,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.20598500000025274
+      ],
+      "final_fitness": 0.20598500000025274,
+      "best_fitness": 0.20598500000025274,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:51:13.707416"
+  },
+  {
+    "experiment_id": 160,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 30
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:51:16.694752"
+  },
+  {
+    "experiment_id": 161,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 40
+    },
+    "metrics": {
+      "average_fitness": [],
+      "final_fitness": null,
+      "best_fitness": 0,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:51:19.515976"
+  },
+  {
+    "experiment_id": 162,
+    "params": {
+      "init_pop_size": 100000,
+      "n": 6,
+      "mutation_rate": 0.15,
+      "survival_rate": 0.25,
+      "num_generations": 50
+    },
+    "metrics": {
+      "average_fitness": [
+        0.22603083333362037
+      ],
+      "final_fitness": 0.22603083333362037,
+      "best_fitness": 0.22603083333362037,
+      "num_high_accuracy": 0,
+      "final_counts": {},
+      "improvement_rate": 0,
+      "success": false
+    },
+    "timestamp": "2025-12-01T23:51:52.294630"
+  }
+]

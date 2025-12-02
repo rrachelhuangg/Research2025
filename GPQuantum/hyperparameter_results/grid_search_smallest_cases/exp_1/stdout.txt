@@ -1,0 +1,65 @@
+Starting GASP experiment with parameters:
+  Population size: 1000
+  n (qubits): 5
+  Mutation rate: 0.05
+  Survival rate: 0.1
+  Generations: 10
+
+GENERATION 0
+AVERAGE FITNESS:  0.3296166666666652
+GENERATION 1
+AVERAGE FITNESS:  0.34550000000000003
+GENERATION 2
+AVERAGE FITNESS:  0.23500000000000001
+GENERATION 3
+AVERAGE FITNESS:  0.25
+GENERATION 4
+Halting at generation 4 - saving data from previous generation
+MEASURED CIRCUIT:  {'00100 00000': 1} => TARGET STATE: {'00100 00000': 1} 4
+PRE OPT:
+
+     ┌─────────┐
+q_0: ┤ Ry(1.5) ├
+     ├─────────┤
+q_1: ┤ Rz(1.5) ├
+     ├─────────┤
+q_2: ┤ Rx(1.5) ├
+     ├─────────┤
+q_3: ┤ Ry(1.5) ├
+     └─────────┘
+q_4: ───────────
+                
+c: 5/═══════════
+                
+
+
+POST OPT: 
+
+     ┌─────────┐   ┌───┐   ┌────────────┐┌───┐┌──────────┐
+q_0: ┤ Rz(π/2) ├───┤ H ├───┤ Rz(4.7832) ├┤ H ├┤ Rz(3π/2) ├
+     ├─────────┤   ├───┤   └───┬───┬────┘└───┘└──────────┘
+q_1: ┤ Rz(1.5) ├───┤ H ├───────┤ H ├──────────────────────
+     └──┬───┬──┘┌──┴───┴──┐    ├───┤                      
+q_2: ───┤ H ├───┤ Rz(1.5) ├────┤ H ├──────────────────────
+     ┌──┴───┴──┐└──┬───┬──┘┌───┴───┴────┐┌───┐┌──────────┐
+q_3: ┤ Rz(π/2) ├───┤ H ├───┤ Rz(4.7832) ├┤ H ├┤ Rz(3π/2) ├
+     └──┬───┬──┘   ├───┤   └────────────┘└───┘└──────────┘
+q_4: ───┤ H ├──────┤ H ├──────────────────────────────────
+        └───┘      └───┘                                  
+Pre ZX-calculus optimized stats: 
+Circuit 5.qasm on 5 qubits with 8 gates.
+        4 is the T-count
+        4 Cliffords among which
+        0 2-qubit gates (0 CNOT, 0 other) and
+        0 Hadamard gates.
+
+
+Post ZX-calculus optimized stats: 
+Circuit  on 5 qubits with 18 gates.
+        4 is the T-count
+        14 Cliffords among which
+        0 2-qubit gates (0 CNOT, 0 other) and
+        10 Hadamard gates.
+
+
+COUNTS:  {4: 1}

@@ -1,0 +1,12 @@
+Starting GASP experiment with parameters:
+  Population size: 100000
+  n (qubits): 6
+  Mutation rate: 0.05
+  Survival rate: 0.2
+  Generations: 50
+
+GENERATION 0
+AVERAGE FITNESS:  0.20804400000025802
+GENERATION 1
+AVERAGE FITNESS:  0.2092449999999398
+GENERATION 2

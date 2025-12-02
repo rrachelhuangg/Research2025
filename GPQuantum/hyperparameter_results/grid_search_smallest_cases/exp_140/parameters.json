@@ -1,0 +1,7 @@
+{
+  "init_pop_size": 2000,
+  "n": 7,
+  "mutation_rate": 0.05,
+  "survival_rate": 0.25,
+  "num_generations": 15
+}
