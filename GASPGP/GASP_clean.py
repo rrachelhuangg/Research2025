@@ -35,21 +35,40 @@ def run_circuit(circuit):
     return counts
 
 
+def select_gene(i):
+    gene = [None, None, None, None]
+    gate = gates[random.randint(0,3)]
+    if gate == "CNOT":
+        control_bit = i
+        while control_bit == i:
+            control_bit = random.randint(0, n-1)
+        gene[2] = control_bit
+    else:
+        gene[2] = None
+    gene[0] = i
+    gene[1] = gate
+    gene[3] = 0
+    return gene
+
 def create_individual():
+    """
+    O: gene format
+    """
     individual = []
     for i in range(n):
-        gene = [None, None, None, None]
-        gate = gates[random.randint(0,3)]
-        if gate == "CNOT":
-            control_bit = i
-            while control_bit == i:
-                control_bit = random.randint(0, n-1)
-            gene[2] = control_bit
-        else:
-            gene[2] = None
-        gene[0] = i
-        gene[1] = gate
-        gene[3] = 0
+        gene = select_gene(i)
+        # gene = [None, None, None, None]
+        # gate = gates[random.randint(0,3)]
+        # if gate == "CNOT":
+        #     control_bit = i
+        #     while control_bit == i:
+        #         control_bit = random.randint(0, n-1)
+        #     gene[2] = control_bit
+        # else:
+        #     gene[2] = None
+        # gene[0] = i
+        # gene[1] = gate
+        # gene[3] = 0
         individual += [gene]
     return individual
 
@@ -62,6 +81,10 @@ def create_population():
 
 
 def individual_to_circuit(individual):
+    """
+    I: gene format
+    O: circuit format
+    """
     circuit = QuantumCircuit(n, n)
     for gene in individual:
         if gene[1] == "R_X":
@@ -85,13 +108,25 @@ def calculate_fitness(circuit):
 def crossover(ind_1, ind_2):
     """
     (k=1)-point crossover as defined by the GASP algorithm. 
+    I/O: individuals are in gene format
     """
     half_1_idx = len(ind_1)//2
     half_2_idx = len(ind_2)//2
     child = ind_1[:half_1_idx] + ind_2[half_2_idx:]
     return child
 
+def mutate(individual):
+    """
+    I/O: individuals are in gene format
+    """
+    idx = random.randint(0, n-1)
+    new_gene = individual[idx]
+    while new_gene == individual[idx]:
+        new_gene = select_gene(idx)
+    mutated_individual = individual[:idx] + [new_gene] + individual[idx+1:]
+    return mutated_individual
+
 
 if __name__ == '__main__':
     population = create_population()
-    crossover(population[0], population[1])
+    mutate(population[0])
