@@ -16,12 +16,10 @@ gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 n = 6
 init_pop_size = 1000
 
+target_state_circuit = QuantumCircuit(n,n)
+target_state_circuit.x(n-1)
+target_state_vector = Statevector(target_state_circuit)
 
-def create_target_state(n):
-    """All qubits are 0 except for the last qubit, which is a 1."""
-    qc = QuantumCircuit(n,n)
-    qc.x(n-1)
-    return qc
 
 def run_circuit(circuit):
     """
@@ -36,11 +34,6 @@ def run_circuit(circuit):
     counts = result.get_counts(compiled_circuit)
     return counts
 
-def get_circuit_state(circuit):
-    """
-    Returns the Qiskit Statevector of the input circuit.
-    """
-    return Statevector(circuit)
 
 def create_individual():
     individual = []
@@ -60,16 +53,37 @@ def create_individual():
         individual += [gene]
     return individual
 
+
 def create_population():
     population = []
     for i in range(init_pop_size):
         population += [create_individual()]
     return population
 
-def individual_to_circuit():
-    return
+
+def individual_to_circuit(individual):
+    circuit = QuantumCircuit(n, n)
+    for gene in individual:
+        if gene[1] == "R_X":
+            circuit.rx(gene[3], gene[0])
+        elif gene[1] == "R_Y":
+            circuit.ry(gene[3], gene[0])
+        elif gene[1] == "R_Z":
+            circuit.rz(gene[3], gene[0])
+        elif gene[1] == "CNOT":
+            circuit.cx(gene[2], gene[0])
+    return circuit
+
+
+def calculate_fitness(circuit):
+    individual_statevector = Statevector(circuit)
+    inner_product = individual_statevector.inner(target_state_vector)
+    fitness = abs(inner_product)**2
+    return fitness
+
 
 if __name__ == '__main__':
     population = create_population()
     for individual in population:
-        print("INDIVIDUAL: \n", individual)
+        circuit = individual_to_circuit(individual)
+        calculate_fitness(circuit)
