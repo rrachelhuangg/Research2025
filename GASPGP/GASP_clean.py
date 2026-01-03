@@ -82,8 +82,16 @@ def calculate_fitness(circuit):
     return fitness
 
 
+def crossover(ind_1, ind_2):
+    """
+    (k=1)-point crossover as defined by the GASP algorithm. 
+    """
+    half_1_idx = len(ind_1)//2
+    half_2_idx = len(ind_2)//2
+    child = ind_1[:half_1_idx] + ind_2[half_2_idx:]
+    return child
+
+
 if __name__ == '__main__':
     population = create_population()
-    for individual in population:
-        circuit = individual_to_circuit(individual)
-        calculate_fitness(circuit)
+    crossover(population[0], population[1])
