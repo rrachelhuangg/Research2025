@@ -57,18 +57,6 @@ def create_individual():
     individual = []
     for i in range(n):
         gene = select_gene(i)
-        # gene = [None, None, None, None]
-        # gate = gates[random.randint(0,3)]
-        # if gate == "CNOT":
-        #     control_bit = i
-        #     while control_bit == i:
-        #         control_bit = random.randint(0, n-1)
-        #     gene[2] = control_bit
-        # else:
-        #     gene[2] = None
-        # gene[0] = i
-        # gene[1] = gate
-        # gene[3] = 0
         individual += [gene]
     return individual
 
@@ -129,4 +117,7 @@ def mutate(individual):
 
 if __name__ == '__main__':
     population = create_population()
-    mutate(population[0])
+    """
+    Want to pull out all of the above functions so that this main file
+    only handles generational experiments.
+    """
