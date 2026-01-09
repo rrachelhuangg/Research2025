@@ -4,6 +4,7 @@ Implementation of the GASP experiment steps, where each step is a function (or t
 
 import random
 import numpy as np
+import numpy.random as npr
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
 from qiskit.quantum_info import Statevector
 from qiskit_aer import AerSimulator
@@ -85,7 +86,38 @@ def individual_to_circuit(individual):
     return circuit
 
 
+def circuit_to_individual(individual):
+    """
+    I: circuit format
+    O: gene format
+    """
+    gene_format = []
+    for gate in individual.data:
+        gene = [None, None, None, None]
+        if gate.operation.name != "cx":
+            gene[0] = gate.qubits[0]._index
+            if gate.operation.name == "rx":
+                gene[1] = "R_X"
+            elif gate.operation.name == "ry":
+                gene[1] = "R_Y"
+            elif gate.operation.name == "rz":
+                gene[1] = "R_Z"
+            gene[2] = None
+            gene[3] = gate.operation.params[0]
+        elif gate.operation.name == "cx":
+            gene[0] = gate.qubits[1]._index
+            gene[2] = gate.qubits[0]._index
+            gene[1] = "CNOT"
+            gene[3] = 0
+        gene_format += [gene]
+    return gene_format
+
+
 def calculate_fitness(circuit):
+    """
+    I: circuit (non-parameterized)
+    F: float
+    """
     individual_statevector = Statevector(circuit)
     inner_product = individual_statevector.inner(target_state_vector)
     fitness = abs(inner_product)**2
@@ -113,3 +145,39 @@ def mutate(individual):
         new_gene = select_gene(idx)
     mutated_individual = individual[:idx] + [new_gene] + individual[idx+1:]
     return mutated_individual
+
+
+def roulette_wheel_select_single(population, max_fitness):
+    """
+    I: population of individuals in circuit format
+    O: selected individual in gene format
+    Note: This function selects a single individual from the population. 
+    Prioritizes a higher fitness.
+    """
+    if max_fitness == 0:
+        selected_individual = random.choice(population)
+    else:
+        selection_probs = [calculate_fitness(c)/max_fitness for c in population]
+        selected_individual = population[npr.choice(len(population), p=selection_probs)]
+    return circuit_to_individual(selected_individual)
+
+
+def roulette_wheel_selection(population, survival_rate):
+    """
+    I/O: population with individuals in gene format
+    """
+    selected_individuals = []
+    to_survive = int(len(population)*survival_rate)
+
+    circuit_population = []
+    for individual in population:
+        circuit_population += [individual_to_circuit(individual)]
+    max_fitness = sum([calculate_fitness(c) for c in circuit_population])
+
+    while len(selected_individuals) < to_survive:
+        selected_individual = roulette_wheel_select_single(circuit_population, max_fitness)
+        while selected_individual in selected_individuals:
+            selected_individual = roulette_wheel_select_single(circuit_population, max_fitness)
+        selected_individuals += [selected_individual]
+    
+    return selected_individuals
