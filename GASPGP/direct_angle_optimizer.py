@@ -37,12 +37,14 @@ def optimize_angles(individual):
         bound_circuit = circuit.assign_parameters(param_dict)
         fitness = calculate_fitness(bound_circuit)
         return -fitness #minimize negative fitness = maximize fitness
-    initial_angles = [gene[3] if gene[1] != "CNOT" else 0 for gene in individual]
+    initial_angles = [gene[3] for gene in individual if gene[1] != "CNOT"]
+    if len(initial_angles) == 0:
+        return individual
     result = minimize(
         cost_function,
         x0=initial_angles,
         bounds=[(0, 2*np.pi)] * len(initial_angles),
-        method="COBYLA"
+        method="SLSQP"
     )
     optimized_individual = []
     angle_idx = 0

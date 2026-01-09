@@ -14,7 +14,6 @@ gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
 n = 6
-init_pop_size = 1000
 
 target_state_circuit = QuantumCircuit(n,n)
 target_state_circuit.x(n-1)
@@ -43,11 +42,12 @@ def select_gene(i):
         while control_bit == i:
             control_bit = random.randint(0, n-1)
         gene[2] = control_bit
+        gene[3] = 0
     else:
         gene[2] = None
+        gene[3] = random.uniform(0, 2*np.pi)
     gene[0] = i
     gene[1] = gate
-    gene[3] = 0
     return gene
 
 def create_individual():
@@ -61,7 +61,7 @@ def create_individual():
     return individual
 
 
-def create_population():
+def create_population(init_pop_size):
     population = []
     for i in range(init_pop_size):
         population += [create_individual()]
@@ -176,8 +176,20 @@ def roulette_wheel_selection(population, survival_rate):
 
     while len(selected_individuals) < to_survive:
         selected_individual = roulette_wheel_select_single(circuit_population, max_fitness)
-        while selected_individual in selected_individuals:
-            selected_individual = roulette_wheel_select_single(circuit_population, max_fitness)
         selected_individuals += [selected_individual]
     
     return selected_individuals
+
+def breed_to_minimum(population, target_size):
+    """
+    Prevent population from running to size 0.
+    """
+    if len(population) >= target_size:
+        return population
+    current_population = population.copy()
+    while len(current_population) < target_size:
+        parent1 = random.choice(population)
+        parent2 = random.choice(population)
+        child = crossover(parent1, parent2)
+        current_population.append(child)
+    return current_population
