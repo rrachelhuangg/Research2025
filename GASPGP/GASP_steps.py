@@ -17,6 +17,8 @@ n = 6
 
 target_state_circuit = QuantumCircuit(n,n)
 target_state_circuit.x(n-1)
+target_state_circuit.h(n-2)
+target_state_circuit.y(n-3)
 target_state_vector = Statevector(target_state_circuit)
 
 
@@ -147,7 +149,7 @@ def mutate(individual):
     return mutated_individual
 
 
-def roulette_wheel_select_single(population, max_fitness):
+def roulette_wheel_select_single(population, max_fitness, selection_probs):
     """
     I: population of individuals in circuit format
     O: selected individual in gene format
@@ -157,7 +159,7 @@ def roulette_wheel_select_single(population, max_fitness):
     if max_fitness == 0:
         selected_individual = random.choice(population)
     else:
-        selection_probs = [calculate_fitness(c)/max_fitness for c in population]
+        #selection_probs = [calculate_fitness(c)/max_fitness for c in population]
         selected_individual = population[npr.choice(len(population), p=selection_probs)]
     return circuit_to_individual(selected_individual)
 
@@ -172,10 +174,12 @@ def roulette_wheel_selection(population, survival_rate):
     circuit_population = []
     for individual in population:
         circuit_population += [individual_to_circuit(individual)]
+
     max_fitness = sum([calculate_fitness(c) for c in circuit_population])
+    selection_probs = [calculate_fitness(c)/max_fitness for c in circuit_population]
 
     while len(selected_individuals) < to_survive:
-        selected_individual = roulette_wheel_select_single(circuit_population, max_fitness)
+        selected_individual = roulette_wheel_select_single(circuit_population, max_fitness, selection_probs)
         selected_individuals += [selected_individual]
     
     return selected_individuals

@@ -13,17 +13,19 @@ from direct_angle_optimizer import optimize_angles
 def run_experiment():
     init_pop_size = 10000
     n = 6
-    mutation_rate = 0.8
-    survival_rate = 0.9
-    desired_fitness = 0.1
+    mutation_rate = 0.5
+    survival_rate = 0.75
+    desired_fitness = 0.95
     maxiter = 50
 
     population = create_population(init_pop_size)
     iterations_since_improvement = 0
     max_fitness_overall = 0
+    average_fitness_overall = 0
     generation = 0
 
-    while iterations_since_improvement < maxiter and max_fitness_overall < desired_fitness:
+    while iterations_since_improvement < maxiter and average_fitness_overall < desired_fitness:
+    # while iterations_since_improvement < maxiter and max_fitness_overall < desired_fitness:
         generation += 1
         print(f"Generation: {generation}")
 
@@ -35,6 +37,7 @@ def run_experiment():
         
         max_fitness_gen = max(fitnesses)
         avg_fitness_gen = sum(fitnesses)/len(fitnesses)
+        average_fitness_overall = avg_fitness_gen
         print(f"Max fitness: {max_fitness_gen:.6f}, Avg fitness: {avg_fitness_gen:.6f}")
         if max_fitness_gen > max_fitness_overall:
             max_fitness_overall = max_fitness_gen
@@ -43,7 +46,8 @@ def run_experiment():
         else:
             iterations_since_improvement += 1
         
-        if max_fitness_overall >= desired_fitness:
+        # if max_fitness_overall >= desired_fitness:
+        if average_fitness_overall >= desired_fitness:
             print(f"Target fitness of {desired_fitness} achieved!")
             break
         
@@ -52,12 +56,14 @@ def run_experiment():
             break
             
         offspring = []
+        print("BREEDING")
         for _ in range(len(population)//2):
             parent1 = random.choice(population)
             parent2 = random.choice(population)
             child = crossover(parent1, parent2)
             offspring.append(child)
         
+        print("MUTATING")
         mutated_population = []
         for individual in offspring:
             if random.random() < mutation_rate:
@@ -65,11 +71,13 @@ def run_experiment():
             else:
                 mutated_population.append(individual)
         
+        print("OPTIMIZING ANGLES")
         optimized_population = []
         for individual in mutated_population:
             optimized_individual = optimize_angles(individual)
             optimized_population.append(optimized_individual)
         
+        print("ROULETTING")
         population = roulette_wheel_selection(optimized_population, survival_rate)
         population = breed_to_minimum(population, 100)
         print(f"Selected {len(population)} individuals for next generation.")
@@ -95,3 +103,4 @@ if __name__ == '__main__':
         print("Best individual:\n")
         best_circuit = individual_to_circuit(best_individual)
         print(best_circuit.draw(output='text'))
+        print(run_circuit(best_circuit))
