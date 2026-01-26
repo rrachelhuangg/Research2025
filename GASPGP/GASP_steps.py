@@ -118,7 +118,7 @@ def circuit_to_individual(individual):
 def calculate_fitness(circuit):
     """
     I: circuit (non-parameterized)
-    F: float
+    O: float
     """
     individual_statevector = Statevector(circuit)
     inner_product = individual_statevector.inner(target_state_vector)
