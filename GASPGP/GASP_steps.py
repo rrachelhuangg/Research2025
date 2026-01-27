@@ -131,8 +131,8 @@ def crossover(ind_1, ind_2):
     (k=1)-point crossover as defined by the GASP algorithm. 
     I/O: individuals are in gene format
     """
-    half_1_idx = len(ind_1)//2
-    half_2_idx = len(ind_2)//2
+    half_1_idx = random.randint(0, len(ind_1))
+    half_2_idx = random.randint(0, len(ind_2))
     child = ind_1[:half_1_idx] + ind_2[half_2_idx:]
     return child
 
@@ -141,12 +141,59 @@ def mutate(individual):
     """
     I/O: individuals are in gene format
     """
-    idx = random.randint(0, n-1)
+    if len(individual) == 0:
+        return individual
+    idx = random.randint(0, len(individual)-1)
+    mutation_type = random.randint(0, 3)
+    if mutation_type == 0:
+        return mutate_replace(individual, idx)
+    elif mutation_type == 1:
+        return mutate_insert(individual, idx)
+    elif mutation_type == 2:
+        return mutate_swap(individual, idx)
+    elif mutation_type == 3:
+        return mutate_delete(individual, idx)
+
+
+def mutate_replace(individual, idx):
+    """
+    I/O: individuals are in gene format
+    """
     new_gene = individual[idx]
     while new_gene == individual[idx]:
-        new_gene = select_gene(idx)
+        new_gene = select_gene(random.randint(0, n-1))
     mutated_individual = individual[:idx] + [new_gene] + individual[idx+1:]
     return mutated_individual
+
+
+def mutate_insert(individual, idx):
+    """
+    I/O: individuals are in gene format
+    """
+    new_gene = select_gene(random.randint(0, n-1))
+    return individual[:idx] + [new_gene] + individual[idx:]
+
+
+def mutate_swap(individual, idx):
+    """
+    I/O: individuals are in gene format
+    """
+    if len(individual) < 2:
+        return individual 
+    other_idx = random.choice([i for i in range(len(individual)) if i != idx])
+    copied_individual = individual.copy()
+    copied_individual[idx], copied_individual[other_idx] = copied_individual[other_idx], copied_individual[idx]
+    return copied_individual
+
+
+def mutate_delete(individual, idx):
+    """
+    I/O: individuals are in gene format
+    """
+    MIN_LEN=1
+    if len(individual)<=MIN_LEN:
+        return individual
+    return individual[:idx] + individual[idx+1:]
 
 
 def roulette_wheel_select_single(population, max_fitness, selection_probs):
