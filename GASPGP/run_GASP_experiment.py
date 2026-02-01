@@ -85,27 +85,11 @@ def run_experiment():
         print(f"Selected {len(population)} individuals for next generation.")
         print()
 
-    best_individual = None
-    best_fitness = 0
-    for individual in population:
-        circuit = individual_to_circuit(individual)
-        fitness = calculate_fitness(circuit)
-        if fitness > best_fitness:
-            best_fitness = fitness
-            best_individual = individual
-
     selected_individuals = selected_subset(population, minimum_pop_size)
     print("SELECTED INDIVIDUALS: ", selected_individuals)
 
     print(f"Experiment complete!")
-    return best_individual, best_fitness
 
 
 if __name__ == '__main__':
-    best_individual, best_fitness = run_experiment()
-    print(f"Best fitness achieved: {best_fitness:.6f}")
-    if best_individual is not None:
-        print("Best individual:\n")
-        best_circuit = individual_to_circuit(best_individual)
-        print(best_circuit.draw(output='text'))
-        print(run_circuit(best_circuit))
+    run_experiment()
