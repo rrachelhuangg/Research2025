@@ -33,15 +33,15 @@ def individual_to_parameterized_circuit(individual, n):
 
 def optimize_angles(individual):
     circuit, param_list = individual_to_parameterized_circuit(individual, 6)
-    # def cost_function(angles):
-    #     """
-    #     Cost function v1: maximizes fitness of an individual
-    #     """
-    #     param_dict = {param: angle for param, angle in zip([p for p in param_list if p], angles) if param is not None}
-    #     bound_circuit = circuit.assign_parameters(param_dict)
-    #     fitness = calculate_fitness(bound_circuit)
-    #     return -fitness #minimize negative fitness = maximize fitness
-    def cost_function(angles):
+    def fitness_cost_function(angles):
+        """
+        Cost function v1: maximizes fitness of an individual
+        """
+        param_dict = {param: angle for param, angle in zip([p for p in param_list if p], angles) if param is not None}
+        bound_circuit = circuit.assign_parameters(param_dict)
+        fitness = calculate_fitness(bound_circuit)
+        return -fitness #minimize negative fitness = maximize fitness
+    def zx_cost_function(angles):
         """
         Cost function v2: maximizes "zx-calcness" of an individual
         """
@@ -49,6 +49,11 @@ def optimize_angles(individual):
         bound_circuit = circuit.assign_parameters(param_dict)
         zx_value = assign_zx_value(bound_circuit)
         return -zx_value #minimize negative zx-calcness = maximize zx-calcness
+    def cost_function(angles):
+        fitness_cost = fitness_cost_function(angles)
+        zx_cost = zx_cost_function(angles)
+        overall_cost = (0.5*fitness_cost) + (0.5*zx_cost)
+        return overall_cost
     initial_angles = [gene[3] for gene in individual if gene[1] != "CNOT"]
     if len(initial_angles) == 0:
         return individual

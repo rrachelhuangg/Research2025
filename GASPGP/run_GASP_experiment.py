@@ -12,13 +12,13 @@ from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
 
 def run_experiment():
-    init_pop_size = 10000
+    init_pop_size = 1000
     n = 6
     mutation_rate = 0.5
     survival_rate = 0.75
-    desired_fitness = 0.9
+    desired_fitness = 0.75
     maxiter = 50
-    minimum_pop_size = 1000
+    minimum_pop_size = 100
 
     population = create_population(init_pop_size)
     iterations_since_improvement = 0
@@ -86,6 +86,8 @@ def run_experiment():
         print()
 
     selected_individuals = selected_subset(population, minimum_pop_size)
+    for individual in selected_individuals:
+        print(individual.draw(output='text'))
     print("SELECTED INDIVIDUALS: ", selected_individuals)
 
     print(f"Experiment complete!")
