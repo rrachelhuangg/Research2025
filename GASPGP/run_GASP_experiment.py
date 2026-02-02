@@ -9,14 +9,16 @@ import numpy as np
 from qiskit import QuantumCircuit
 from GASP_steps import run_circuit, select_gene, create_individual, create_population, individual_to_circuit, calculate_fitness, crossover, mutate, circuit_to_individual, roulette_wheel_select_single, roulette_wheel_selection, breed_to_minimum
 from direct_angle_optimizer import optimize_angles
+from population_evals import selected_subset
 
 def run_experiment():
-    init_pop_size = 10000
+    init_pop_size = 1000
     n = 6
     mutation_rate = 0.5
     survival_rate = 0.75
-    desired_fitness = 0.95
+    desired_fitness = 0.75
     maxiter = 50
+    minimum_pop_size = 100
 
     population = create_population(init_pop_size)
     iterations_since_improvement = 0
@@ -79,28 +81,17 @@ def run_experiment():
         
         print("ROULETTING")
         population = roulette_wheel_selection(optimized_population, survival_rate)
-        population = breed_to_minimum(population, 100)
+        population = breed_to_minimum(population, minimum_pop_size)
         print(f"Selected {len(population)} individuals for next generation.")
         print()
-    
-    best_individual = None
-    best_fitness = 0
-    for individual in population:
-        circuit = individual_to_circuit(individual)
-        fitness = calculate_fitness(circuit)
-        if fitness > best_fitness:
-            best_fitness = fitness
-            best_individual = individual
-    
+
+    selected_individuals = selected_subset(population, minimum_pop_size)
+    for individual in selected_individuals:
+        print(individual.draw(output='text'))
+    print("SELECTED INDIVIDUALS: ", selected_individuals)
+
     print(f"Experiment complete!")
-    return best_individual, best_fitness
 
 
 if __name__ == '__main__':
-    best_individual, best_fitness = run_experiment()
-    print(f"Best fitness achieved: {best_fitness:.6f}")
-    if best_individual is not None:
-        print("Best individual:\n")
-        best_circuit = individual_to_circuit(best_individual)
-        print(best_circuit.draw(output='text'))
-        print(run_circuit(best_circuit))
+    run_experiment()
