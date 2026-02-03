@@ -8,18 +8,27 @@ import numpy.random as npr
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
 from qiskit.quantum_info import Statevector
 from qiskit_aer import AerSimulator
+from qiskit import transpile
+from qiskit_ibm_runtime import QiskitRuntimeService
+from qiskit.transpiler import generate_preset_pass_manager
+from circuit_library import qv_circuit
 
 #biological structure
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
-n = 6
+n = 3
 
-target_state_circuit = QuantumCircuit(n,n)
-target_state_circuit.x(n-1)
-target_state_circuit.h(n-2)
-target_state_circuit.y(n-3)
+# target_state_circuit = QuantumCircuit(n,n)
+# target_state_circuit.x(n-1)
+# target_state_circuit.h(n-2)
+# target_state_circuit.y(n-3)
+target_state_circuit = qv_circuit(n)
 target_state_vector = Statevector(target_state_circuit)
+service = QiskitRuntimeService()
+backend = service.backend("ibm_torino")
+pm = generate_preset_pass_manager(backend=backend, optimization_level=3)
+target_state_circuit = pm.run(target_state_circuit)
 
 
 def run_circuit(circuit):

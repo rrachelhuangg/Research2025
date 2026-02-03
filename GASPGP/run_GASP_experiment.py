@@ -12,13 +12,13 @@ from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
 
 def run_experiment():
-    init_pop_size = 1000
-    n = 6
+    init_pop_size = 10000
+    n = 3
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.75
-    maxiter = 50
-    minimum_pop_size = 100
+    maxiter = 500
+    minimum_pop_size = 1000
 
     population = create_population(init_pop_size)
     iterations_since_improvement = 0
