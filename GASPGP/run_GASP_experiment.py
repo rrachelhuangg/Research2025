@@ -14,13 +14,13 @@ from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
 
 def run_experiment(circuit_depth=3):
-    init_pop_size = 5000
+    init_pop_size = 10000
     n = 3
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.75
     maxiter = 500
-    minimum_pop_size = 500
+    minimum_pop_size = 1000
 
     population = create_population(init_pop_size, depth=circuit_depth)
     iterations_since_improvement = 0
@@ -32,6 +32,8 @@ def run_experiment(circuit_depth=3):
     gen_indices = []
     avg_fitness_vals = []
     avg_angle_opt_times = []
+    avg_zx = []
+    avg_len = []
 
     while iterations_since_improvement < maxiter and average_fitness_overall < desired_fitness:
     # while iterations_since_improvement < maxiter and max_fitness_overall < desired_fitness:
@@ -88,13 +90,20 @@ def run_experiment(circuit_depth=3):
         print("OPTIMIZING ANGLES")
         optimized_population = []
         angle_opt_times = []
+        pop_zx = []
+        pop_len = []
         for individual in mutated_population:
             start_time = time.time()
-            optimized_individual = optimize_angles(individual)
+            optimized_individual, fit, zx, length = optimize_angles(individual)
+            pop_zx += [zx]
+            pop_len += [length]
             end_time = time.time()
             angle_opt_times += [end_time-start_time]
             optimized_population.append(optimized_individual)
+        #recording stats for visualizations
         avg_angle_opt_times += [sum(angle_opt_times)/len(angle_opt_times)]
+        avg_zx += [sum(pop_zx)/len(pop_zx)]
+        avg_len += [sum(pop_len)/len(pop_len)]
         
         print("ROULETTING")
         population = roulette_wheel_selection(optimized_population, survival_rate)
@@ -104,20 +113,30 @@ def run_experiment(circuit_depth=3):
 
         #generating visualizations
         if generation % 10 == 0:
-            fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(8,4))
-            axs[0].plot(gen_indices, avg_fitness_vals)
-            axs[0].set_xlabel('Generation #')
-            axs[0].set_ylabel('Average Fitness')
-            axs[0].set_title('Average Fitness per Generation')
-            axs[0].grid(True)
+            fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(8,8))
+            axs[0, 0].plot(gen_indices, avg_fitness_vals)
+            axs[0, 0].set_xlabel('Generation #')
+            axs[0, 0].set_ylabel('Average Fitness')
+            axs[0, 0].set_title('Average Fitness per Generation')
+            axs[0, 0].grid(True)
             if len(gen_indices) == len(avg_angle_opt_times)+1:
                 gen_indices = gen_indices[:-1]
-            axs[1].plot(gen_indices, avg_angle_opt_times)
-            axs[1].set_xlabel('Generation #')
-            axs[1].set_ylabel('Average Optimization Time')
-            axs[1].set_title('Average Optimization Time per Generation')
-            axs[1].grid(True)
-            plt.tight_layout()
+            axs[1, 0].plot(gen_indices, avg_angle_opt_times)
+            axs[1, 0].set_xlabel('Generation #')
+            axs[1, 0].set_ylabel('Average Optimization Time')
+            axs[1, 0].set_title('Average Optimization Time per Generation')
+            axs[1, 0].grid(True)
+            axs[0, 1].plot(gen_indices, avg_len)
+            axs[0, 1].set_xlabel('Generation #')
+            axs[0, 1].set_ylabel('Average Length')
+            axs[0, 1].set_title('Average Length per Generation')
+            axs[0, 1].grid(True)
+            axs[1, 1].plot(gen_indices, avg_zx)
+            axs[1, 1].set_xlabel('Generation #')
+            axs[1, 1].set_ylabel('Average ZX-Calcness')
+            axs[1, 1].set_title('Average ZX-Calcness per Generation')
+            axs[1, 1].grid(True)
+            plt.tight_layout()  
             plt.savefig('visualizations/Experiment_Vizs_1.png', dpi=300, bbox_inches='tight')
 
     selected_individuals = selected_subset(population, minimum_pop_size)

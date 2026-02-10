@@ -33,6 +33,7 @@ def individual_to_parameterized_circuit(individual, n):
 
 def optimize_angles(individual):
     circuit, param_list = individual_to_parameterized_circuit(individual, 3)
+    return_fitness, return_zx, return_length = 0, 0, 0
     def fitness_cost_function(angles):
         """
         Cost function v1: maximizes fitness of an individual
@@ -57,11 +58,11 @@ def optimize_angles(individual):
         else:
             zx_cost = 1/zx_cost
         length_cost = 1/len(individual)
-        overall_cost = (0.7*fitness_cost) + (0.2*zx_cost) + (0.1*length_cost)
+        overall_cost = (0.8*fitness_cost) + (0.1*zx_cost) + (0.1*length_cost)
         return overall_cost
     initial_angles = [gene[3] for gene in individual if gene[1] != "CNOT"]
     if len(initial_angles) == 0:
-        return individual
+        return individual, 0, 0, 0
     result = minimize(
         cost_function,
         x0=initial_angles,
@@ -76,4 +77,9 @@ def optimize_angles(individual):
             new_gene[3] = result.x[angle_idx]
             angle_idx += 1
         optimized_individual += [new_gene]
-    return optimized_individual
+    param_dict = {param: angle for param, angle in zip([p for p in param_list if p], result.x) if param is not None}         
+    bound_circuit = circuit.assign_parameters(param_dict)                                                                    
+    return_fitness = calculate_fitness(bound_circuit)                                                                        
+    return_zx = assign_zx_value(bound_circuit)                                                                               
+    return_length = len(individual)  
+    return optimized_individual, return_fitness, return_zx, return_length
