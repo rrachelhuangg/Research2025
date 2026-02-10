@@ -52,9 +52,12 @@ def optimize_angles(individual):
     def cost_function(angles):
         fitness_cost = fitness_cost_function(angles)
         zx_cost = zx_cost_function(angles)
-        length_cost = len(individual)
-        # overall_cost = (0.4*fitness_cost) + (0.4*zx_cost) + (0.2*length_cost)
-        overall_cost = (0.8*fitness_cost) + (0.2*length_cost)
+        if zx_cost == 0:
+            zx_cost = 0
+        else:
+            zx_cost = 1/zx_cost
+        length_cost = 1/len(individual)
+        overall_cost = (0.7*fitness_cost) + (0.2*zx_cost) + (0.1*length_cost)
         return overall_cost
     initial_angles = [gene[3] for gene in individual if gene[1] != "CNOT"]
     if len(initial_angles) == 0:
