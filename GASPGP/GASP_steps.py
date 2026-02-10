@@ -72,20 +72,20 @@ def create_individual():
         individual += [gene]
     return individual
 
-def create_random_individual():
+def create_random_individual(depth=3):
     """
     O: gene format
     """
-    rando_circuit = random_circuit(n, max_operands=2, depth=3)
+    rando_circuit = random_circuit(n, max_operands=2, depth=depth)
     to_gene = circuit_to_individual(rando_circuit)
     return to_gene
 
 
-def create_population(init_pop_size):
+def create_population(init_pop_size, depth=3):
     population = []
     for i in range(init_pop_size):
         # population += [create_individual()]
-        population += [create_random_individual()]
+        population += [create_random_individual(depth)]
     return population
 
 

@@ -1,9 +1,0 @@
-Experiment_Vizs_1.png:
-init_pop_size = 1000
-n = 6
-mutation_rate = 0.5
-survival_rate = 0.75
-desired_fitness = 0.75
-maxiter = 50
-minimum_pop_size = 100
-Initial population = random_circuit(n, max_operands=2, depth=3)

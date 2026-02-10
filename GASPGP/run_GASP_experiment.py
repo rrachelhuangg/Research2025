@@ -13,7 +13,7 @@ from GASP_steps import run_circuit, select_gene, create_individual, create_popul
 from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
 
-def run_experiment():
+def run_experiment(circuit_depth=3):
     init_pop_size = 5000
     n = 3
     mutation_rate = 0.5
@@ -22,7 +22,7 @@ def run_experiment():
     maxiter = 500
     minimum_pop_size = 500
 
-    population = create_population(init_pop_size)
+    population = create_population(init_pop_size, depth=circuit_depth)
     iterations_since_improvement = 0
     max_fitness_overall = 0
     average_fitness_overall = 0
@@ -126,6 +126,14 @@ def run_experiment():
     print("SELECTED INDIVIDUALS: ", selected_individuals)
 
     print(f"Experiment complete!")
+
+    return {
+        'final_generation': generation,
+        'max_fitness': max_fitness_overall,
+        'average_fitness': average_fitness_overall,
+        'iterations_since_improvement': iterations_since_improvement,
+        'final_population_size': len(population)
+    }
 
 
 if __name__ == '__main__':
