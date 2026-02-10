@@ -14,13 +14,13 @@ from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
 
 def run_experiment():
-    init_pop_size = 10000
+    init_pop_size = 5000
     n = 3
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.75
     maxiter = 500
-    minimum_pop_size = 1000
+    minimum_pop_size = 500
 
     population = create_population(init_pop_size)
     iterations_since_improvement = 0
@@ -102,29 +102,30 @@ def run_experiment():
         print(f"Selected {len(population)} individuals for next generation.")
         print()
 
+        #generating visualizations
+        if generation % 10 == 0:
+            fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(8,4))
+            axs[0].plot(gen_indices, avg_fitness_vals)
+            axs[0].set_xlabel('Generation #')
+            axs[0].set_ylabel('Average Fitness')
+            axs[0].set_title('Average Fitness per Generation')
+            axs[0].grid(True)
+            if len(gen_indices) == len(avg_angle_opt_times)+1:
+                gen_indices = gen_indices[:-1]
+            axs[1].plot(gen_indices, avg_angle_opt_times)
+            axs[1].set_xlabel('Generation #')
+            axs[1].set_ylabel('Average Optimization Time')
+            axs[1].set_title('Average Optimization Time per Generation')
+            axs[1].grid(True)
+            plt.tight_layout()
+            plt.savefig('visualizations/Experiment_Vizs_1.png', dpi=300, bbox_inches='tight')
+
     selected_individuals = selected_subset(population, minimum_pop_size)
     for individual in selected_individuals:
         print(individual.draw(output='text'))
     print("SELECTED INDIVIDUALS: ", selected_individuals)
 
     print(f"Experiment complete!")
-
-    #generating visualizations
-    fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(8,4))
-    axs[0].plot(gen_indices, avg_fitness_vals)
-    axs[0].set_xlabel('Generation #')
-    axs[0].set_ylabel('Average Fitness')
-    axs[0].set_title('Average Fitness per Generation')
-    axs[0].grid(True)
-    if len(gen_indices) == len(avg_angle_opt_times)+1:
-        gen_indices = gen_indices[:-1]
-    axs[1].plot(gen_indices, avg_angle_opt_times)
-    axs[1].set_xlabel('Generation #')
-    axs[1].set_ylabel('Average Optimization Time')
-    axs[1].set_title('Average Optimization Time per Generation')
-    axs[1].grid(True)
-    plt.tight_layout()
-    plt.savefig('visualizations/Experiment_Vizs_1.png', dpi=300, bbox_inches='tight')
 
 
 if __name__ == '__main__':
