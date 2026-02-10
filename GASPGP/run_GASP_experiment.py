@@ -4,8 +4,10 @@ https://www.nature.com/articles/s41598-023-37767-w.
 This file handles the generational experiments. 
 """
 
+import time
 import random
 import numpy as np
+import matplotlib.pyplot as plt
 from qiskit import QuantumCircuit
 from GASP_steps import run_circuit, select_gene, create_individual, create_population, individual_to_circuit, calculate_fitness, crossover, mutate, circuit_to_individual, roulette_wheel_select_single, roulette_wheel_selection, breed_to_minimum
 from direct_angle_optimizer import optimize_angles
@@ -26,6 +28,11 @@ def run_experiment():
     average_fitness_overall = 0
     generation = 0
 
+    #for visualizations
+    gen_indices = []
+    avg_fitness_vals = []
+    avg_angle_opt_times = []
+
     while iterations_since_improvement < maxiter and average_fitness_overall < desired_fitness:
     # while iterations_since_improvement < maxiter and max_fitness_overall < desired_fitness:
         generation += 1
@@ -39,6 +46,11 @@ def run_experiment():
         
         max_fitness_gen = max(fitnesses)
         avg_fitness_gen = sum(fitnesses)/len(fitnesses)
+
+        #recording stats for visualizations
+        gen_indices += [generation]
+        avg_fitness_vals += [avg_fitness_gen]
+
         average_fitness_overall = avg_fitness_gen
         print(f"Max fitness: {max_fitness_gen:.6f}, Avg fitness: {avg_fitness_gen:.6f}")
         if max_fitness_gen > max_fitness_overall:
@@ -75,9 +87,14 @@ def run_experiment():
         
         print("OPTIMIZING ANGLES")
         optimized_population = []
+        angle_opt_times = []
         for individual in mutated_population:
+            start_time = time.time()
             optimized_individual = optimize_angles(individual)
+            end_time = time.time()
+            angle_opt_times += [end_time-start_time]
             optimized_population.append(optimized_individual)
+        avg_angle_opt_times += [sum(angle_opt_times)/len(angle_opt_times)]
         
         print("ROULETTING")
         population = roulette_wheel_selection(optimized_population, survival_rate)
@@ -91,6 +108,23 @@ def run_experiment():
     print("SELECTED INDIVIDUALS: ", selected_individuals)
 
     print(f"Experiment complete!")
+
+    #generating visualizations
+    fig, axs = plt.subplots(nrows=1, ncols=2, figsize=(8,4))
+    axs[0].plot(gen_indices, avg_fitness_vals)
+    axs[0].set_xlabel('Generation #')
+    axs[0].set_ylabel('Average Fitness')
+    axs[0].set_title('Average Fitness per Generation')
+    axs[0].grid(True)
+    if len(gen_indices) == len(avg_angle_opt_times)+1:
+        gen_indices = gen_indices[:-1]
+    axs[1].plot(gen_indices, avg_angle_opt_times)
+    axs[1].set_xlabel('Generation #')
+    axs[1].set_ylabel('Average Optimization Time')
+    axs[1].set_title('Average Optimization Time per Generation')
+    axs[1].grid(True)
+    plt.tight_layout()
+    plt.savefig('visualizations/Experiment_Vizs_1.png', dpi=300, bbox_inches='tight')
 
 
 if __name__ == '__main__':

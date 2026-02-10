@@ -12,6 +12,7 @@ from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit.transpiler import generate_preset_pass_manager
 from circuit_library import qv_circuit
+from qiskit.circuit.random import random_circuit
 
 #biological structure
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
@@ -71,11 +72,20 @@ def create_individual():
         individual += [gene]
     return individual
 
+def create_random_individual():
+    """
+    O: gene format
+    """
+    rando_circuit = random_circuit(n, max_operands=2, depth=3)
+    to_gene = circuit_to_individual(rando_circuit)
+    return to_gene
+
 
 def create_population(init_pop_size):
     population = []
     for i in range(init_pop_size):
-        population += [create_individual()]
+        # population += [create_individual()]
+        population += [create_random_individual()]
     return population
 
 
