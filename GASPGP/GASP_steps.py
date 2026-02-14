@@ -72,7 +72,7 @@ def create_individual():
         individual += [gene]
     return individual
 
-def create_random_individual(depth=3):
+def create_random_individual(depth):
     """
     O: gene format
     """
@@ -81,7 +81,7 @@ def create_random_individual(depth=3):
     return to_gene
 
 
-def create_population(init_pop_size, depth=3):
+def create_population(init_pop_size, depth):
     population = []
     for i in range(init_pop_size):
         # population += [create_individual()]

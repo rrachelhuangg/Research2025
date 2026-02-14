@@ -1,9 +1,10 @@
 """
 In-progress implementation of the GASP experiment/algorithm from:
 https://www.nature.com/articles/s41598-023-37767-w.
-This file handles the generational experiments. 
+This file handles the generational experiments.
 """
 
+import argparse
 import time
 import random
 import numpy as np
@@ -12,28 +13,56 @@ from qiskit import QuantumCircuit
 from GASP_steps import run_circuit, select_gene, create_individual, create_population, individual_to_circuit, calculate_fitness, crossover, mutate, circuit_to_individual, roulette_wheel_select_single, roulette_wheel_selection, breed_to_minimum
 from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
+from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_path
 
-def run_experiment(circuit_depth=3):
-    init_pop_size = 10000
+def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment"):
+    init_pop_size = 1000
     n = 3
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.75
     maxiter = 500
-    minimum_pop_size = 1000
+    minimum_pop_size = 500
 
-    population = create_population(init_pop_size, depth=circuit_depth)
-    iterations_since_improvement = 0
-    max_fitness_overall = 0
-    average_fitness_overall = 0
-    generation = 0
+    # Load from checkpoint if provided
+    if checkpoint_path:
+        state = load_checkpoint(checkpoint_path)
+        if state:
+            population = state['population']
+            iterations_since_improvement = state['iterations_since_improvement']
+            max_fitness_overall = state['max_fitness_overall']
+            average_fitness_overall = state['average_fitness_overall']
+            generation = state['generation']
+            # Restore visualization data if available
+            gen_indices = state.get('gen_indices', [])
+            avg_fitness_vals = state.get('avg_fitness_vals', [])
+            avg_angle_opt_times = state.get('avg_angle_opt_times', [])
+            avg_zx = state.get('avg_zx', [])
+            avg_len = state.get('avg_len', [])
+            # Restore circuit_depth from checkpoint
+            checkpoint_circuit_depth = state.get('circuit_depth', circuit_depth)
+            if checkpoint_circuit_depth != circuit_depth:
+                print(f"⚠ Warning: Checkpoint was created with circuit_depth={checkpoint_circuit_depth}, but {circuit_depth} was specified.")
+                print(f"  Using circuit_depth={checkpoint_circuit_depth} from checkpoint.")
+                circuit_depth = checkpoint_circuit_depth
+            print(f"✓ Resuming experiment from generation {generation}")
+        else:
+            print("Failed to load checkpoint, starting fresh experiment")
+            checkpoint_path = None
 
-    #for visualizations
-    gen_indices = []
-    avg_fitness_vals = []
-    avg_angle_opt_times = []
-    avg_zx = []
-    avg_len = []
+    # Initialize new experiment if no checkpoint loaded
+    if not checkpoint_path or not state:
+        population = create_population(init_pop_size, depth=circuit_depth)
+        iterations_since_improvement = 0
+        max_fitness_overall = 0
+        average_fitness_overall = 0
+        generation = 0
+        # For visualizations
+        gen_indices = []
+        avg_fitness_vals = []
+        avg_angle_opt_times = []
+        avg_zx = []
+        avg_len = []
 
     while iterations_since_improvement < maxiter and average_fitness_overall < desired_fitness:
     # while iterations_since_improvement < maxiter and max_fitness_overall < desired_fitness:
@@ -136,13 +165,50 @@ def run_experiment(circuit_depth=3):
             axs[1, 1].set_ylabel('Average ZX-Calcness')
             axs[1, 1].set_title('Average ZX-Calcness per Generation')
             axs[1, 1].grid(True)
-            plt.tight_layout()  
-            plt.savefig('visualizations/Experiment_Vizs_1.png', dpi=300, bbox_inches='tight')
+            plt.tight_layout()
+            plt.savefig('visualizations/Experiment_Vizs_2.png', dpi=300, bbox_inches='tight')
+
+        # Save checkpoint periodically
+        if generation % save_every == 0:
+            checkpoint_file = get_checkpoint_path(experiment_name, circuit_depth)
+            state_dict = {
+                'generation': generation,
+                'population': population,
+                'max_fitness_overall': max_fitness_overall,
+                'average_fitness_overall': average_fitness_overall,
+                'iterations_since_improvement': iterations_since_improvement,
+                'gen_indices': gen_indices,
+                'avg_fitness_vals': avg_fitness_vals,
+                'avg_angle_opt_times': avg_angle_opt_times,
+                'avg_zx': avg_zx,
+                'avg_len': avg_len,
+                'circuit_depth': circuit_depth
+            }
+            save_checkpoint(checkpoint_file, state_dict)
+            print(f"✓ Checkpoint saved to {checkpoint_file}")
 
     selected_individuals = selected_subset(population, minimum_pop_size)
     for individual in selected_individuals:
         print(individual.draw(output='text'))
     print("SELECTED INDIVIDUALS: ", selected_individuals)
+
+    # Save final checkpoint
+    checkpoint_file = get_checkpoint_path(experiment_name, circuit_depth)
+    state_dict = {
+        'generation': generation,
+        'population': population,
+        'max_fitness_overall': max_fitness_overall,
+        'average_fitness_overall': average_fitness_overall,
+        'iterations_since_improvement': iterations_since_improvement,
+        'gen_indices': gen_indices,
+        'avg_fitness_vals': avg_fitness_vals,
+        'avg_angle_opt_times': avg_angle_opt_times,
+        'avg_zx': avg_zx,
+        'avg_len': avg_len,
+        'circuit_depth': circuit_depth
+    }
+    save_checkpoint(checkpoint_file, state_dict)
+    print(f"✓ Final checkpoint saved to {checkpoint_file}")
 
     print(f"Experiment complete!")
 
@@ -156,4 +222,36 @@ def run_experiment(circuit_depth=3):
 
 
 if __name__ == '__main__':
-    run_experiment()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--circuit-depth',
+        type=int,
+        default=3,
+        help='Depth of random circuits in initial population'
+    )
+    parser.add_argument(
+        '--checkpoint',
+        type=str,
+        default=None,
+        help='Path to checkpoint file to resume from'
+    )
+    parser.add_argument(
+        '--save-every',
+        type=int,
+        default=10,
+        help='Save checkpoint every N generations'
+    )
+    parser.add_argument(
+        '--experiment-name',
+        type=str,
+        default='gasp_experiment',
+        help='Name for the experiment (used in checkpoint filenames)'
+    )
+    args = parser.parse_args()
+
+    run_experiment(
+        circuit_depth=args.circuit_depth,
+        checkpoint_path=args.checkpoint,
+        save_every=args.save_every,
+        experiment_name=args.experiment_name
+    )
