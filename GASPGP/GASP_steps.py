@@ -27,7 +27,7 @@ n = 3
 target_state_circuit = qv_circuit(n)
 target_state_vector = Statevector(target_state_circuit)
 service = QiskitRuntimeService()
-backend = service.backend("ibm_torino")
+backend = service.backend("ibm_torino") #pass manager configured for chosen QPU
 pm = generate_preset_pass_manager(backend=backend, optimization_level=3)
 target_state_circuit = pm.run(target_state_circuit)
 
@@ -38,7 +38,7 @@ def run_circuit(circuit):
     Note: Measures the circuit and thus collapses it.
     """
     circuit.measure(range(n), range(n))
-    simulator = AerSimulator()
+    simulator = AerSimulator().from_backend("ibm_torino")
     compiled_circuit = transpile(circuit, simulator)
     job = simulator.run(compiled_circuit, shots=1000)
     result = job.result()
