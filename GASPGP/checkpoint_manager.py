@@ -3,10 +3,12 @@ Checkpoint management for GASP experiments.
 Allows saving and loading experiment state for resuming runs.
 """
 
-import pickle
-import json
 import os
+import json
+import random
+import pickle
 from datetime import datetime
+from GASP_steps import individual_to_circuit
 
 
 def save_checkpoint(checkpoint_path, state_dict):
@@ -77,6 +79,37 @@ def get_checkpoint_path(experiment_name, circuit_depth):
     checkpoint_dir = "checkpoints"
     filename = f"{experiment_name}_depth{circuit_depth}.pkl"
     return os.path.join(checkpoint_dir, filename)
+
+
+def save_circuits_to_text(checkpoint_path, population, num_circuits, individual_to_circuit_func):
+    """
+    Save a random sample of circuits from the population to a text file.
+
+    Args:
+        checkpoint_path: Path to the checkpoint file (used to generate txt filename)
+        population: List of individuals in gene format
+        num_circuits: Number of circuits to randomly sample and save
+        individual_to_circuit_func: Function to convert individual to circuit
+    """
+    txt_path = checkpoint_path.replace('.pkl', '_circuits.txt')
+
+    num_to_sample = min(num_circuits, len(population))
+    sampled_individuals = random.sample(population, num_to_sample)
+
+    with open(txt_path, 'w') as f:
+        f.write(f"Random sample of {num_to_sample} circuits from population\n")
+        f.write(f"Checkpoint: {checkpoint_path}\n")
+        f.write(f"Timestamp: {datetime.now().isoformat()}\n")
+        f.write("=" * 80 + "\n\n")
+
+        for idx, individual in enumerate(sampled_individuals, 1):
+            circuit = individual_to_circuit(individual)
+            f.write(f"Circuit {idx}/{num_to_sample}:\n")
+            f.write("-" * 80 + "\n")
+            f.write(str(circuit.draw(output='text')))
+            f.write("\n\n")
+
+    return txt_path
 
 
 def list_checkpoints(checkpoint_dir="checkpoints"):

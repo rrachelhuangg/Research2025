@@ -13,9 +13,9 @@ from qiskit import QuantumCircuit
 from GASP_steps import run_circuit, select_gene, create_individual, create_population, individual_to_circuit, calculate_fitness, crossover, mutate, circuit_to_individual, roulette_wheel_select_single, roulette_wheel_selection, breed_to_minimum
 from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
-from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_path
+from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_path, save_circuits_to_text
 
-def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment"):
+def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
     init_pop_size = 1000
     n = 3
     mutation_rate = 0.5
@@ -187,6 +187,10 @@ def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experim
             save_checkpoint(checkpoint_file, state_dict)
             print(f"✓ Checkpoint saved to {checkpoint_file}")
 
+            # Save sample circuits to text file
+            txt_path = save_circuits_to_text(checkpoint_file, population, num_circuits_to_save, individual_to_circuit)
+            print(f"✓ Sample circuits saved to {txt_path}")
+
     selected_individuals = selected_subset(population, minimum_pop_size)
     for individual in selected_individuals:
         print(individual.draw(output='text'))
@@ -209,6 +213,10 @@ def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experim
     }
     save_checkpoint(checkpoint_file, state_dict)
     print(f"✓ Final checkpoint saved to {checkpoint_file}")
+
+    # Save sample circuits to text file
+    txt_path = save_circuits_to_text(checkpoint_file, population, num_circuits_to_save, individual_to_circuit)
+    print(f"✓ Final sample circuits saved to {txt_path}")
 
     print(f"Experiment complete!")
 
@@ -247,11 +255,18 @@ if __name__ == '__main__':
         default='gasp_experiment',
         help='Name for the experiment (used in checkpoint filenames)'
     )
+    parser.add_argument(
+        '--num-circuits-to-save',
+        type=int,
+        default=100,
+        help='Number of random circuits to save to text file at each checkpoint'
+    )
     args = parser.parse_args()
 
     run_experiment(
         circuit_depth=args.circuit_depth,
         checkpoint_path=args.checkpoint,
         save_every=args.save_every,
-        experiment_name=args.experiment_name
+        experiment_name=args.experiment_name,
+        num_circuits_to_save=args.num_circuits_to_save
     )
