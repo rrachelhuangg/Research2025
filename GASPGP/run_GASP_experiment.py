@@ -166,7 +166,7 @@ def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experim
             axs[1, 1].set_title('Average ZX-Calcness per Generation')
             axs[1, 1].grid(True)
             plt.tight_layout()
-            plt.savefig('visualizations/Experiment_Vizs_2.png', dpi=300, bbox_inches='tight')
+            plt.savefig(f'visualizations/{experiment_name}.png', dpi=300, bbox_inches='tight')
 
         # Save checkpoint periodically
         if generation % save_every == 0:
