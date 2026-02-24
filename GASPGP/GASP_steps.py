@@ -12,6 +12,7 @@ from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit.transpiler import generate_preset_pass_manager
 from circuit_library import qv_circuit
+from zx_helper import apply_zx_calc
 from qiskit.circuit.random import random_circuit
 
 #biological structure
@@ -116,6 +117,9 @@ def circuit_to_individual(individual):
     for gate in individual.data:
         gene = [None, None, None, None]
         if gate.operation.name != "cx":
+            if gate.operation.name not in ["rx", "ry", "rz"]:
+                continue
+
             gene[0] = gate.qubits[0]._index
             if gate.operation.name == "rx":
                 gene[1] = "R_X"
@@ -124,7 +128,10 @@ def circuit_to_individual(individual):
             elif gate.operation.name == "rz":
                 gene[1] = "R_Z"
             gene[2] = None
-            gene[3] = gate.operation.params[0]
+            if len(gate.operation.params) > 0:
+                gene[3] = gate.operation.params[0]
+            else:
+                gene[3] = 0
         elif gate.operation.name == "cx":
             gene[0] = gate.qubits[1]._index
             gene[2] = gate.qubits[0]._index
@@ -162,16 +169,27 @@ def mutate(individual):
     """
     if len(individual) == 0:
         return individual
-    idx = random.randint(0, len(individual)-1)
-    mutation_type = random.randint(0, 3)
-    if mutation_type == 0:
-        return mutate_replace(individual, idx)
-    elif mutation_type == 1:
-        return mutate_insert(individual, idx)
-    elif mutation_type == 2:
-        return mutate_swap(individual, idx)
-    elif mutation_type == 3:
-        return mutate_delete(individual, idx)
+    # idx = random.randint(0, len(individual)-1)
+    # mutation_type = random.randint(0, 3)
+    # if mutation_type == 0:
+    #     return mutate_replace(individual, idx)
+    # elif mutation_type == 1:
+    #     return mutate_insert(individual, idx)
+    # elif mutation_type == 2:
+    #     return mutate_swap(individual, idx)
+    # elif mutation_type == 3:
+    #     return mutate_delete(individual, idx)
+    return mutate_zx(individual)
+
+
+def mutate_zx(individual):
+    """
+    I/O: individuals are in gene format
+    """
+    circuit = individual_to_circuit(individual)
+    opt_circuit, stats1, stats2 = apply_zx_calc(circuit)
+    gates = circuit_to_individual(opt_circuit)
+    return gates
 
 
 def mutate_replace(individual, idx):
