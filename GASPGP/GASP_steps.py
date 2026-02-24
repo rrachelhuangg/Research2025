@@ -163,15 +163,15 @@ def mutate(individual):
     if len(individual) == 0:
         return individual
     idx = random.randint(0, len(individual)-1)
-    mutation_type = random.randint(0, 3)
-    if mutation_type == 0:
-        return mutate_replace(individual, idx)
-    elif mutation_type == 1:
-        return mutate_insert(individual, idx)
-    elif mutation_type == 2:
-        return mutate_swap(individual, idx)
-    elif mutation_type == 3:
-        return mutate_delete(individual, idx)
+    #mutation_type = random.randint(0, 3)
+    #if mutation_type == 0:
+    return mutate_replace(individual, idx)
+    # elif mutation_type == 1:
+    #     return mutate_insert(individual, idx)
+    # elif mutation_type == 2:
+    #     return mutate_swap(individual, idx)
+    # elif mutation_type == 3:
+    #     return mutate_delete(individual, idx)
 
 
 def mutate_replace(individual, idx):
