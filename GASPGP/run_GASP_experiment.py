@@ -21,7 +21,7 @@ def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experim
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.75
-    maxiter = 500
+    maxiter = 10
     minimum_pop_size = 500
 
     # Load from checkpoint if provided
