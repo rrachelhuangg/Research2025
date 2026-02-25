@@ -11,7 +11,7 @@ from qiskit_aer import AerSimulator
 from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit.transpiler import generate_preset_pass_manager
-from circuit_library import qv_circuit
+from circuit_library import qv_circuit, adder_circuit
 from zx_helper import apply_zx_calc
 from qiskit.circuit.random import random_circuit
 
@@ -19,13 +19,15 @@ from qiskit.circuit.random import random_circuit
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
-n = 3
+n = 2 * 3 + 2 #not just n = 3 for the adder circuit
 
 # target_state_circuit = QuantumCircuit(n,n)
 # target_state_circuit.x(n-1)
 # target_state_circuit.h(n-2)
 # target_state_circuit.y(n-3)
-target_state_circuit = qv_circuit(n)
+
+# target_state_circuit = qv_circuit(n)
+target_state_circuit = adder_circuit(3)
 target_state_vector = Statevector(target_state_circuit)
 service = QiskitRuntimeService()
 backend = service.backend("ibm_torino") #pass manager configured for chosen QPU

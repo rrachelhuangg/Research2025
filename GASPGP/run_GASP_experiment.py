@@ -9,6 +9,7 @@ import time
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 from qiskit import QuantumCircuit
 from GASP_steps import run_circuit, select_gene, create_individual, create_population, individual_to_circuit, calculate_fitness, crossover, mutate, circuit_to_individual, roulette_wheel_select_single, roulette_wheel_selection, breed_to_minimum
 from direct_angle_optimizer import optimize_angles
@@ -121,7 +122,7 @@ def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experim
         angle_opt_times = []
         pop_zx = []
         pop_len = []
-        for individual in mutated_population:
+        for individual in tqdm(mutated_population):
             start_time = time.time()
             optimized_individual, fit, zx, length = optimize_angles(individual)
             pop_zx += [zx]
