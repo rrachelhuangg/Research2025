@@ -77,7 +77,7 @@ def get_checkpoint_path(experiment_name, circuit_depth):
         Path to checkpoint file
     """
     checkpoint_dir = "checkpoints"
-    filename = f"{experiment_name}_depth{circuit_depth}.pkl"
+    filename = f"{experiment_name}_depth_{circuit_depth}.pkl"
     return os.path.join(checkpoint_dir, filename)
 
 

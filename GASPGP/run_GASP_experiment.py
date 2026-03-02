@@ -9,18 +9,19 @@ import time
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 from qiskit import QuantumCircuit
 from GASP_steps import run_circuit, select_gene, create_individual, create_population, individual_to_circuit, calculate_fitness, crossover, mutate, circuit_to_individual, roulette_wheel_select_single, roulette_wheel_selection, breed_to_minimum
 from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
 from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_path, save_circuits_to_text
 
-def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
+def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
     init_pop_size = 10000
-    n = 3
+    n = 5
     mutation_rate = 0.5
     survival_rate = 0.75
-    desired_fitness = 0.75
+    desired_fitness = 0.95
     maxiter = 10
     minimum_pop_size = 500
 
@@ -78,6 +79,20 @@ def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experim
         max_fitness_gen = max(fitnesses)
         avg_fitness_gen = sum(fitnesses)/len(fitnesses)
 
+        if generation == 1:
+            print("CHECKPOINT_FILE_NAME: ", get_checkpoint_path(experiment_name, circuit_depth))
+
+        if max_fitness_gen > desired_fitness:
+            best_idx = fitnesses.index(max_fitness_gen)
+            best_individual = population[best_idx]
+            print(f"Max fitness {max_fitness_gen:.6f} exceeds desired fitness {desired_fitness}!")
+            print(f"Best individual (gene format):")
+            print(best_individual)
+            print(f"Best individual (circuit format):")
+            print(individual_to_circuit(best_individual).draw(output='text'))
+            print("-"*10)
+            break
+
         #recording stats for visualizations
         gen_indices += [generation]
         avg_fitness_vals += [avg_fitness_gen]
@@ -121,7 +136,7 @@ def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experim
         angle_opt_times = []
         pop_zx = []
         pop_len = []
-        for individual in mutated_population:
+        for individual in tqdm(mutated_population):
             start_time = time.time()
             optimized_individual, fit, zx, length = optimize_angles(individual)
             pop_zx += [zx]
@@ -191,10 +206,10 @@ def run_experiment(circuit_depth=3, checkpoint_path=None, save_every=10, experim
             txt_path = save_circuits_to_text(checkpoint_file, population, num_circuits_to_save, individual_to_circuit)
             print(f"✓ Sample circuits saved to {txt_path}")
 
-    selected_individuals = selected_subset(population, minimum_pop_size)
+    selected_individuals = selected_subset(population, 10)
     for individual in selected_individuals:
         print(individual.draw(output='text'))
-    print("SELECTED INDIVIDUALS: ", selected_individuals)
+    # print("SELECTED INDIVIDUALS: ", selected_individuals)
 
     # Save final checkpoint
     checkpoint_file = get_checkpoint_path(experiment_name, circuit_depth)
