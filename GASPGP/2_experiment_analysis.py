@@ -1,4 +1,4 @@
-from experiment_result_gene_circuits import qv_no_zx, qv_yes_zx
+from experiment_result_top_gene_circuits import qv_no_zx, qv_yes_zx, adder_no_zx, adder_yes_zx
 from GASP_steps import individual_to_circuit, target_state_circuit
 from zx_helper import assign_zx_value
 from qiskit.circuit.library import QuantumVolume
@@ -11,8 +11,8 @@ from qiskit.transpiler import generate_preset_pass_manager
 target_circuit = target_state_circuit
 print("TARGET CIRCUIT: ", target_circuit.draw(output='text'))
 
-no_zx_circuit = individual_to_circuit(qv_no_zx)
-yes_zx_circuit = individual_to_circuit(qv_yes_zx)
+no_zx_circuit = individual_to_circuit(adder_no_zx)
+yes_zx_circuit = individual_to_circuit(adder_yes_zx)
 
 no_zx_circuit = individual_to_circuit(qv_no_zx)
 print("QV NO ZX CIRCUIT: ", no_zx_circuit.draw(output='text'))

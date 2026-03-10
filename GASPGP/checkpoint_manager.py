@@ -97,16 +97,9 @@ def save_circuits_to_text(checkpoint_path, population, num_circuits, individual_
     sampled_individuals = random.sample(population, num_to_sample)
 
     with open(txt_path, 'w') as f:
-        f.write(f"Random sample of {num_to_sample} circuits from population\n")
-        f.write(f"Checkpoint: {checkpoint_path}\n")
-        f.write(f"Timestamp: {datetime.now().isoformat()}\n")
-        f.write("=" * 80 + "\n\n")
 
         for idx, individual in enumerate(sampled_individuals, 1):
-            circuit = individual_to_circuit(individual)
-            f.write(f"Circuit {idx}/{num_to_sample}:\n")
-            f.write("-" * 80 + "\n")
-            f.write(str(circuit.draw(output='text')))
+            f.write(str(individual))
             f.write("\n\n")
 
     return txt_path

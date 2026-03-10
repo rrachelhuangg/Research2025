@@ -1,4 +1,4 @@
-from qiskit.circuit.library import QuantumVolume
+from qiskit.circuit.library import QuantumVolume, CDKMRippleCarryAdder
 from qiskit import transpile
 from qiskit_aer import AerSimulator
 from qiskit_ibm_runtime import QiskitRuntimeService
@@ -17,3 +17,9 @@ def qv_circuit(n):
     print(qv_circuit_whole.draw(output='text'))
     print(backend.basis_gates)
     return qv_circuit_whole
+
+
+def adder_circuit(n):
+    adder_circuit_whole = CDKMRippleCarryAdder(n)
+    print(adder_circuit_whole.draw(output='text'))
+    return adder_circuit_whole

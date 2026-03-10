@@ -18,7 +18,7 @@ from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_
 
 def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
     init_pop_size = 10000
-    n = 5
+    n = 12
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.95
@@ -206,11 +206,6 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
         txt_path = save_circuits_to_text(checkpoint_file, population, num_circuits_to_save, individual_to_circuit)
         print(f"✓ Sample circuits saved to {txt_path}")
 
-    selected_individuals = selected_subset(population, 10)
-    for individual in selected_individuals:
-        print(individual.draw(output='text'))
-    # print("SELECTED INDIVIDUALS: ", selected_individuals)
-
     # Save final checkpoint
     checkpoint_file = get_checkpoint_path(experiment_name, circuit_depth)
     state_dict = {
@@ -249,7 +244,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--circuit-depth',
         type=int,
-        default=3,
+        default=7,
         help='Depth of random circuits in initial population'
     )
     parser.add_argument(
