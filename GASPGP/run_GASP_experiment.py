@@ -5,6 +5,7 @@ This file handles the generational experiments.
 """
 
 import argparse
+import os
 import time
 import random
 import numpy as np
@@ -181,7 +182,10 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
         axs[1, 1].set_title('Average ZX-Calcness per Generation')
         axs[1, 1].grid(True)
         plt.tight_layout()
-        plt.savefig(f'visualizations/{experiment_name}.png', dpi=300, bbox_inches='tight')
+        viz_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'visualizations')
+        os.makedirs(viz_dir, exist_ok=True)
+        print("EXPERImENT NAME: ", viz_dir, ": ", experiment_name)
+        plt.savefig(os.path.join(viz_dir, f'{experiment_name}.png'), dpi=300, bbox_inches='tight')
 
         # Save checkpoint periodically
         # if generation % save_every == 0:
@@ -223,6 +227,35 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
     }
     save_checkpoint(checkpoint_file, state_dict)
     print(f"✓ Final checkpoint saved to {checkpoint_file}")
+
+    fig, axs = plt.subplots(nrows=2, ncols=2, figsize=(8,8))
+    axs[0, 0].plot(gen_indices, avg_fitness_vals)
+    axs[0, 0].set_xlabel('Generation #')
+    axs[0, 0].set_ylabel('Average Fitness')
+    axs[0, 0].set_title('Average Fitness per Generation')
+    axs[0, 0].grid(True)
+    if len(gen_indices) == len(avg_angle_opt_times)+1:
+        gen_indices = gen_indices[:-1]
+    axs[1, 0].plot(gen_indices, avg_angle_opt_times)
+    axs[1, 0].set_xlabel('Generation #')
+    axs[1, 0].set_ylabel('Average Optimization Time')
+    axs[1, 0].set_title('Average Optimization Time per Generation')
+    axs[1, 0].grid(True)
+    axs[0, 1].plot(gen_indices, avg_len)
+    axs[0, 1].set_xlabel('Generation #')
+    axs[0, 1].set_ylabel('Average Length')
+    axs[0, 1].set_title('Average Length per Generation')
+    axs[0, 1].grid(True)
+    axs[1, 1].plot(gen_indices, avg_zx)
+    axs[1, 1].set_xlabel('Generation #')
+    axs[1, 1].set_ylabel('Average ZX-Calcness')
+    axs[1, 1].set_title('Average ZX-Calcness per Generation')
+    axs[1, 1].grid(True)
+    plt.tight_layout()
+    viz_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'visualizations')
+    os.makedirs(viz_dir, exist_ok=True)
+    print("EXPERImENT NAME: ", viz_dir, ": ", experiment_name)
+    plt.savefig(os.path.join(viz_dir, f'{experiment_name}.png'), dpi=300, bbox_inches='tight')
 
     # Save sample circuits to text file
     txt_path = save_circuits_to_text(checkpoint_file, population, num_circuits_to_save, individual_to_circuit)

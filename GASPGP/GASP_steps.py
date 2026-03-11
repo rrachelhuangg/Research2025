@@ -112,14 +112,19 @@ def circuit_to_individual(individual):
     gene_format = []
     for gate in individual.data:
         gene = [None, None, None, None]
-        if gate.operation.name != "cx":
+        if gate.operation.name == "rx":
             gene[0] = gate.qubits[0]._index
-            if gate.operation.name == "rx":
-                gene[1] = "R_X"
-            elif gate.operation.name == "ry":
-                gene[1] = "R_Y"
-            elif gate.operation.name == "rz":
-                gene[1] = "R_Z"
+            gene[1] = "R_X"
+            gene[2] = None
+            gene[3] = gate.operation.params[0]
+        elif gate.operation.name == "ry":
+            gene[0] = gate.qubits[0]._index
+            gene[1] = "R_Y"
+            gene[2] = None
+            gene[3] = gate.operation.params[0]
+        elif gate.operation.name == "rz":
+            gene[0] = gate.qubits[0]._index
+            gene[1] = "R_Z"
             gene[2] = None
             gene[3] = gate.operation.params[0]
         elif gate.operation.name == "cx":
@@ -127,6 +132,8 @@ def circuit_to_individual(individual):
             gene[2] = gate.qubits[0]._index
             gene[1] = "CNOT"
             gene[3] = 0
+        else:
+            continue  # skip unsupported gates (e.g. h, x, s, t)
         gene_format += [gene]
     return gene_format
 
