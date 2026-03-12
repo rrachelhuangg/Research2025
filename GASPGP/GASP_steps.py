@@ -11,17 +11,18 @@ from qiskit_aer import AerSimulator
 from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit.transpiler import generate_preset_pass_manager
-from circuit_library import qv_circuit, adder_circuit
+from circuit_library import qv_circuit, adder_circuit, chem_circuit
 from qiskit.circuit.random import random_circuit
 
 #biological structure
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
-n = 12
-adder_n = 5
+n = 2
 
-target_state_circuit = adder_circuit(5)
+target_state_circuit = chem_circuit()
+params = list(target_state_circuit.parameters)
+target_state_circuit = target_state_circuit.assign_parameters({params[0]:0, params[1]:0, params[2]:0})
 target_state_vector = Statevector(target_state_circuit)
 service = QiskitRuntimeService()
 backend = service.backend("ibm_torino") #pass manager configured for chosen QPU
@@ -35,7 +36,9 @@ def run_circuit(circuit):
     Note: Measures the circuit and thus collapses it.
     """
     circuit.measure(range(n), range(n))
-    simulator = AerSimulator().from_backend("ibm_torino")
+    service = QiskitRuntimeService()
+    backend = service.backend("ibm_torino")
+    simulator = AerSimulator().from_backend(backend)
     compiled_circuit = transpile(circuit, simulator)
     job = simulator.run(compiled_circuit, shots=1000)
     result = job.result()
