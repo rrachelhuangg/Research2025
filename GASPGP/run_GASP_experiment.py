@@ -19,7 +19,7 @@ from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_
 
 def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
     init_pop_size = 10000
-    n = 2
+    n = 22
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.95
@@ -72,7 +72,7 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
         print(f"Generation: {generation}")
 
         fitnesses = []
-        for individual in population:
+        for individual in tqdm(population):
             circuit = individual_to_circuit(individual)
             fitness = calculate_fitness(circuit)
             fitnesses.append(fitness)
@@ -118,7 +118,7 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
             
         offspring = []
         print("BREEDING")
-        for _ in range(len(population)//2):
+        for _ in tqdm(range(len(population)//2)):
             parent1 = random.choice(population)
             parent2 = random.choice(population)
             child = crossover(parent1, parent2)
@@ -126,7 +126,7 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
         
         print("MUTATING")
         mutated_population = []
-        for individual in offspring:
+        for individual in tqdm(offspring):
             if random.random() < mutation_rate:
                 mutated_population.append(mutate(individual))
             else:

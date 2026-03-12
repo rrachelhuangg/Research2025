@@ -18,11 +18,13 @@ from qiskit.circuit.random import random_circuit
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
-n = 2
+# n = 2
+n = 22
 
-target_state_circuit = chem_circuit()
-params = list(target_state_circuit.parameters)
-target_state_circuit = target_state_circuit.assign_parameters({params[0]:0, params[1]:0, params[2]:0})
+target_state_circuit = adder_circuit(10)
+# target_state_circuit = chem_circuit()
+# params = list(target_state_circuit.parameters)
+# target_state_circuit = target_state_circuit.assign_parameters({params[0]:0, params[1]:0, params[2]:0})
 target_state_vector = Statevector(target_state_circuit)
 service = QiskitRuntimeService()
 backend = service.backend("ibm_torino") #pass manager configured for chosen QPU
