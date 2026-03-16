@@ -6,6 +6,10 @@ from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
 
 
+def bits_to_val(bits):
+    return int(bits, 2)
+
+
 def generate_n_inputs():
     """
     enumerate the full state-space for all 3-bit numbers (2 operands)
@@ -13,7 +17,6 @@ def generate_n_inputs():
     vals = ['000', '001', '010', '011', '100', '101', '110', '111']
     product_iterator = itertools.product(vals, vals)
     combinations_list = list(product_iterator)
-    print("LIST: ", combinations_list)
     return combinations_list
 
 
@@ -68,7 +71,9 @@ def create_circuits(inputs):
     return val_circuits
 
 
-def pair_up(inputs, circuits):
+def pair_up():
+    inputs = generate_n_inputs()
+    circuits = create_circuits(inputs)
     pairs = []
     for i in range(len(inputs)):
         pairs += [(inputs[i], circuits[i])]
@@ -79,6 +84,7 @@ def add_operands(circuit):
     """
     output: returns most likely measured bitstring in little-endian format
     """
+    circuit = circuit.copy()
     adder = CDKMRippleCarryAdder(3, 'full', 'Full Adder')
 
     operand1, operand2, anc = circuit.qregs
@@ -87,7 +93,6 @@ def add_operands(circuit):
     circuit.append(adder, [anc[0]] + list(operand1) + list(operand2) + [anc[1]])
 
     circuit.measure(list(operand2) + [anc[1]], creg)
-    print(circuit.draw(output='text'))
 
     service = QiskitRuntimeService()
     backend = service.backend("ibm_torino")
@@ -96,5 +101,4 @@ def add_operands(circuit):
     result = simulator.run(tr_circ).result()
     counts = result.get_counts()
     maximum = max(counts, key=counts.get)
-    print("MAX: ", maximum)
     return maximum

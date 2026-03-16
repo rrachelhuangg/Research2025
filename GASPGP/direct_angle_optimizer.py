@@ -7,12 +7,22 @@ import numpy as np
 from scipy.optimize import minimize
 from qiskit import QuantumCircuit
 from qiskit.circuit import Parameter
-from GASP_steps import calculate_fitness
+from GASP_steps import calculate_fitness, calculate_mod_fitness, compare_measurements
 from zx_helper import assign_zx_value
+from enumerate_loss import pair_up
+from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
+
+
+guidance_pairs = pair_up()
 
 
 def individual_to_parameterized_circuit(individual, n):
-    created_circuit = QuantumCircuit(n, n)
+    # created_circuit = QuantumCircuit(n, n)
+    operand1 = QuantumRegister(3, 'o1')
+    operand2 = QuantumRegister(3, 'o2')
+    anc = QuantumRegister(2, 'a')
+    cr = ClassicalRegister(4)
+    created_circuit = QuantumCircuit(operand1, operand2, anc, cr)
     parameters = [] #angles
     for i, gene in enumerate(individual):
         if gene[1] in ["R_X", "R_Y", "R_Z"]:
@@ -32,16 +42,30 @@ def individual_to_parameterized_circuit(individual, n):
 
 
 def optimize_angles(individual):
-    circuit, param_list = individual_to_parameterized_circuit(individual, 5)
+    circuit, param_list = individual_to_parameterized_circuit(individual, 8)
     return_fitness, return_zx, return_length = 0, 0, 0
+    # def fitness_cost_function(angles):
+    #     """
+    #     Cost function v1: maximizes fitness of an individual
+    #     """
+    #     param_dict = {param: angle for param, angle in zip([p for p in param_list if p], angles) if param is not None}
+    #     bound_circuit = circuit.assign_parameters(param_dict)
+    #     fitness = calculate_fitness(bound_circuit)
+    #     return -fitness #minimize negative fitness = maximize fitness
     def fitness_cost_function(angles):
         """
         Cost function v1: maximizes fitness of an individual
         """
         param_dict = {param: angle for param, angle in zip([p for p in param_list if p], angles) if param is not None}
         bound_circuit = circuit.assign_parameters(param_dict)
-        fitness = calculate_fitness(bound_circuit)
-        return -fitness #minimize negative fitness = maximize fitness
+        avg_statevector_fitness = 0
+        avg_measurement_comparisons = 0
+        for pair in guidance_pairs:
+            avg_statevector_fitness += calculate_fitness(bound_circuit, pair[1])
+            avg_measurement_comparisons += compare_measurements(bound_circuit, pair[1])
+        avg_statevector_fitness /= len(guidance_pairs)
+        avg_measurement_comparisons /= len(guidance_pairs)
+        return -avg_statevector_fitness + -avg_measurement_comparisons #minimize negative fitness = maximize fitness
     def zx_cost_function(angles):
         """
         Cost function v2: maximizes "zx-calcness" of an individual
@@ -79,7 +103,7 @@ def optimize_angles(individual):
         optimized_individual += [new_gene]
     param_dict = {param: angle for param, angle in zip([p for p in param_list if p], result.x) if param is not None}         
     bound_circuit = circuit.assign_parameters(param_dict)                                                                    
-    return_fitness = calculate_fitness(bound_circuit)                                                                        
+    return_fitness = calculate_mod_fitness(bound_circuit)                                                                        
     return_zx = assign_zx_value(bound_circuit)                                                                               
     return_length = len(individual)  
     return optimized_individual, return_fitness, return_zx, return_length

@@ -5,6 +5,7 @@ Implementation of the GASP experiment steps, where each step is a function (or t
 import random
 import numpy as np
 import numpy.random as npr
+from tqdm import tqdm
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
 from qiskit.quantum_info import Statevector
 from qiskit_aer import AerSimulator
@@ -13,14 +14,18 @@ from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit.transpiler import generate_preset_pass_manager
 from circuit_library import qv_circuit, adder_circuit, chem_circuit
 from qiskit.circuit.random import random_circuit
+from enumerate_loss import add_operands, bits_to_val, pair_up
+
+guidance_pairs = pair_up()
 
 #biological structure
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
-n = 5
+n = 8
 
-target_state_circuit = qv_circuit(5)
+# target_state_circuit = qv_circuit(5)
+target_state_circuit = adder_circuit(5)
 # params = list(target_state_circuit.parameters)
 # target_state_circuit = target_state_circuit.assign_parameters({params[0]:0, params[1]:0, params[2]:0})
 target_state_vector = Statevector(target_state_circuit)
@@ -81,11 +86,25 @@ def create_random_individual(depth):
     return to_gene
 
 
+def create_random_adder_individual(depth):
+    operand1 = QuantumRegister(3, 'o1')
+    operand2 = QuantumRegister(3, 'o2')
+    anc = QuantumRegister(2, 'a')
+    cr = ClassicalRegister(4)
+    circuit = QuantumCircuit(operand1, operand2, anc, cr)
+    random_part = random_circuit(8, max_operands=2, depth=depth)
+    circuit.compose(random_part, inplace=True)
+    to_gene = circuit_to_individual(circuit)
+    return to_gene
+
+
 def create_population(init_pop_size, depth):
     population = []
-    for i in range(init_pop_size):
+    print("Creating population")
+    for i in tqdm(range(init_pop_size)):
         # population += [create_individual()]
-        population += [create_random_individual(depth)]
+        # population += [create_random_individual(depth)]
+        population += [create_random_adder_individual(depth)]
     return population
 
 
@@ -94,7 +113,12 @@ def individual_to_circuit(individual):
     I: gene format
     O: circuit format
     """
-    circuit = QuantumCircuit(n, n)
+    # circuit = QuantumCircuit(n, n)
+    operand1 = QuantumRegister(3, 'o1')                                                                                                
+    operand2 = QuantumRegister(3, 'o2')                                                                                                
+    anc = QuantumRegister(2, 'a')                                                                                                      
+    cr = ClassicalRegister(4)                                                                                                          
+    circuit = QuantumCircuit(operand1, operand2, anc, cr)
     for gene in individual:
         if gene[1] == "R_X":
             circuit.rx(gene[3], gene[0])
@@ -116,23 +140,23 @@ def circuit_to_individual(individual):
     for gate in individual.data:
         gene = [None, None, None, None]
         if gate.operation.name == "rx":
-            gene[0] = gate.qubits[0]._index
+            gene[0] = individual.find_bit(gate.qubits[0]).index
             gene[1] = "R_X"
             gene[2] = None
             gene[3] = gate.operation.params[0]
         elif gate.operation.name == "ry":
-            gene[0] = gate.qubits[0]._index
+            gene[0] = individual.find_bit(gate.qubits[0]).index
             gene[1] = "R_Y"
             gene[2] = None
             gene[3] = gate.operation.params[0]
         elif gate.operation.name == "rz":
-            gene[0] = gate.qubits[0]._index
+            gene[0] = individual.find_bit(gate.qubits[0]).index
             gene[1] = "R_Z"
             gene[2] = None
             gene[3] = gate.operation.params[0]
         elif gate.operation.name == "cx":
-            gene[0] = gate.qubits[1]._index
-            gene[2] = gate.qubits[0]._index
+            gene[0] = individual.find_bit(gate.qubits[1]).index
+            gene[2] = individual.find_bit(gate.qubits[0]).index
             gene[1] = "CNOT"
             gene[3] = 0
         else:
@@ -141,15 +165,37 @@ def circuit_to_individual(individual):
     return gene_format
 
 
-def calculate_fitness(circuit):
+def calculate_fitness(circuit, target_circuit):
     """
     I: circuit (non-parameterized)
     O: float
     """
     individual_statevector = Statevector(circuit)
+    target_state_vector = Statevector(target_circuit)
     inner_product = individual_statevector.inner(target_state_vector)
     fitness = abs(inner_product)**2
     return fitness
+
+
+def compare_measurements(circuit, target_circuit):
+    circuit_result = add_operands(circuit)
+    target_result = add_operands(target_circuit)
+    bits_diff = abs(bits_to_val(circuit_result) - bits_to_val(target_result))
+    return bits_diff/100
+
+
+def calculate_mod_fitness(circuit):
+    avg_statevector_fitness = 0
+    avg_measurement_comparisons = 0
+    i = 0
+    for pair in guidance_pairs:
+        print("I: ", i)
+        avg_statevector_fitness += calculate_fitness(circuit, pair[1])
+        avg_measurement_comparisons += compare_measurements(circuit, pair[1])
+        i += 1
+    avg_statevector_fitness /= len(guidance_pairs)
+    avg_measurement_comparisons /= len(guidance_pairs)
+    return avg_statevector_fitness + avg_measurement_comparisons
 
 
 def crossover(ind_1, ind_2):
@@ -248,8 +294,10 @@ def roulette_wheel_selection(population, survival_rate):
     for individual in population:
         circuit_population += [individual_to_circuit(individual)]
 
-    max_fitness = sum([calculate_fitness(c) for c in circuit_population])
-    selection_probs = [calculate_fitness(c)/max_fitness for c in circuit_population]
+    # max_fitness = sum([calculate_fitness(c) for c in circuit_population])
+    # selection_probs = [calculate_fitness(c)/max_fitness for c in circuit_population]
+    max_fitness = sum([calculate_mod_fitness(c) for c in circuit_population])
+    selection_probs = [calculate_mod_fitness(c)/max_fitness for c in circuit_population]
 
     while len(selected_individuals) < to_survive:
         selected_individual = roulette_wheel_select_single(circuit_population, max_fitness, selection_probs)
