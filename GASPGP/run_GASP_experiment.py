@@ -19,7 +19,7 @@ from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_
 
 def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
     init_pop_size = 10000
-    n = 22
+    n = 5
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.95

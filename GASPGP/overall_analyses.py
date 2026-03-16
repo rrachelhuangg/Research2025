@@ -13,11 +13,11 @@ from GASP_steps import calculate_fitness
 no_zx_circuits = []
 yes_zx_circuits = []
 
-with open("checkpoints/adder-no-zx_depth_7_circuits.txt", "r") as f:
+with open("checkpoints/qv-no-zx_depth_7_circuits.txt", "r") as f:
     circuits = f.read()
     no_zx_circuits = circuits.split("\n\n")[:-1]
 
-with open("checkpoints/adder-yes-zx_depth_7_circuits.txt", "r") as f:
+with open("checkpoints/qv-yes-zx_depth_7_circuits.txt", "r") as f:
     circuits = f.read()
     yes_zx_circuits = circuits.split("\n\n")[:-1]
 

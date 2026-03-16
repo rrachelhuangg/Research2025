@@ -18,11 +18,9 @@ from qiskit.circuit.random import random_circuit
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
-# n = 2
-n = 22
+n = 5
 
-target_state_circuit = adder_circuit(10)
-# target_state_circuit = chem_circuit()
+target_state_circuit = qv_circuit(5)
 # params = list(target_state_circuit.parameters)
 # target_state_circuit = target_state_circuit.assign_parameters({params[0]:0, params[1]:0, params[2]:0})
 target_state_vector = Statevector(target_state_circuit)
