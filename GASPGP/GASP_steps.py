@@ -198,6 +198,16 @@ def calculate_mod_fitness(circuit):
     return avg_statevector_fitness + avg_measurement_comparisons
 
 
+fitness_cache = {}
+
+def get_fitness(individual):
+    key = tuple(tuple(gene) for gene in individual)
+    if key not in fitness_cache:
+        circuit = individual_to_circuit(individual)
+        fitness_cache[key] = calculate_mod_fitness(circuit)
+    return fitness_cache[key]
+
+
 def crossover(ind_1, ind_2):
     """
     (k=1)-point crossover as defined by the GASP algorithm. 
@@ -280,7 +290,7 @@ def roulette_wheel_select_single(population, max_fitness, selection_probs):
     else:
         #selection_probs = [calculate_fitness(c)/max_fitness for c in population]
         selected_individual = population[npr.choice(len(population), p=selection_probs)]
-    return circuit_to_individual(selected_individual)
+    return selected_individual
 
 
 def roulette_wheel_selection(population, survival_rate):
@@ -290,17 +300,11 @@ def roulette_wheel_selection(population, survival_rate):
     selected_individuals = []
     to_survive = int(len(population)*survival_rate)
 
-    circuit_population = []
-    for individual in population:
-        circuit_population += [individual_to_circuit(individual)]
-
-    # max_fitness = sum([calculate_fitness(c) for c in circuit_population])
-    # selection_probs = [calculate_fitness(c)/max_fitness for c in circuit_population]
-    max_fitness = sum([calculate_mod_fitness(c) for c in circuit_population])
-    selection_probs = [calculate_mod_fitness(c)/max_fitness for c in circuit_population]
+    max_fitness = sum([get_fitness(ind) for ind in population])
+    selection_probs = [get_fitness(ind)/max_fitness for ind in population]
 
     while len(selected_individuals) < to_survive:
-        selected_individual = roulette_wheel_select_single(circuit_population, max_fitness, selection_probs)
+        selected_individual = roulette_wheel_select_single(population, max_fitness, selection_probs)
         selected_individuals += [selected_individual]
     
     return selected_individuals

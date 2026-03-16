@@ -7,7 +7,7 @@ import numpy as np
 from scipy.optimize import minimize
 from qiskit import QuantumCircuit
 from qiskit.circuit import Parameter
-from GASP_steps import calculate_fitness, calculate_mod_fitness, compare_measurements
+from GASP_steps import calculate_fitness, calculate_mod_fitness, compare_measurements, get_fitness, circuit_to_individual
 from zx_helper import assign_zx_value
 from enumerate_loss import pair_up
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
@@ -58,14 +58,8 @@ def optimize_angles(individual):
         """
         param_dict = {param: angle for param, angle in zip([p for p in param_list if p], angles) if param is not None}
         bound_circuit = circuit.assign_parameters(param_dict)
-        avg_statevector_fitness = 0
-        avg_measurement_comparisons = 0
-        for pair in guidance_pairs:
-            avg_statevector_fitness += calculate_fitness(bound_circuit, pair[1])
-            avg_measurement_comparisons += compare_measurements(bound_circuit, pair[1])
-        avg_statevector_fitness /= len(guidance_pairs)
-        avg_measurement_comparisons /= len(guidance_pairs)
-        return -avg_statevector_fitness + -avg_measurement_comparisons #minimize negative fitness = maximize fitness
+        individual_key = circuit_to_individual(bound_circuit)
+        return -get_fitness(individual_key)
     def zx_cost_function(angles):
         """
         Cost function v2: maximizes "zx-calcness" of an individual
@@ -102,8 +96,8 @@ def optimize_angles(individual):
             angle_idx += 1
         optimized_individual += [new_gene]
     param_dict = {param: angle for param, angle in zip([p for p in param_list if p], result.x) if param is not None}         
-    bound_circuit = circuit.assign_parameters(param_dict)                                                                    
-    return_fitness = calculate_mod_fitness(bound_circuit)                                                                        
+    bound_circuit = circuit.assign_parameters(param_dict)                                                                     
+    return_fitness = get_fitness(circuit_to_individual(bound_circuit))                                                               
     return_zx = assign_zx_value(bound_circuit)                                                                               
     return_length = len(individual)  
     return optimized_individual, return_fitness, return_zx, return_length

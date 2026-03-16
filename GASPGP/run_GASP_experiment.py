@@ -12,21 +12,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from qiskit import QuantumCircuit
-from GASP_steps import run_circuit, select_gene, create_individual, create_population, individual_to_circuit, calculate_fitness, crossover, mutate, circuit_to_individual, roulette_wheel_select_single, roulette_wheel_selection, breed_to_minimum, calculate_mod_fitness
+from GASP_steps import run_circuit, select_gene, create_individual, create_population, individual_to_circuit, calculate_fitness, crossover, mutate, circuit_to_individual, roulette_wheel_select_single, roulette_wheel_selection, breed_to_minimum, calculate_mod_fitness, get_fitness
 from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
 from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_path, save_circuits_to_text
 
 def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
-    # init_pop_size = 10000
-    init_pop_size = 2
+    init_pop_size = 1000
     n = 8
     mutation_rate = 0.5
     survival_rate = 0.75
     desired_fitness = 0.95
     maxiter = 10
-    # minimum_pop_size = 500
-    minimum_pop_size = 2
+    minimum_pop_size = 50
 
     # Load from checkpoint if provided
     if checkpoint_path:
@@ -76,7 +74,7 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
         fitnesses = []
         for individual in tqdm(population):
             circuit = individual_to_circuit(individual)
-            fitness = calculate_mod_fitness(circuit)
+            fitness = get_fitness(individual)
             fitnesses.append(fitness)
         
         max_fitness_gen = max(fitnesses)
