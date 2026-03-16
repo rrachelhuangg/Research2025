@@ -7,7 +7,9 @@ from qiskit_ibm_runtime import QiskitRuntimeService
 
 
 def generate_n_inputs():
-    #enumerate the full state-space for all 3-bit numbers (2 operands)
+    """
+    enumerate the full state-space for all 3-bit numbers (2 operands)
+    """
     vals = ['000', '001', '010', '011', '100', '101', '110', '111']
     product_iterator = itertools.product(vals, vals)
     combinations_list = list(product_iterator)
@@ -70,42 +72,29 @@ def pair_up(inputs, circuits):
     pairs = []
     for i in range(len(inputs)):
         pairs += [(inputs[i], circuits[i])]
-    print("PAIRS ELEMENT: ", pairs[5][0], pairs[5][1].draw(output='text'))
     return pairs
 
 
-inputs = generate_n_inputs()
-circuits = create_circuits(inputs)
-pair_up(inputs, circuits)
+def add_operands(circuit):
+    """
+    output: returns most likely measured bitstring in little-endian format
+    """
+    adder = CDKMRippleCarryAdder(3, 'full', 'Full Adder')
 
+    operand1, operand2, anc = circuit.qregs
+    creg = circuit.cregs[0]
 
-# first_option = generate_n_inputs()[1]
-# print("FIRST OPTION: ", first_option)
+    circuit.append(adder, [anc[0]] + list(operand1) + list(operand2) + [anc[1]])
 
+    circuit.measure(list(operand2) + [anc[1]], creg)
+    print(circuit.draw(output='text'))
 
-# operand1 = QuantumRegister(3, 'o1')
-# operand2 = QuantumRegister(3, 'o2')
-# anc = QuantumRegister(2, 'a')
-# cr = ClassicalRegister(4)
-
-# circ = QuantumCircuit(operand1, operand2, anc, cr)
-
-# modded_circuit = operands_to_gates(first_option[0], first_option[1], circ, operand1, operand2)
-# print("CIRCUIT: ", modded_circuit.draw(output='text'))
-
-
-# circ = modded_circuit
-# adder = CDKMRippleCarryAdder(3, 'full', 'Full Adder')
-# circ.append(adder, [anc[0]] + operand1[0:3] + operand2[0:3] + [anc[1]])
-
-# circ.measure(operand2[0:3] + [anc[1]], cr)
-# print(circ.draw(output='text'))
-
-# service = QiskitRuntimeService()
-# backend = service.backend("ibm_torino")
-# simulator = AerSimulator.from_backend(backend)
-# tr_circ = transpile(circ, simulator)
-# result = simulator.run(tr_circ).result()
-# counts = result.get_counts()
-# print("COUNTS: ", counts)
-# print("MOST LIKELY RESULT: ", max(counts, key=counts.get))
+    service = QiskitRuntimeService()
+    backend = service.backend("ibm_torino")
+    simulator = AerSimulator.from_backend(backend)
+    tr_circ = transpile(circuit, simulator)
+    result = simulator.run(tr_circ).result()
+    counts = result.get_counts()
+    maximum = max(counts, key=counts.get)
+    print("MAX: ", maximum)
+    return maximum
