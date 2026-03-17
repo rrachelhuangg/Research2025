@@ -18,7 +18,7 @@ def generate_n_inputs():
     vals = ['000', '001', '010', '011', '100', '101', '110', '111']
     product_iterator = itertools.product(vals, vals)
     combinations_list = list(product_iterator)
-    selected = random.sample(combinations_list, 20)
+    selected = random.sample(combinations_list, 10)
     return selected
 
 
@@ -74,7 +74,7 @@ def create_circuits(inputs):
 
 
 def pair_up():
-    inputs = [('010', '101'), ('111', '111'), ('010', '100'), ('010', '011'), ('110', '101'), ('101', '111'), ('001', '010'), ('100', '011'), ('100', '100'), ('111', '101'), ('001', '100'), ('000', '011'), ('010', '010'), ('110', '000'), ('111', '000'), ('100', '001'), ('111', '010'), ('000', '001'), ('001', '000'), ('000', '110')]
+    inputs = [('100', '011'), ('111', '111'), ('001', '000'), ('011', '100'), ('111', '100'), ('000', '011'), ('010', '000'), ('001', '101'), ('001', '001'), ('100', '110')]
     circuits = create_circuits(inputs)
     pairs = []
     for i in range(len(inputs)):

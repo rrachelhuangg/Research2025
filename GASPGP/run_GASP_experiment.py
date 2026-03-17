@@ -21,8 +21,8 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
     init_pop_size = 1000
     n = 8
     mutation_rate = 0.5
-    survival_rate = 0.75
-    desired_fitness = 0.95
+    survival_rate = 0.65
+    desired_fitness = 0.75
     maxiter = 10
     minimum_pop_size = 50
 
