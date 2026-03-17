@@ -17,14 +17,14 @@ from direct_angle_optimizer import optimize_angles
 from population_evals import selected_subset
 from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_path, save_circuits_to_text
 
-def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
-    init_pop_size = 1000
+def run_experiment(circuit_depth=1, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
+    init_pop_size = 5
     n = 8
     mutation_rate = 0.5
     survival_rate = 0.65
     desired_fitness = 0.75
     maxiter = 10
-    minimum_pop_size = 50
+    minimum_pop_size = 2
 
     # Load from checkpoint if provided
     if checkpoint_path:
@@ -66,6 +66,7 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
         avg_zx = []
         avg_len = []
 
+    print("EXPERIMENT NAME: ", experiment_name)
     while iterations_since_improvement < maxiter and average_fitness_overall < desired_fitness:
     # while iterations_since_improvement < maxiter and max_fitness_overall < desired_fitness:
         generation += 1
@@ -277,7 +278,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--circuit-depth',
         type=int,
-        default=7,
+        default=1,
         help='Depth of random circuits in initial population'
     )
     parser.add_argument(
