@@ -96,6 +96,17 @@ def create_random_adder_individual(depth):
     to_gene = circuit_to_individual(circuit)
     return to_gene
 
+def create_random_mult_individual(depth):
+    operand1 = QuantumRegister(3, 'o1')
+    operand2 = QuantumRegister(3, 'o2')
+    anc = QuantumRegister(6, 'p')
+    cr = ClassicalRegister(6)
+    circuit = QuantumCircuit(operand1, operand2, anc, cr)
+    random_part = random_circuit(8, max_operands=2, depth=depth)
+    circuit.compose(random_part, inplace=True)
+    to_gene = circuit_to_individual(circuit)
+    return to_gene
+
 
 def create_population(init_pop_size, depth):
     population = []
@@ -103,7 +114,8 @@ def create_population(init_pop_size, depth):
     for i in tqdm(range(init_pop_size)):
         # population += [create_individual()]
         # population += [create_random_individual(depth)]
-        population += [create_random_adder_individual(depth)]
+        # population += [create_random_adder_individual(depth)]
+        population += [create_random_mult_individual(depth)]
     return population
 
 

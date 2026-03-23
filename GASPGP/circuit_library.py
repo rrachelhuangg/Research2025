@@ -1,4 +1,4 @@
-from qiskit.circuit.library import QuantumVolume, CDKMRippleCarryAdder
+from qiskit.circuit.library import QuantumVolume, CDKMRippleCarryAdder, RGQFTMultiplier
 from qiskit import transpile
 from qiskit_aer import AerSimulator
 from qiskit_ibm_runtime import QiskitRuntimeService
@@ -38,13 +38,13 @@ def adder_circuit(n):
 
 
 def mult_circuit(n):
-    operand1 = QuantumRegister(3, 'o1')
-    operand2 = QuantumRegister(3, 'o2')
-    anc = QuantumRegister(6, 'p')
-    cr = ClassicalRegister(6)
-    circuit = QuantumCircuit(operand1, operand2, anc, cr)
-    return circuit
-
+    # operand1 = QuantumRegister(3, 'o1')
+    # operand2 = QuantumRegister(3, 'o2')
+    # anc = QuantumRegister(6, 'p')
+    # cr = ClassicalRegister(6)
+    # circuit = QuantumCircuit(operand1, operand2, anc, cr)
+    # return circuit
+    return RGQFTMultiplier(3)
 
 def chem_circuit():
     driver = PySCFDriver(
