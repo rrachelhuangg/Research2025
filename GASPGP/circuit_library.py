@@ -36,6 +36,16 @@ def adder_circuit(n):
     # print(circuit.draw(output='text'))
     return circuit
 
+
+def mult_circuit(n):
+    operand1 = QuantumRegister(3, 'o1')
+    operand2 = QuantumRegister(3, 'o2')
+    anc = QuantumRegister(6, 'p')
+    cr = ClassicalRegister(6)
+    circuit = QuantumCircuit(operand1, operand2, anc, cr)
+    return circuit
+
+
 def chem_circuit():
     driver = PySCFDriver(
         # atom='H .0 .0 .0; H .0 .0 0.735',
