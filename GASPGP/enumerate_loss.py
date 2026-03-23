@@ -91,8 +91,17 @@ def create_mult_circuits(inputs):
 
 
 def pair_up():
-    inputs = [('100', '011'), ('111', '111'), ('001', '000'), ('011', '100'), ('111', '100'), ('000', '011'), ('010', '000'), ('001', '101'), ('001', '001'), ('100', '110')]
+    inputs = generate_n_inputs()
     circuits = create_circuits(inputs)
+    pairs = []
+    for i in range(len(inputs)):
+        pairs += [(inputs[i], circuits[i])]
+    return pairs
+
+
+def pair_mult_up():
+    inputs = generate_n_inputs()
+    circuits = create_mult_circuits(inputs)
     pairs = []
     for i in range(len(inputs)):
         pairs += [(inputs[i], circuits[i])]
@@ -137,8 +146,3 @@ def multiply_operands(circuit):
     counts = result.get_counts()
     maximum = max(counts, key=counts.get)
     return maximum
-
-
-circuits = create_mult_circuits([('001', '010')])                                                                                           
-result = multiply_operands(circuits[0])                                                                                                     
-print(f"result bitstring: {bits_to_val(result)}") 
