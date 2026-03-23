@@ -1,7 +1,7 @@
 import random
 import itertools
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
-from qiskit.circuit.library import CDKMRippleCarryAdder
+from qiskit.circuit.library import CDKMRippleCarryAdder, RGQFTMultiplier
 from qiskit_aer import AerSimulator
 from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
@@ -31,34 +31,34 @@ def operands_to_gates(operand_1, operand_2, circuit, operand1, operand2):
         case '000':
             pass
         case '001':
-            circuit.x([operand1[2]])
+            circuit.x([operand1[0]])
         case '010':
             circuit.x([operand1[1]])
         case '011':
-            circuit.x([operand1[1], operand1[2]])
+            circuit.x([operand1[0], operand1[1]])
         case '100':
-            circuit.x([operand1[0]])
+            circuit.x([operand1[2]])
         case '101':
             circuit.x([operand1[0], operand1[2]])
         case '110':
-            circuit.x([operand1[0], operand1[1]])
+            circuit.x([operand1[1], operand1[2]])
         case '111':
             circuit.x([operand1[0], operand1[1], operand1[2]])
     match operand_2:
         case '000':
             pass
         case '001':
-            circuit.x([operand2[2]])
+            circuit.x([operand2[0]])
         case '010':
             circuit.x([operand2[1]])
         case '011':
-            circuit.x([operand2[1], operand2[2]])
+            circuit.x([operand2[0], operand2[1]])
         case '100':
-            circuit.x([operand2[0]])
+            circuit.x([operand2[2]])
         case '101':
             circuit.x([operand2[0], operand2[2]])
         case '110':
-            circuit.x([operand2[0], operand2[1]])
+            circuit.x([operand2[1], operand2[2]])
         case '111':
             circuit.x([operand2[0], operand2[1], operand2[2]])
     return circuit
@@ -71,6 +71,19 @@ def create_circuits(inputs):
         operand2 = QuantumRegister(3, 'o2')
         anc = QuantumRegister(2, 'a')
         cr = ClassicalRegister(4)
+        circ = QuantumCircuit(operand1, operand2, anc, cr)
+        formed_circuit = operands_to_gates(expression[0], expression[1], circ, operand1, operand2)
+        val_circuits += [formed_circuit]
+    return val_circuits
+
+
+def create_mult_circuits(inputs):
+    val_circuits = []
+    for expression in inputs:
+        operand1 = QuantumRegister(3, 'o1')
+        operand2 = QuantumRegister(3, 'o2')
+        anc = QuantumRegister(6, 'p')
+        cr = ClassicalRegister(6)
         circ = QuantumCircuit(operand1, operand2, anc, cr)
         formed_circuit = operands_to_gates(expression[0], expression[1], circ, operand1, operand2)
         val_circuits += [formed_circuit]
@@ -104,3 +117,28 @@ def add_operands(circuit):
     counts = result.get_counts()
     maximum = max(counts, key=counts.get)
     return maximum
+
+
+def multiply_operands(circuit):
+    """
+    output: returns most likely measured bitstring in little-endian format
+    """
+    circuit = circuit.copy()
+    multiplier = RGQFTMultiplier(3)
+
+    operand1, operand2, anc = circuit.qregs
+    creg = circuit.cregs[0]
+
+    circuit.append(multiplier, operand1[:]+operand2[:]+anc[:])
+
+    circuit.measure(anc, creg)
+    tr_circ = transpile(circuit, simulator)
+    result = simulator.run(tr_circ).result()
+    counts = result.get_counts()
+    maximum = max(counts, key=counts.get)
+    return maximum
+
+
+circuits = create_mult_circuits([('001', '010')])                                                                                           
+result = multiply_operands(circuits[0])                                                                                                     
+print(f"result bitstring: {bits_to_val(result)}") 
