@@ -6,6 +6,10 @@ from qiskit_aer import AerSimulator
 from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
 
+service = QiskitRuntimeService()
+backend = service.backend("ibm_torino")
+simulator = AerSimulator.from_backend(backend)
+
 
 def bits_to_val(bits):
     return int(bits, 2)
@@ -95,10 +99,6 @@ def add_operands(circuit):
     circuit.append(adder, [anc[0]] + list(operand1) + list(operand2) + [anc[1]])
 
     circuit.measure(list(operand2) + [anc[1]], creg)
-
-    service = QiskitRuntimeService()
-    backend = service.backend("ibm_torino")
-    simulator = AerSimulator.from_backend(backend)
     tr_circ = transpile(circuit, simulator)
     result = simulator.run(tr_circ).result()
     counts = result.get_counts()
