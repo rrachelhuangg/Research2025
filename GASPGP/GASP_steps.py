@@ -11,8 +11,8 @@ from qiskit.quantum_info import Statevector
 from qiskit_aer import AerSimulator
 from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
-from qiskit.transpiler import generate_preset_pass_manager
-from circuit_library import qv_circuit, adder_circuit, chem_circuit, mult_circuit
+from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
+from circuit_library import qv_circuit, adder_circuit, mult_circuit
 from qiskit.circuit.random import random_circuit
 from enumerate_loss import add_operands, bits_to_val, pair_up, multiply_operands, pair_mult_up
 
@@ -20,11 +20,11 @@ from enumerate_loss import add_operands, bits_to_val, pair_up, multiply_operands
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
-n = 12
+n = 8
 
 # target_state_circuit = qv_circuit(5)
-# target_state_circuit = adder_circuit(5)
-target_state_circuit = mult_circuit(5)
+target_state_circuit = adder_circuit(3)
+# target_state_circuit = mult_circuit(5)
 # params = list(target_state_circuit.parameters)
 # target_state_circuit = target_state_circuit.assign_parameters({params[0]:0, params[1]:0, params[2]:0})
 target_state_vector = Statevector(target_state_circuit)
@@ -114,8 +114,8 @@ def create_population(init_pop_size, depth):
     for i in tqdm(range(init_pop_size)):
         # population += [create_individual()]
         # population += [create_random_individual(depth)]
-        # population += [create_random_adder_individual(depth)]
-        population += [create_random_mult_individual(depth)]
+        population += [create_random_adder_individual(depth)]
+        # population += [create_random_mult_individual(depth)]
     return population
 
 
@@ -124,16 +124,16 @@ def individual_to_circuit(individual):
     I: gene format
     O: circuit format
     """
-    # circuit = QuantumCircuit(n, n)
-    # operand1 = QuantumRegister(3, 'o1')                                                                                                
-    # operand2 = QuantumRegister(3, 'o2')                                                                                                
-    # anc = QuantumRegister(2, 'a')                                                                                                      
-    # cr = ClassicalRegister(4)      
     circuit = QuantumCircuit(n, n)
     operand1 = QuantumRegister(3, 'o1')                                                                                                
     operand2 = QuantumRegister(3, 'o2')                                                                                                
-    anc = QuantumRegister(6, 'p')                                                                                                      
-    cr = ClassicalRegister(6)                                                                                                
+    anc = QuantumRegister(2, 'a')                                                                                                      
+    cr = ClassicalRegister(4)      
+    # circuit = QuantumCircuit(n, n)
+    # operand1 = QuantumRegister(3, 'o1')                                                                                                
+    # operand2 = QuantumRegister(3, 'o2')                                                                                                
+    # anc = QuantumRegister(6, 'p')                                                                                                      
+    # cr = ClassicalRegister(6)                                                                                                
     circuit = QuantumCircuit(operand1, operand2, anc, cr)
     for gene in individual:
         if gene[1] == "R_X":
@@ -351,11 +351,11 @@ def roulette_wheel_selection(population, survival_rate):
     selected_individuals = []
     to_survive = int(len(population)*survival_rate)
 
-    # max_fitness = sum([get_fitness(ind) for ind in population])
-    # selection_probs = [get_fitness(ind)/max_fitness for ind in population]
+    max_fitness = sum([get_fitness(ind) for ind in population])
+    selection_probs = [get_fitness(ind)/max_fitness for ind in population]
 
-    max_fitness = sum([get_mult_fitness(ind) for ind in population])
-    selection_probs = [get_mult_fitness(ind)/max_fitness for ind in population]
+    # max_fitness = sum([get_mult_fitness(ind) for ind in population])
+    # selection_probs = [get_mult_fitness(ind)/max_fitness for ind in population]
 
     while len(selected_individuals) < to_survive:
         selected_individual = roulette_wheel_select_single(population, max_fitness, selection_probs)

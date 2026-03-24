@@ -27,40 +27,39 @@ def generate_n_inputs():
 
 
 def operands_to_gates(operand_1, operand_2, circuit, operand1, operand2):
-    match operand_1:
-        case '000':
-            pass
-        case '001':
-            circuit.x([operand1[0]])
-        case '010':
-            circuit.x([operand1[1]])
-        case '011':
-            circuit.x([operand1[0], operand1[1]])
-        case '100':
-            circuit.x([operand1[2]])
-        case '101':
-            circuit.x([operand1[0], operand1[2]])
-        case '110':
-            circuit.x([operand1[1], operand1[2]])
-        case '111':
-            circuit.x([operand1[0], operand1[1], operand1[2]])
-    match operand_2:
-        case '000':
-            pass
-        case '001':
-            circuit.x([operand2[0]])
-        case '010':
-            circuit.x([operand2[1]])
-        case '011':
-            circuit.x([operand2[0], operand2[1]])
-        case '100':
-            circuit.x([operand2[2]])
-        case '101':
-            circuit.x([operand2[0], operand2[2]])
-        case '110':
-            circuit.x([operand2[1], operand2[2]])
-        case '111':
-            circuit.x([operand2[0], operand2[1], operand2[2]])
+    if operand_1 == '000':
+        pass
+    elif operand_1 == '001':
+        circuit.x([operand1[0]])
+    elif operand_1 == '010':
+        circuit.x([operand1[1]])
+    elif operand_1 == '011':
+        circuit.x([operand1[0], operand1[1]])
+    elif operand_1 == '100':
+        circuit.x([operand1[2]])
+    elif operand_1 == '101':
+        circuit.x([operand1[0], operand1[2]])
+    elif operand_1 == '110':
+        circuit.x([operand1[1], operand1[2]])
+    elif operand_1 == '111':
+        circuit.x([operand1[0], operand1[1], operand1[2]])
+
+    if operand_2 == '000':
+        pass
+    elif operand_2 == '001':
+        circuit.x([operand2[0]])
+    elif operand_2 == '010':
+        circuit.x([operand2[1]])
+    elif operand_2 == '011':
+        circuit.x([operand2[0], operand2[1]])
+    elif operand_2 == '100':
+        circuit.x([operand2[2]])
+    elif operand_2 == '101':
+        circuit.x([operand2[0], operand2[2]])
+    elif operand_2 == '110':
+        circuit.x([operand2[1], operand2[2]])
+    elif operand_2 == '111':
+        circuit.x([operand2[0], operand2[1], operand2[2]])
     return circuit
 
 

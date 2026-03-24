@@ -39,7 +39,7 @@ def individual_to_parameterized_circuit(individual, n):
 
 
 def optimize_angles(individual):
-    circuit, param_list = individual_to_parameterized_circuit(individual, 12)
+    circuit, param_list = individual_to_parameterized_circuit(individual, 8)
     return_fitness, return_zx, return_length = 0, 0, 0
     def fitness_cost_function(angles):
         """

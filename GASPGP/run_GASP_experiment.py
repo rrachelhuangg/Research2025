@@ -19,7 +19,7 @@ from checkpoint_manager import load_checkpoint, save_checkpoint, get_checkpoint_
 
 def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experiment_name="gasp_experiment", num_circuits_to_save=100):
     init_pop_size = 1000
-    n = 12
+    n = 8
     mutation_rate = 0.5
     survival_rate = 0.65
     desired_fitness = 0.75
@@ -75,8 +75,8 @@ def run_experiment(circuit_depth=7, checkpoint_path=None, save_every=10, experim
         fitnesses = []
         for individual in tqdm(population):
             circuit = individual_to_circuit(individual)
-            # fitness = get_fitness(individual)
-            fitness = get_mult_fitness(individual)
+            fitness = get_fitness(individual)
+            # fitness = get_mult_fitness(individual)
             fitnesses.append(fitness)
         
         max_fitness_gen = max(fitnesses)
