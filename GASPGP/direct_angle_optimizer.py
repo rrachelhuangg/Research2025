@@ -15,11 +15,15 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister, transpile
 
 def individual_to_parameterized_circuit(individual, n):
     # created_circuit = QuantumCircuit(n, n)
-    operand1 = QuantumRegister(3, 'o1')
-    operand2 = QuantumRegister(3, 'o2')
-    anc = QuantumRegister(2, 'a')
-    cr = ClassicalRegister(4)
-    created_circuit = QuantumCircuit(operand1, operand2, anc, cr)
+    # operand1 = QuantumRegister(3, 'o1')
+    # operand2 = QuantumRegister(3, 'o2')
+    # anc = QuantumRegister(2, 'a')
+    # cr = ClassicalRegister(4)
+    # created_circuit = QuantumCircuit(operand1, operand2, anc, cr)
+    bitstring = QuantumRegister(3, 'bitstring')
+    sum_reg = QuantumRegister(4, 'sum')
+    carry = QuantumRegister(3, 'carry')
+    created_circuit = QuantumCircuit(bitstring, sum_reg, carry)
     parameters = [] #angles
     for i, gene in enumerate(individual):
         if gene[1] in ["R_X", "R_Y", "R_Z"]:
@@ -39,7 +43,7 @@ def individual_to_parameterized_circuit(individual, n):
 
 
 def optimize_angles(individual):
-    circuit, param_list = individual_to_parameterized_circuit(individual, 8)
+    circuit, param_list = individual_to_parameterized_circuit(individual, 11)
     return_fitness, return_zx, return_length = 0, 0, 0
     def fitness_cost_function(angles):
         """

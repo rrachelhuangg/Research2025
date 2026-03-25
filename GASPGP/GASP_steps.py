@@ -12,18 +12,19 @@ from qiskit_aer import AerSimulator
 from qiskit import transpile
 from qiskit_ibm_runtime import QiskitRuntimeService
 from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
-from circuit_library import qv_circuit, adder_circuit, mult_circuit
+from circuit_library import qv_circuit, adder_circuit, mult_circuit, weight_circuit
 from qiskit.circuit.random import random_circuit
-from enumerate_loss import add_operands, bits_to_val, pair_up, multiply_operands, pair_mult_up
+from enumerate_loss import add_operands, bits_to_val, pair_up, multiply_operands, pair_mult_up, weight_operands, pair_weight_up
 
 #biological structure
 gates = {0:"R_X", 1:"R_Y", 2:"R_Z", 3:"CNOT"}
 
 #experiment parameters
-n = 8
+n = 11
 
 # target_state_circuit = qv_circuit(5)
-target_state_circuit = adder_circuit(3)
+# target_state_circuit = adder_circuit(3)
+target_state_circuit = weight_circuit(3)
 # target_state_circuit = mult_circuit(5)
 # params = list(target_state_circuit.parameters)
 # target_state_circuit = target_state_circuit.assign_parameters({params[0]:0, params[1]:0, params[2]:0})
@@ -108,14 +109,25 @@ def create_random_mult_individual(depth):
     return to_gene
 
 
+def create_random_weight_individual(depth):
+    qr = QuantumRegister(11, 'bitstring')
+    cr = ClassicalRegister(4, 'carry')
+    circuit = QuantumCircuit(qr, cr)
+    random_part = random_circuit(11, max_operands=2, depth=depth)
+    circuit.compose(random_part, inplace=True)
+    to_gene = circuit_to_individual(circuit)
+    return to_gene
+
+
 def create_population(init_pop_size, depth):
     population = []
     print("Creating population")
     for i in tqdm(range(init_pop_size)):
         # population += [create_individual()]
         # population += [create_random_individual(depth)]
-        population += [create_random_adder_individual(depth)]
+        # population += [create_random_adder_individual(depth)]
         # population += [create_random_mult_individual(depth)]
+        population += [create_random_weight_individual(depth)]
     return population
 
 
@@ -124,17 +136,20 @@ def individual_to_circuit(individual):
     I: gene format
     O: circuit format
     """
-    circuit = QuantumCircuit(n, n)
-    operand1 = QuantumRegister(3, 'o1')                                                                                                
-    operand2 = QuantumRegister(3, 'o2')                                                                                                
-    anc = QuantumRegister(2, 'a')                                                                                                      
-    cr = ClassicalRegister(4)      
+    # circuit = QuantumCircuit(n, n)
+    # operand1 = QuantumRegister(3, 'o1')                                                                                                
+    # operand2 = QuantumRegister(3, 'o2')                                                                                                
+    # anc = QuantumRegister(2, 'a')                                                                                                      
+    # cr = ClassicalRegister(4)  
+    qr = QuantumRegister(11, 'bitstring')
+    cr = ClassicalRegister(4)
+    circuit = QuantumCircuit(qr, cr)
     # circuit = QuantumCircuit(n, n)
     # operand1 = QuantumRegister(3, 'o1')                                                                                                
     # operand2 = QuantumRegister(3, 'o2')                                                                                                
     # anc = QuantumRegister(6, 'p')                                                                                                      
     # cr = ClassicalRegister(6)                                                                                                
-    circuit = QuantumCircuit(operand1, operand2, anc, cr)
+    # circuit = QuantumCircuit(operand1, operand2, anc, cr)
     for gene in individual:
         if gene[1] == "R_X":
             circuit.rx(gene[3], gene[0])
@@ -176,7 +191,7 @@ def circuit_to_individual(individual):
             gene[1] = "CNOT"
             gene[3] = 0
         else:
-            continue  # skip unsupported gates (e.g. h, x, s, t)
+            continue
         gene_format += [gene]
     return gene_format
 
@@ -210,6 +225,14 @@ def compare_mult_measurements(circuit, target_circuit):
     return bits_diff/100
 
 
+def compare_weight_measurements(circuit, target_circuit):
+    circuit_result = weight_operands(circuit)
+    target_result = weight_operands(target_circuit)
+    bits_diff = abs(bits_to_val(circuit_result) - bits_to_val(target_result))
+    normalized_error = bits_diff/100
+    return max(0, 1-normalized_error)
+
+
 def calculate_mod_fitness(circuit):
     avg_statevector_fitness = 0
     avg_measurement_comparisons = 0
@@ -240,6 +263,21 @@ def calculate_mult_mod_fitness(circuit):
     return avg_statevector_fitness + avg_measurement_comparisons
 
 
+def calculate_weight_mod_fitness(circuit):
+    avg_statevector_fitness = 0
+    avg_measurement_comparisons = 0
+    guidance_pairs = pair_weight_up()
+    i = 0
+    for pair in guidance_pairs:
+        print("I: ", i)
+        avg_statevector_fitness += calculate_fitness(circuit, pair[1])
+        avg_measurement_comparisons += compare_weight_measurements(circuit, pair[1])
+        i += 1
+    avg_statevector_fitness /= len(guidance_pairs)
+    avg_measurement_comparisons /= len(guidance_pairs)
+    return avg_statevector_fitness + avg_measurement_comparisons
+
+
 fitness_cache = {}
 
 def get_fitness(individual):
@@ -249,6 +287,7 @@ def get_fitness(individual):
         fitness_cache[key] = calculate_mod_fitness(circuit)
     return fitness_cache[key]
 
+
 mult_fitness_cache = {}
 
 def get_mult_fitness(individual):
@@ -257,6 +296,16 @@ def get_mult_fitness(individual):
         circuit = individual_to_circuit(individual)
         mult_fitness_cache[key] = calculate_mult_mod_fitness(circuit)
     return mult_fitness_cache[key]
+
+
+weight_fitness_cache = {}
+
+def get_weight_fitness(individual):
+    key = tuple(tuple(gene) for gene in individual)
+    if key not in weight_fitness_cache:
+        circuit = individual_to_circuit(individual)
+        weight_fitness_cache[key] = calculate_weight_mod_fitness(circuit)
+    return weight_fitness_cache[key]
 
 
 def crossover(ind_1, ind_2):
@@ -351,11 +400,14 @@ def roulette_wheel_selection(population, survival_rate):
     selected_individuals = []
     to_survive = int(len(population)*survival_rate)
 
-    max_fitness = sum([get_fitness(ind) for ind in population])
-    selection_probs = [get_fitness(ind)/max_fitness for ind in population]
+    # max_fitness = sum([get_fitness(ind) for ind in population])
+    # selection_probs = [get_fitness(ind)/max_fitness for ind in population]
 
     # max_fitness = sum([get_mult_fitness(ind) for ind in population])
     # selection_probs = [get_mult_fitness(ind)/max_fitness for ind in population]
+
+    max_fitness = sum([get_weight_fitness(ind) for ind in population])
+    selection_probs = [get_weight_fitness(ind)/max_fitness for ind in population]
 
     while len(selected_individuals) < to_survive:
         selected_individual = roulette_wheel_select_single(population, max_fitness, selection_probs)

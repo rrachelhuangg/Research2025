@@ -1,4 +1,4 @@
-from qiskit.circuit.library import QuantumVolume, CDKMRippleCarryAdder, RGQFTMultiplier
+from qiskit.circuit.library import QuantumVolume, CDKMRippleCarryAdder, RGQFTMultiplier, WeightedAdder
 from qiskit import transpile
 from qiskit_aer import AerSimulator
 from qiskit_ibm_runtime import QiskitRuntimeService
@@ -42,3 +42,7 @@ def mult_circuit(n):
     # return circuit
     return RGQFTMultiplier(3)
 
+
+def weight_circuit(n):
+    #n should be 3
+    return WeightedAdder(n)
