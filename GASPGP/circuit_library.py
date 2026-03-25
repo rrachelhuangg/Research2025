@@ -44,5 +44,9 @@ def mult_circuit(n):
 
 
 def weight_circuit(n):
-    #n should be 3
-    return WeightedAdder(n)
+    #n should be 3, weights fixed to [4,5,6]
+    weights = [4, 5, 6]
+    adder = WeightedAdder(n, weights)
+    circuit = QuantumCircuit(11, adder.num_sum_qubits)
+    circuit.append(adder, range(adder.num_qubits))
+    return circuit

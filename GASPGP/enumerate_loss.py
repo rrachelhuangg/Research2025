@@ -28,14 +28,12 @@ def generate_n_inputs():
 
 def generate_weight_inputs():
     """
-    enumerate a state-space comprised of all 3-bit numbers and 3-lists of weights
+    enumerate a state-space with fixed weights [4,5,6] and random 3-bit input values
     """
     vals = ['000', '001', '010', '011', '100', '101', '110', '111']
-    weights = [[4, 5, 6], [4, 6, 5], [5, 2, 3], [4, 7, 2], [3, 4, 5], [5, 3, 4], [6, 2, 3], [2, 5, 4]]
-    product_iterator = itertools.product(vals, weights)
-    combinations_list = list(product_iterator)
-    selected = random.sample(combinations_list, 10)
-    return selected
+    fixed_weights = [4, 5, 6]
+    selected = random.sample(vals, 10)
+    return [(val, fixed_weights) for val in selected]
 
 
 def operands_to_gates(operand_1, operand_2, circuit, operand1, operand2):

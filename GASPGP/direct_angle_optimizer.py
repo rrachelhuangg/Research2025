@@ -20,10 +20,12 @@ def individual_to_parameterized_circuit(individual, n):
     # anc = QuantumRegister(2, 'a')
     # cr = ClassicalRegister(4)
     # created_circuit = QuantumCircuit(operand1, operand2, anc, cr)
-    bitstring = QuantumRegister(3, 'bitstring')
-    sum_reg = QuantumRegister(4, 'sum')
-    carry = QuantumRegister(3, 'carry')
-    created_circuit = QuantumCircuit(bitstring, sum_reg, carry)
+    # bitstring = QuantumRegister(3, 'bitstring')
+    # sum_reg = QuantumRegister(4, 'sum')
+    # carry = QuantumRegister(3, 'carry')
+    # created_circuit = QuantumCircuit(bitstring, sum_reg, carry)
+    qr = QuantumRegister(11)
+    created_circuit = QuantumCircuit(qr)
     parameters = [] #angles
     for i, gene in enumerate(individual):
         if gene[1] in ["R_X", "R_Y", "R_Z"]:
